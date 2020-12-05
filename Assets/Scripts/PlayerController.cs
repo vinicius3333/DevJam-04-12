@@ -17,13 +17,13 @@ public class PlayerController : MonoBehaviour
     public float timeBetweenShots; //tempo entre um tiro e outro
     public Transform[] groundCheck;
 
-    [Header("Shot Config")]
+    [Header("Powers Config")]
+    public GameObject shield;
     public GameObject presentePrefab;
     public float bulletSpeed;
 
     [Header("Instantiate Positions")]
     public Transform gunTrasform;
-    public Transform shieldPosition;
 
     [Header("Powers")]
     public bool isDoubleJumpActive;
@@ -32,9 +32,11 @@ public class PlayerController : MonoBehaviour
 
     [Header("Controladores")]
     private float horizontal; //eixo pegado no input
-    private float time = 0; //usado para controle do tiro
+    private float time = 0; //usado
+    private float timeTemp = 0; //
     private bool isGrounded;
     private bool isShot;
+    private bool isShield;
 
     // Start is called before the first frame update
     void Start()
@@ -55,6 +57,16 @@ public class PlayerController : MonoBehaviour
             else if (horizontal < 0 && isLookLeft == false)
             { 
                 Flip();
+            }
+
+            //Controle da velocidade do tiro
+            if (horizontal > 0 && bulletSpeed < 0)
+            {
+                bulletSpeed *= -1;
+            }
+            else if (horizontal < 0 && bulletSpeed > 0)
+            {
+                bulletSpeed *= -1;
             }
         }
 
@@ -96,41 +108,50 @@ public class PlayerController : MonoBehaviour
         #endregion
 
         #region SHOT
-        if (Input.GetButtonDown("Fire1") && isShootActive == true && isShot == false)
-        {
-            isShot = true;
-            StartCoroutine("TimeToShotAgain");
-            Instantiate(presentePrefab, gunTrasform.position, transform.localRotation);
-        }
 
-        if(Input.GetButton("Fire1") && isShootActive == true) //tiro segurando o botao
+        if(isShot == true)
         {
-            time += Time.deltaTime; //controla o tempo do tiro segurando o botao
+            time += Time.deltaTime;
 
-            if(time >= timeBetweenShots)
+            if(time > timeBetweenShots)
             {
-                isShot = true;
+                isShot = false;
                 time = 0;
-                Instantiate(presentePrefab, gunTrasform.position, transform.localRotation);
             }
         }
 
-        if(Input.GetButtonUp("Fire1"))
+        if (isShield == false)
         {
-            isShot = false;
-            time = 0;
+            if (Input.GetButtonDown("Fire1") && isShootActive == true && isShot == false)
+            {
+                Shot();
+            }
+
+            if (Input.GetButton("Fire1") && isShootActive == true && isShot == false) //tiro segurando o botao
+            {
+                 Shot();
+            }
+
+            if (Input.GetButtonUp("Fire1"))
+            {
+                isShot = false;
+                time = 0;
+            }
         }
+
         #endregion
 
         #region SHIELD
         if (Input.GetButton("Fire2") && isShieldActive == true) //segura o shield
         {
-            //ATIVAR O COLISOR DO SHIELD
+            isShield = true;
+            shield.SetActive(true);
         }
 
         if(Input.GetButtonUp("Fire2"))
         {
-            //DESATIVA O COLISOR DO SHIELD
+            isShield = false;
+            shield.SetActive(false);
         }
 
         #endregion
@@ -168,9 +189,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    IEnumerator TimeToShotAgain() //controla o tempo dos tiros para o jogador nao atirar rapido dms
+    void Shot()
     {
-        yield return new WaitForSeconds(timeBetweenShots);
         isShot = true;
+        Instantiate(presentePrefab, gunTrasform.position, transform.localRotation);
     }
 }
