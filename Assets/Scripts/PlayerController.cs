@@ -80,7 +80,6 @@ public class PlayerController : MonoBehaviour
     void InputController()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
-
         playerRb.velocity = new Vector2(horizontal * speed, playerRb.velocity.y);
 
         #region JUMP
