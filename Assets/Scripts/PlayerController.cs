@@ -122,7 +122,7 @@ public class PlayerController : MonoBehaviour
 
         #region SHOT
 
-        if(isShot == true)
+        if(isShot == true) //Controle do tempo entre tiros
         {
             time += Time.deltaTime;
 
@@ -184,7 +184,7 @@ public class PlayerController : MonoBehaviour
         isLookLeft = !isLookLeft;
         Vector3 scale = gameObject.transform.localScale;
         gameObject.transform.localScale = new Vector3(scale.x *-1, scale.y, scale.z);
-    }
+    } //flipa o objeto
 
     void SetShotPosition()
     {
@@ -204,7 +204,7 @@ public class PlayerController : MonoBehaviour
         }
 
         Shot(temp, isX);
-    }
+    } //controla a posicao do tiro antes de instanciar
 
     void Shot(Transform newTransform, bool eixoX)
     {
@@ -221,13 +221,13 @@ public class PlayerController : MonoBehaviour
             temp.velocity = new Vector2(0, bulletSpeed);
         }
        
-    }
+    } //instancia o tiro
 
     void SetShieldPosition(Transform newPosition)
     {
         shield.transform.position = newPosition.position;
         shield.transform.rotation = newPosition.rotation;
-    }
+    } //controla a posicao do shield
 
     private void OnTriggerEnter2D(Collider2D col)
     {
@@ -237,7 +237,7 @@ public class PlayerController : MonoBehaviour
                 TakeHit();
                 break;
         }
-    }
+    } //isso era pra tirar dano etc
 
     void TakeHit()
     {
@@ -247,7 +247,7 @@ public class PlayerController : MonoBehaviour
         {
             //GAMEOVER
         }
-    }
+    } //controle da vida
 
     
 }
