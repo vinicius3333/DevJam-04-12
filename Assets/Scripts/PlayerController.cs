@@ -23,7 +23,8 @@ public class PlayerController : MonoBehaviour
     public float bulletSpeed;
 
     [Header("Positions")]
-    public Transform gunTrasform;
+    public Transform gunTrasformX;
+    public Transform gunTransformY;
     public Transform shieldTransformX;
     public Transform shieldTransformY;
 
@@ -35,16 +36,25 @@ public class PlayerController : MonoBehaviour
     [Header("Controladores")]
     private float horizontal; //eixo pego no input
     private float vertical; //eixo pego no input
-    private float time = 0; //usado
-    private float timeTemp = 0; //
+    private float time = 0; //usado para controle do tiro
+    private bool isShot; //usado para controle de tiro
     private bool isGrounded;
-    private bool isShot;
+
     private bool isShield;
 
     // Start is called before the first frame update
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
+
+        if(isLookLeft == true)
+        {
+            bulletSpeed *= -1;
+        }
+        else
+        {
+            bulletSpeed *= 1;
+        }
     }
 
     // Update is called once per frame
@@ -123,16 +133,16 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (isShield == false)
+        if (isShield == false && isShootActive == true && isShot == false)
         {
-            if (Input.GetButtonDown("Fire1") && isShootActive == true && isShot == false)
+            if (Input.GetButtonDown("Fire1"))
             {
-                Shot();
+                SetShotPosition();
             }
 
-            if (Input.GetButton("Fire1") && isShootActive == true && isShot == false) //tiro segurando o botao
+            if (Input.GetButton("Fire1")) //tiro segurando o botao
             {
-                 Shot();
+                SetShotPosition();
             }
         }
 
@@ -144,12 +154,7 @@ public class PlayerController : MonoBehaviour
             isShield = true;
             shield.SetActive(true);
 
-            if(horizontal == 0)
-            {
-                SetShieldPosition(shieldTransformX);
-            }
-
-            if(horizontal != 0)
+            if(horizontal == 0 || horizontal != 0)
             {
                 SetShieldPosition(shieldTransformX);
             }
@@ -174,17 +179,48 @@ public class PlayerController : MonoBehaviour
         playerRb.AddForce(new Vector2(0, force));
     }
 
-    void Shot()
-    {
-        isShot = true;
-        Instantiate(presentePrefab, gunTrasform.position, transform.localRotation);
-    }
-
     void Flip()
     {
         isLookLeft = !isLookLeft;
         Vector3 scale = gameObject.transform.localScale;
         gameObject.transform.localScale = new Vector3(scale.x *-1, scale.y, scale.z);
+    }
+
+    void SetShotPosition()
+    {
+        bool isX = false;
+        Transform temp = null;
+
+        if (horizontal == 0 || horizontal != 0)
+        {
+            temp = gunTrasformX;
+            isX = true;
+        }
+
+        if (vertical != 0)
+        {
+            temp = gunTransformY;
+            isX = false;
+        }
+
+        Shot(temp, isX);
+    }
+
+    void Shot(Transform newTransform, bool eixoX)
+    {
+        isShot = true;
+        Rigidbody2D temp = Instantiate(presentePrefab, newTransform.position, transform.localRotation).GetComponent<Rigidbody2D>();
+
+        if(eixoX == true)
+        {
+            temp.velocity = new Vector2(bulletSpeed, 0);
+        }
+        else
+        {
+            if(bulletSpeed < 0) { bulletSpeed *= -1; }
+            temp.velocity = new Vector2(0, bulletSpeed);
+        }
+       
     }
 
     void SetShieldPosition(Transform newPosition)
