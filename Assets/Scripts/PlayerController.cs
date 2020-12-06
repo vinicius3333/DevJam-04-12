@@ -22,8 +22,10 @@ public class PlayerController : MonoBehaviour
     public GameObject presentePrefab;
     public float bulletSpeed;
 
-    [Header("Instantiate Positions")]
+    [Header("Positions")]
     public Transform gunTrasform;
+    public Transform shieldTransformX;
+    public Transform shieldTransformY;
 
     [Header("Powers")]
     public bool isDoubleJumpActive;
@@ -31,7 +33,8 @@ public class PlayerController : MonoBehaviour
     public bool isShieldActive;
 
     [Header("Controladores")]
-    private float horizontal; //eixo pegado no input
+    private float horizontal; //eixo pego no input
+    private float vertical; //eixo pego no input
     private float time = 0; //usado
     private float timeTemp = 0; //
     private bool isGrounded;
@@ -79,6 +82,7 @@ public class PlayerController : MonoBehaviour
 
     void InputController()
     {
+        vertical = Input.GetAxisRaw("Vertical");
         horizontal = Input.GetAxisRaw("Horizontal");
         playerRb.velocity = new Vector2(horizontal * speed, playerRb.velocity.y);
 
@@ -130,12 +134,6 @@ public class PlayerController : MonoBehaviour
             {
                  Shot();
             }
-
-            if (Input.GetButtonUp("Fire1"))
-            {
-                isShot = false;
-                time = 0;
-            }
         }
 
         #endregion
@@ -145,6 +143,21 @@ public class PlayerController : MonoBehaviour
         {
             isShield = true;
             shield.SetActive(true);
+
+            if(horizontal == 0)
+            {
+                SetShieldPosition(shieldTransformX);
+            }
+
+            if(horizontal != 0)
+            {
+                SetShieldPosition(shieldTransformX);
+            }
+
+            if(vertical != 0)
+            {
+                SetShieldPosition(shieldTransformY);
+            }
         }
 
         if(Input.GetButtonUp("Fire2"))
@@ -161,11 +174,23 @@ public class PlayerController : MonoBehaviour
         playerRb.AddForce(new Vector2(0, force));
     }
 
+    void Shot()
+    {
+        isShot = true;
+        Instantiate(presentePrefab, gunTrasform.position, transform.localRotation);
+    }
+
     void Flip()
     {
         isLookLeft = !isLookLeft;
         Vector3 scale = gameObject.transform.localScale;
         gameObject.transform.localScale = new Vector3(scale.x *-1, scale.y, scale.z);
+    }
+
+    void SetShieldPosition(Transform newPosition)
+    {
+        shield.transform.position = newPosition.position;
+        shield.transform.rotation = newPosition.rotation;
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -188,9 +213,5 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Shot()
-    {
-        isShot = true;
-        Instantiate(presentePrefab, gunTrasform.position, transform.localRotation);
-    }
+    
 }
