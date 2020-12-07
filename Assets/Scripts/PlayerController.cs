@@ -8,18 +8,23 @@ public class PlayerController : MonoBehaviour {
     public LayerMask whatIsGround; //o que é chão
     public bool isLookLeft; //pra onde o player está olhando na cena?
 
+    [Header("HP Config")]
+    public float healthPoints = 3;
+
     [Header("Player Config")]
-    public float healthPoints = 50;
     public float speed;
     public float jumpForce;
     public float doubleJumpForce;
+    public float bounceForce;
     public float timeBetweenShots; //tempo entre um tiro e outro
     public Transform[] groundCheck;
 
     [Header("Powers Config")]
+    public int extraJumps = 1; //quantos pulos pode dar
     public GameObject shield;
     public GameObject presentePrefab;
     public float bulletSpeed;
+    private BoxCollider2D bounceCollider; //para cair no inimigo
 
     [Header("Positions")]
     public Transform gunTrasformX;
@@ -38,11 +43,12 @@ public class PlayerController : MonoBehaviour {
     private float time = 0; //usado para controle do tiro
     private bool isShot; //usado para controle de tiro
     private bool isGrounded;
-
+    private int jumps = 0; //controla os pulos
     private bool isShield;
 
     // Start is called before the first frame update
     void Start() {
+        bounceCollider = GetComponent<BoxCollider2D>();
         playerRb = GetComponent<Rigidbody2D>();
 
         if (isLookLeft == true) {
@@ -54,7 +60,19 @@ public class PlayerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        // Verifica se o jogo tá pausado e previni animações do player
         if (PauseMenu.GameIsPaused) return;
+
+        //============= FUI DORMIR ==========
+        /*if(isJu)
+        {
+            bounceCollider.enabled = true;
+        }
+        else
+        {
+            bounceCollider.enabled = false;
+        }*/
+
         //Controle de Flip, para deixar o personagem olhando para o lado certo
         if (horizontal != 0) {
             if (horizontal > 0 && isLookLeft == true) {
@@ -88,21 +106,31 @@ public class PlayerController : MonoBehaviour {
             Jump(jumpForce);
         }
 
-        //controle da força do pulo duplo, que corrige um bug de somar forças caso aperte rapido dms
-        if (Input.GetButtonDown("Jump") && isGrounded == false && isDoubleJumpActive == true && playerRb.velocity.y < 0) //double jump
-        {
-            Jump(doubleJumpForce);
-        }
+        if (jumps < extraJumps) {
+            //controle da força do pulo duplo, que corrige um bug de somar forças caso aperte rapido dms
+            if (Input.GetButtonDown("Jump") && isGrounded == false && isDoubleJumpActive == true && playerRb.velocity.y < 0) //double jump
+            {
+                jumps++;
+                Jump(doubleJumpForce);
+            }
 
-        if (Input.GetButtonDown("Jump") && isGrounded == false && isDoubleJumpActive == true && playerRb.velocity.y > 0) //double jump
-        {
-            Jump(doubleJumpForce / 1.2f);
+            if (Input.GetButtonDown("Jump") && isGrounded == false && isDoubleJumpActive == true && playerRb.velocity.y > 0) //double jump
+            {
+                jumps++;
+                Jump(doubleJumpForce / 1.2f);
+            }
         }
 
         if (Input.GetButtonUp("Jump"))  //diminue o y quando solta o botao e estiver subindo
         {
             playerRb.velocity = new Vector2(0, playerRb.velocity.y / 2.5f);
         }
+
+        if (isGrounded == true) {
+            jumps = 0;
+        }
+
+
 
         #endregion
 
@@ -201,14 +229,28 @@ public class PlayerController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D col) {
         switch (col.gameObject.tag) {
-            case "EnemyHit":
-                TakeHit();
+            case "EnemyHead":
+                //tirar dano
+                Bounce();
                 break;
         }
     } //isso era pra tirar dano etc
 
+    private void OnCollisionEnter2D(Collision2D col) {
+        switch (col.gameObject.tag) {
+            case "Enemy":
+                TakeHit();
+                break;
+        }
+    }
+
+    void Bounce() {
+        playerRb.AddForce(new Vector2(0, bounceForce));
+    } //controle da vida
+
     void TakeHit() {
         healthPoints--;
+        //COLOCAR IMPACTO
 
         if (healthPoints < 0) {
             //GAMEOVER

@@ -5,21 +5,21 @@ using UnityEngine;
 public class SpawnController : MonoBehaviour
 {
     public float force;
+    public float timeToSpawn;
     public Transform spawnPoint;
     public GameObject fishPrefab = null;
     private GameObject temp;
-    private bool isIstantiate;
 
     void Start()
     {
-        temp = Instantiate(fishPrefab, spawnPoint);
-        temp.SendMessage("StartForce", force, SendMessageOptions.DontRequireReceiver);
-        isIstantiate = true;
+        StartCoroutine("Spawn");
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator Spawn()
     {
-    
+        temp = Instantiate(fishPrefab, spawnPoint);
+        temp.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, force));
+        yield return new WaitForSeconds(timeToSpawn);
+        StartCoroutine("Spawn");
     }
 }
