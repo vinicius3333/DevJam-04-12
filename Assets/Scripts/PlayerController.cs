@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
-{
+public class PlayerController : MonoBehaviour {
     private Rigidbody2D playerRb;
 
     public LayerMask whatIsGround; //o que é chão
@@ -43,55 +42,42 @@ public class PlayerController : MonoBehaviour
     private bool isShield;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         playerRb = GetComponent<Rigidbody2D>();
 
-        if(isLookLeft == true)
-        {
+        if (isLookLeft == true) {
             bulletSpeed *= -1;
-        }
-        else
-        {
+        } else {
             bulletSpeed *= 1;
         }
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
+        if (PauseMenu.GameIsPaused) return;
         //Controle de Flip, para deixar o personagem olhando para o lado certo
-        if(horizontal != 0)
-        {
-            if (horizontal > 0 && isLookLeft == true) 
-            {
-                Flip(); 
-            }
-            else if (horizontal < 0 && isLookLeft == false)
-            { 
+        if (horizontal != 0) {
+            if (horizontal > 0 && isLookLeft == true) {
+                Flip();
+            } else if (horizontal < 0 && isLookLeft == false) {
                 Flip();
             }
 
             //Controle da velocidade do tiro
-            if (horizontal > 0 && bulletSpeed < 0)
-            {
+            if (horizontal > 0 && bulletSpeed < 0) {
                 bulletSpeed *= -1;
-            }
-            else if (horizontal < 0 && bulletSpeed > 0)
-            {
+            } else if (horizontal < 0 && bulletSpeed > 0) {
                 bulletSpeed *= -1;
             }
         }
 
         InputController();
     }
-    private void FixedUpdate()
-    {
+    private void FixedUpdate() {
         isGrounded = Physics2D.OverlapArea(groundCheck[0].position, groundCheck[1].position, whatIsGround);
     }
 
-    void InputController()
-    {
+    void InputController() {
         vertical = Input.GetAxisRaw("Vertical");
         horizontal = Input.GetAxisRaw("Horizontal");
         playerRb.velocity = new Vector2(horizontal * speed, playerRb.velocity.y);
@@ -122,21 +108,18 @@ public class PlayerController : MonoBehaviour
 
         #region SHOT
 
-        if(isShot == true) //Controle do tempo entre tiros
+        if (isShot == true) //Controle do tempo entre tiros
         {
             time += Time.deltaTime;
 
-            if(time > timeBetweenShots)
-            {
+            if (time > timeBetweenShots) {
                 isShot = false;
                 time = 0;
             }
         }
 
-        if (isShield == false && isShootActive == true && isShot == false)
-        {
-            if (Input.GetButtonDown("Fire1"))
-            {
+        if (isShield == false && isShootActive == true && isShot == false) {
+            if (Input.GetButtonDown("Fire1")) {
                 SetShotPosition();
             }
 
@@ -154,19 +137,16 @@ public class PlayerController : MonoBehaviour
             isShield = true;
             shield.SetActive(true);
 
-            if(horizontal == 0 || horizontal != 0)
-            {
+            if (horizontal == 0 || horizontal != 0) {
                 SetShieldPosition(shieldTransformX);
             }
 
-            if(vertical != 0)
-            {
+            if (vertical != 0) {
                 SetShieldPosition(shieldTransformY);
             }
         }
 
-        if(Input.GetButtonUp("Fire2"))
-        {
+        if (Input.GetButtonUp("Fire2")) {
             isShield = false;
             shield.SetActive(false);
         }
@@ -174,31 +154,26 @@ public class PlayerController : MonoBehaviour
         #endregion
     }
 
-    void Jump(float force)
-    {
+    void Jump(float force) {
         playerRb.AddForce(new Vector2(0, force));
     }
 
-    void Flip()
-    {
+    void Flip() {
         isLookLeft = !isLookLeft;
         Vector3 scale = gameObject.transform.localScale;
-        gameObject.transform.localScale = new Vector3(scale.x *-1, scale.y, scale.z);
+        gameObject.transform.localScale = new Vector3(scale.x * -1, scale.y, scale.z);
     } //flipa o objeto
 
-    void SetShotPosition()
-    {
+    void SetShotPosition() {
         bool isX = false;
         Transform temp = null;
 
-        if (horizontal == 0 || horizontal != 0)
-        {
+        if (horizontal == 0 || horizontal != 0) {
             temp = gunTrasformX;
             isX = true;
         }
 
-        if (vertical != 0)
-        {
+        if (vertical != 0) {
             temp = gunTransformY;
             isX = false;
         }
@@ -206,48 +181,39 @@ public class PlayerController : MonoBehaviour
         Shot(temp, isX);
     } //controla a posicao do tiro antes de instanciar
 
-    void Shot(Transform newTransform, bool eixoX)
-    {
+    void Shot(Transform newTransform, bool eixoX) {
         isShot = true;
         Rigidbody2D temp = Instantiate(presentePrefab, newTransform.position, transform.localRotation).GetComponent<Rigidbody2D>();
 
-        if(eixoX == true)
-        {
+        if (eixoX == true) {
             temp.velocity = new Vector2(bulletSpeed, 0);
-        }
-        else
-        {
-            if(bulletSpeed < 0) { bulletSpeed *= -1; }
+        } else {
+            if (bulletSpeed < 0) { bulletSpeed *= -1; }
             temp.velocity = new Vector2(0, bulletSpeed);
         }
-       
+
     } //instancia o tiro
 
-    void SetShieldPosition(Transform newPosition)
-    {
+    void SetShieldPosition(Transform newPosition) {
         shield.transform.position = newPosition.position;
         shield.transform.rotation = newPosition.rotation;
     } //controla a posicao do shield
 
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        switch(col.gameObject.tag)
-        {
+    private void OnTriggerEnter2D(Collider2D col) {
+        switch (col.gameObject.tag) {
             case "EnemyHit":
                 TakeHit();
                 break;
         }
     } //isso era pra tirar dano etc
 
-    void TakeHit()
-    {
+    void TakeHit() {
         healthPoints--;
 
-        if(healthPoints < 0)
-        {
+        if (healthPoints < 0) {
             //GAMEOVER
         }
     } //controle da vida
 
-    
+
 }
