@@ -4,63 +4,60 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    private Rigidbody2D enemyRb;
+
     public GameObject enemy;
-    public float speed;
-    public float timeInPoint; //tempo qnd chega num lugart definido
+    public float timeInPoint;
+    public float enemySpeed;
     public Transform[] wayPoints;
 
     [Header("Controladores")]
+    private int idTarget = 0;
+    private bool isCenter = false;
     private Transform target;
-    [SerializeField]float timeTemp = 0; //controla o tempo num ponto especifico
-    [SerializeField]private bool isCenter;
+    private Vector3 direction;
 
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        target = wayPoints[0];
-        rb = enemy.GetComponent<Rigidbody2D>();
-        rb.velocity = new Vector2(speed, rb.velocity.y);
-        UpdateVelocity();
+        enemyRb = GetComponentInChildren<Rigidbody2D>();
+        target = wayPoints[idTarget];
 
+        direction = Vector3.Normalize(enemy.transform.position - target.position);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if(transform.position.x == target.position.x)
+        if(isCenter == false)
         {
-            SetDirection();
-            isCenter = true;
+            if(idTarget == 0 && enemy.transform.position.x <= wayPoints[0].transform.position.x)
+            {
+                idTarget = 1;
+                StartCoroutine("UpdateTarget");
+            }
+
+            if(idTarget == 1 && enemy.transform.position.x >= wayPoints[1].transform.position.x)
+            {   
+                idTarget = 0;
+                StartCoroutine("UpdateTarget");
+            }
+
+            enemyRb.velocity = new Vector2((enemySpeed * direction.x)*-1, enemyRb.velocity.y);
         }
+        else
+        {
+            enemyRb.velocity = Vector2.zero;
+        }
+       
+        
     }
+    
+    IEnumerator UpdateTarget()
+    {   
+        isCenter = true;
+        target = wayPoints[idTarget];
 
-    void SetDirection()
-    {
-        rb.velocity = Vector2.zero;
-
-        timeTemp += Time.deltaTime;
-
-        if(timeTemp >= timeInPoint)
-        {
-            int rand = Random.Range(0, wayPoints.Length);
-            target = wayPoints[rand];
-
-            isCenter = false;
-            UpdateVelocity();
-        }
-    }
-
-    void UpdateVelocity()
-    {
-        if (enemy.transform.position.x > target.position.x)
-        {
-            speed *= 1;
-        }
-        else if (enemy.transform.position.x < target.position.x)
-        {
-            speed *= -1;
-        }
+        yield return new WaitForSeconds(timeInPoint);
+        direction = Vector3.Normalize(enemy.transform.position - target.position);
+        isCenter = false;
     }
 }
