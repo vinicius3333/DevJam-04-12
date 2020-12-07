@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8967976195510519918}
   m_Layer: 0
   m_Name: bullet
-  m_TagString: Untagged
+  m_TagString: PlayerHit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ce5dbd802add24a96ce0cabaf8cb31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  rb: {fileID: 0}
   spritePresente:
   - {r: 1, g: 0, b: 0, a: 1}
   - {r: 0, g: 0.051671505, b: 1, a: 1}

@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Fish : MonoBehaviour
 {
+    private SpawnController _SpawnController;
     private Rigidbody2D rb;
     private Vector2 scale;
     
     private void Start()
     {
+        _SpawnController = GetComponentInParent<SpawnController>();
         rb = GetComponent<Rigidbody2D>();
         scale = transform.localScale;
     }
@@ -25,4 +27,13 @@ public class Fish : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
+    
+    public void TakeHit() {
+        _SpawnController.enemyCurrentHP--;
+
+        if (_SpawnController.enemyCurrentHP <= 0) {
+            Destroy(this.gameObject);
+            _SpawnController.enemyCurrentHP = _SpawnController.enemyHP; 
+        }
+    } //controle da vida
 }

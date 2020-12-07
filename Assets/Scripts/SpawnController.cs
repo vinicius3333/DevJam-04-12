@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class SpawnController : MonoBehaviour
 {
+    public enum EnemyType
+    {
+        FISH
+    }
+
+    public EnemyType enemyType;
+
+    public float enemyHP;
+    [HideInInspector]public float enemyCurrentHP;
     public float force;
     public float timeToSpawn;
     public Transform spawnPoint;
@@ -12,14 +21,20 @@ public class SpawnController : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine("Spawn");
+        enemyCurrentHP = enemyHP;
+        switch(enemyType)
+        {
+            case EnemyType.FISH:
+            StartCoroutine("SpawnFish");
+            break;
+        }
     }
 
-    IEnumerator Spawn()
+    IEnumerator SpawnFish()
     {
         temp = Instantiate(fishPrefab, spawnPoint);
         temp.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, force));
         yield return new WaitForSeconds(timeToSpawn);
-        StartCoroutine("Spawn");
+        StartCoroutine("SpawnFish");
     }
 }

@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - EnemyDamage
   - EnemyHead
+  - PlayerHit
   layers:
   - Default
   - TransparentFX
@@ -18,9 +19,9 @@ TagManager:
   - 
   - 
   - Ground
-  - 
-  - 
-  - 
+  - Invencivel
+  - Player
+  - Enemy
   - 
   - 
   - 

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6264858615088212352}
   - component: {fileID: 214109991927666839}
   - component: {fileID: 3187474146965045865}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fish
   m_TagString: EnemyDamage
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 5
 --- !u!60 &214109991927666839
 PolygonCollider2D:
   m_ObjectHideFlags: 0

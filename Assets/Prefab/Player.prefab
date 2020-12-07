@@ -196,7 +196,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6546942362425252311}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.49, y: -0.57, z: 0}
+  m_LocalPosition: {x: -0.4, y: -0.57, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6546942363640981363}
@@ -286,7 +286,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6546942363473047214}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.51, y: -0.88, z: 0}
+  m_LocalPosition: {x: 0.4, y: -0.752, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6546942363640981363}
@@ -305,8 +305,9 @@ GameObject:
   - component: {fileID: 6546942363640981361}
   - component: {fileID: 6546942363640981360}
   - component: {fileID: 6546942363640981365}
+  - component: {fileID: 3818040526761308122}
   - component: {fileID: 6546942363640981390}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -391,10 +392,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.5929625}
+  m_Offset: {x: 0, y: -0.555357}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -405,7 +406,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.84210324, y: 0.12589788}
+  m_Size: {x: 0.84210324, y: 0.050686836}
   m_EdgeRadius: 0
 --- !u!50 &6546942363640981360
 Rigidbody2D:
@@ -445,10 +446,15 @@ MonoBehaviour:
     m_Bits: 256
   isLookLeft: 1
   healthPoints: 3
+  changeColorTimes: 6
+  timeBetweenChangeColor: 0.15
+  colorPadrao: {r: 1, g: 0, b: 0, a: 1}
+  colorHit: {r: 1, g: 0.101745084, b: 0, a: 0.4392157}
   speed: 4
   jumpForce: 480
   doubleJumpForce: 440
-  bounceForce: 0
+  bounceForce: 450
+  bounceForceX: 2
   timeBetweenShots: 0.26
   groundCheck:
   - {fileID: 6546942362425252308}
@@ -458,7 +464,6 @@ MonoBehaviour:
   presentePrefab: {fileID: 1111040260623922037, guid: 0a22ad0f15c258b458b302d19e56834c,
     type: 3}
   bulletSpeed: 20
-  bounceCollider: {fileID: 0}
   gunTrasformX: {fileID: 6546942363295196181}
   gunTransformY: {fileID: 6546942363044809113}
   shieldTransformX: {fileID: 6546942362260155060}
@@ -466,6 +471,18 @@ MonoBehaviour:
   isDoubleJumpActive: 1
   isShootActive: 1
   isShieldActive: 1
+--- !u!114 &3818040526761308122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6546942363640981364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3520fe1b181bb454ab71a43fc8f406c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!58 &6546942363640981390
 CircleCollider2D:
   m_ObjectHideFlags: 0

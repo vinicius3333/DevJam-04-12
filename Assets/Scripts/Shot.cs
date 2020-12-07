@@ -24,9 +24,17 @@ public class Shot : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     { 
-        if(col.gameObject.layer.ToString() == "Ground")
+        if(col.gameObject.layer == 8) //layer do ground
         {
-            Destroy(this.gameObject);
+            Destroy(this.gameObject, 0.002f);
+        }
+
+        switch(col.gameObject.layer)
+        {
+            case 11:
+            col.gameObject.SendMessage("TakeHit", SendMessageOptions.DontRequireReceiver);
+            Destroy(this.gameObject, 0.005f);
+            break;
         }
     }
 }

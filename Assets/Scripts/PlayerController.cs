@@ -4,18 +4,24 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
     private Rigidbody2D playerRb;
-
+    private SpriteRenderer playerSr;
     public LayerMask whatIsGround; //o que é chão
     public bool isLookLeft; //pra onde o player está olhando na cena?
 
     [Header("HP Config")]
     public float healthPoints = 3;
+    public float changeColorTimes; //vezes que vai trocar de cor
+    public float timeBetweenChangeColor; //tempo entre piscadas
+
+    public Color colorPadrao;
+    public Color colorHit;
 
     [Header("Player Config")]
     public float speed;
     public float jumpForce;
     public float doubleJumpForce;
     public float bounceForce;
+    public float bounceForceX;
     public float timeBetweenShots; //tempo entre um tiro e outro
     public Transform[] groundCheck;
 
@@ -50,6 +56,7 @@ public class PlayerController : MonoBehaviour {
     void Start() {
         bounceCollider = GetComponent<BoxCollider2D>();
         playerRb = GetComponent<Rigidbody2D>();
+        playerSr = GetComponent<SpriteRenderer>();
 
         if (isLookLeft == true) {
             bulletSpeed *= -1;
@@ -62,16 +69,6 @@ public class PlayerController : MonoBehaviour {
     void Update() {
         // Verifica se o jogo tá pausado e previni animações do player
         if (PauseMenu.GameIsPaused) return;
-
-        //============= FUI DORMIR ==========
-        /*if(isJu)
-        {
-            bounceCollider.enabled = true;
-        }
-        else
-        {
-            bounceCollider.enabled = false;
-        }*/
 
         //Controle de Flip, para deixar o personagem olhando para o lado certo
         if (horizontal != 0) {
@@ -150,8 +147,7 @@ public class PlayerController : MonoBehaviour {
             if (Input.GetButtonDown("Fire1")) {
                 SetShotPosition();
             }
-
-            if (Input.GetButton("Fire1")) //tiro segurando o botao
+            else if (Input.GetButton("Fire1")) //tiro segurando o botao
             {
                 SetShotPosition();
             }
@@ -227,35 +223,51 @@ public class PlayerController : MonoBehaviour {
         shield.transform.rotation = newPosition.rotation;
     } //controla a posicao do shield
 
-    private void OnTriggerEnter2D(Collider2D col) {
+      private void OnTriggerEnter2D(Collider2D col) {
         switch (col.gameObject.tag) {
-            case "EnemyHead":
-                //tirar dano
-                Bounce();
+            case "EnemyDamage":
+               
+                TakeHit();
                 break;
         }
-    } //isso era pra tirar dano etc
-
+    }
     private void OnCollisionEnter2D(Collision2D col) {
         switch (col.gameObject.tag) {
             case "Enemy":
+               
                 TakeHit();
                 break;
         }
     }
 
-    void Bounce() {
-        playerRb.AddForce(new Vector2(0, bounceForce));
+    public void Bounce() {
+        playerRb.velocity = Vector2.zero;
+        playerRb.AddForce(new Vector2(bounceForceX, bounceForce));
     } //controle da vida
 
     void TakeHit() {
         healthPoints--;
-        //COLOCAR IMPACTO
+
+        StartCoroutine("Invencivel");
 
         if (healthPoints < 0) {
             //GAMEOVER
         }
     } //controle da vida
 
+    IEnumerator Invencivel()
+    {
+        gameObject.layer = 9; //invencivel layer
+
+        for(int i = 0; i < changeColorTimes; i++)
+        {
+            yield return new WaitForSeconds(timeBetweenChangeColor);
+            playerSr.color = colorHit;
+            yield return new WaitForSeconds(timeBetweenChangeColor);
+            playerSr.color = colorPadrao;
+        }
+
+        gameObject.layer = 10; //player layer
+    }
 
 }
