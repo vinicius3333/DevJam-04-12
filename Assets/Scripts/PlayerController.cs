@@ -52,8 +52,6 @@ public class PlayerController : MonoBehaviour {
     private int jumps = 0; //controla os pulos
     private bool isShield;
 
-    public HealthBar healthBar;
-
     // Start is called before the first frame update
     void Start() {
         bounceCollider = GetComponent<BoxCollider2D>();
@@ -65,8 +63,6 @@ public class PlayerController : MonoBehaviour {
         } else {
             bulletSpeed *= 1;
         }
-
-        healthBar.SetMaxHealth((int)healthPoints);
     }
 
     // Update is called once per frame
@@ -88,10 +84,6 @@ public class PlayerController : MonoBehaviour {
             } else if (horizontal < 0 && bulletSpeed > 0) {
                 bulletSpeed *= -1;
             }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Q)) {
-            TakeHit();
         }
 
         InputController();
@@ -254,7 +246,6 @@ public class PlayerController : MonoBehaviour {
 
     void TakeHit() {
         healthPoints--;
-        healthBar.SetHealth((int)healthPoints);
 
         StartCoroutine("Invencivel");
 
