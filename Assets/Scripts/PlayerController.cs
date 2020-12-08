@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour {
     public bool isLookLeft; //pra onde o player está olhando na cena?
 
     [Header("HP Config")]
-    public float healthPoints = 3;
+    public float healthPoints = 5;
     public float changeColorTimes; //vezes que vai trocar de cor
     public float timeBetweenChangeColor; //tempo entre piscadas
 
@@ -52,6 +52,8 @@ public class PlayerController : MonoBehaviour {
     private int jumps = 0; //controla os pulos
     private bool isShield;
 
+    public HealthBar healthBar;
+
     // Start is called before the first frame update
     void Start() {
         bounceCollider = GetComponent<BoxCollider2D>();
@@ -63,6 +65,8 @@ public class PlayerController : MonoBehaviour {
         } else {
             bulletSpeed *= 1;
         }
+
+        healthBar.SetMaxHealth((int)healthPoints);
     }
 
     // Update is called once per frame
@@ -84,6 +88,10 @@ public class PlayerController : MonoBehaviour {
             } else if (horizontal < 0 && bulletSpeed > 0) {
                 bulletSpeed *= -1;
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q)) {
+            TakeHit();
         }
 
         InputController();
@@ -146,9 +154,8 @@ public class PlayerController : MonoBehaviour {
         if (isShield == false && isShootActive == true && isShot == false) {
             if (Input.GetButtonDown("Fire1")) {
                 SetShotPosition();
-            }
-            else if (Input.GetButton("Fire1")) //tiro segurando o botao
-            {
+            } else if (Input.GetButton("Fire1")) //tiro segurando o botao
+              {
                 SetShotPosition();
             }
         }
@@ -223,10 +230,10 @@ public class PlayerController : MonoBehaviour {
         shield.transform.rotation = newPosition.rotation;
     } //controla a posicao do shield
 
-      private void OnTriggerEnter2D(Collider2D col) {
+    private void OnTriggerEnter2D(Collider2D col) {
         switch (col.gameObject.tag) {
             case "EnemyDamage":
-               
+
                 TakeHit();
                 break;
         }
@@ -234,7 +241,7 @@ public class PlayerController : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D col) {
         switch (col.gameObject.tag) {
             case "Enemy":
-               
+
                 TakeHit();
                 break;
         }
@@ -247,6 +254,7 @@ public class PlayerController : MonoBehaviour {
 
     void TakeHit() {
         healthPoints--;
+        healthBar.SetHealth((int)healthPoints);
 
         StartCoroutine("Invencivel");
 
@@ -255,12 +263,10 @@ public class PlayerController : MonoBehaviour {
         }
     } //controle da vida
 
-    IEnumerator Invencivel()
-    {
+    IEnumerator Invencivel() {
         gameObject.layer = 9; //invencivel layer
 
-        for(int i = 0; i < changeColorTimes; i++)
-        {
+        for (int i = 0; i < changeColorTimes; i++) {
             yield return new WaitForSeconds(timeBetweenChangeColor);
             playerSr.color = colorHit;
             yield return new WaitForSeconds(timeBetweenChangeColor);
