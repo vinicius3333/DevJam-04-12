@@ -9,6 +9,7 @@ TagManager:
   - EnemyDamage
   - EnemyHead
   - PlayerHit
+  - EnemyBall
   layers:
   - Default
   - TransparentFX
