@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
+
+    public static PlayerController instance;
     private Rigidbody2D playerRb;
     private SpriteRenderer playerSr;
     public LayerMask whatIsGround; //o que é chão
@@ -54,6 +56,7 @@ public class PlayerController : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
+        instance = this;
         bounceCollider = GetComponent<BoxCollider2D>();
         playerRb = GetComponent<Rigidbody2D>();
         playerSr = GetComponent<SpriteRenderer>();
