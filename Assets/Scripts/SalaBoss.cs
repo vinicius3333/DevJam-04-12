@@ -18,7 +18,8 @@ public class SalaBoss : MonoBehaviour {
 
     public float velocidadeCenoura = 5f;
     public float velocidadeBola = 5f;
-    public bool cenouraPraCima = true;
+    private float[] cenouraPosicoes = new float[] { 1.5f, 1.0f, 0.5f };
+    private int indexCenoura = 0;
 
     void Start() {
         instance = this;
@@ -66,17 +67,13 @@ public class SalaBoss : MonoBehaviour {
 
         while (i-- > 0) {
             Vector3 positionRandom = new Vector3(cenouraRandom.position.x, 0, cenouraRandom.position.z);
-            if (cenouraPraCima) {
-                positionRandom.y = (i + 1.5f);
-            } else {
-                positionRandom.y = (i + 0.5f) * -1;
-            }
-            Debug.Log(positionRandom);
+            positionRandom.y = (i + cenouraPosicoes[indexCenoura]);
             Rigidbody2D temp = Instantiate(cenouraPrefab, positionRandom, rotation).GetComponent<Rigidbody2D>();
             temp.velocity = new Vector2(direitaBoss ? velocidadeCenoura : velocidadeCenoura * -1, 0);
         }
 
-        cenouraPraCima = !cenouraPraCima;
+        if (indexCenoura == 2) indexCenoura = 0;
+        else indexCenoura++;
 
         Invoke("mudarPosicaoBossRandom", 1f);
     }
