@@ -21,6 +21,7 @@ public class Foca : MonoBehaviour
     public float enemyHP;
 
     public float shotSpeed;
+    public float forceY;
     public float timeToShot;
 
     public float maxDistance;
@@ -37,6 +38,8 @@ public class Foca : MonoBehaviour
     private bool isCenter = false; //controla se está centralizado no ponto objetivo
     private Transform target; //objetivo
     private Vector3 direction; //direcao do movimento setado da posAtual para o objetivp
+
+    private bool isLockLeft;
 
 
     // Start is called before the first frame update
@@ -60,6 +63,15 @@ public class Foca : MonoBehaviour
         {
             head.SetActive(false);
         }
+
+        if(enemyCurrentState == EnemyState.ATIRANDO)
+        {
+            if(isOlhandoDireita()) {
+                transform.rotation = Quaternion.AngleAxis(0, new Vector3(0, 0, 0));
+            } else {
+                transform.rotation = Quaternion.AngleAxis(180, new Vector3(0, 180, 0));
+            }
+        } 
     }
 
     private void FixedUpdate() {
@@ -140,7 +152,9 @@ public class Foca : MonoBehaviour
         Rigidbody2D temp = Instantiate(shotPrefab, shotPosition.position, shotPosition.localRotation).GetComponent<Rigidbody2D>();
 
         temp.transform.localRotation = shotPosition.localRotation;
+        temp.AddForce(new Vector2(0, forceY));
         temp.velocity = shotPosition.right * shotSpeed;
+        
 
     } //instancia o tiro
 
@@ -165,7 +179,6 @@ public class Foca : MonoBehaviour
                 isCenter = false;
             break;
         }
-
     }
 
     IEnumerator ShotDelay()
@@ -175,5 +188,11 @@ public class Foca : MonoBehaviour
         //StartCoroutine("ShotDelay");
         isLockPlayer = false;
         isShot = false;
+    }
+    
+    public bool isOlhandoDireita() {
+        Vector3 dir = PlayerController.instance.transform.position - transform.position;
+
+        return dir.x < 0;
     }
 }

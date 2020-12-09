@@ -6,9 +6,14 @@ public class EnemyBallShot : MonoBehaviour
 {
     public float timeToDestroy; //tempo para destruir dps que bater em algo
     public Rigidbody2D rb;
+    private CircleCollider2D collider;
+    public float timeToActive;
     // Start is called before the first frame update
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
+        collider = GetComponent<CircleCollider2D>();
+        collider.enabled = false;
+        StartCoroutine("TimeToCollider");
     }
     private void OnCollisionEnter2D(Collision2D col) 
     {
@@ -17,5 +22,12 @@ public class EnemyBallShot : MonoBehaviour
         private void OnBecameInvisible()
     {
         Destroy(this.gameObject);
+    }
+
+    IEnumerator TimeToCollider()
+    {
+        collider.enabled = false;
+        yield return new WaitForSeconds(timeToActive);
+        collider.enabled = true;
     }
 }
