@@ -23,24 +23,29 @@ public class BossNeve : MonoBehaviour {
     }
 
     private void Update() {
-        Vector3 dir = PlayerController.instance.transform.position - transform.position;
-        if (dir.x > 0) {
+        if (isBossOlhandoDireita()) {
             transform.rotation = Quaternion.AngleAxis(0, new Vector3(0, 0, 0));
-        } else if (dir.x < 0) {
+        } else {
             transform.rotation = Quaternion.AngleAxis(180, new Vector3(0, 180, 0));
         }
     }
 
-    public void pularBoss(Transform posicao) {
+    public bool isBossOlhandoDireita() {
+        Vector3 dir = PlayerController.instance.transform.position - transform.position;
+
+        return dir.x > 0;
+    }
+
+    public IEnumerator pularBoss(Transform posicao) {
+        animator.SetTrigger("jump");
+        yield return new WaitForSeconds(0.30f);
         rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);
+        animator.SetBool("onAir", true);
         StartCoroutine(mudarPosicao(posicao, 2f));
     }
 
     IEnumerator mudarPosicao(Transform _transform, float delayTime) {
         yield return new WaitForSeconds(delayTime);
         transform.position = new Vector3(_transform.position.x, transform.position.y, 0f);
-    }
-
-    private void OnTriggerEnter2D(Collider2D other) {
     }
 }

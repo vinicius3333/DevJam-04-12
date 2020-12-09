@@ -17,8 +17,8 @@ public class SalaBoss : MonoBehaviour {
     private int ultimaPosicao = 0;
 
     public float velocidadeCenoura = 5f;
-    private bool isLookLeftCenoura = false;
     public float velocidadeBola = 5f;
+    public bool cenouraPraCima = true;
 
     void Start() {
         instance = this;
@@ -30,7 +30,12 @@ public class SalaBoss : MonoBehaviour {
             indexPosicao = Random.Range(0, posicoesBoss.Length);
         }
         ultimaPosicao = indexPosicao;
-        BossNeve.instance.pularBoss(posicoesBoss[indexPosicao]);
+        StartCoroutine(BossNeve.instance.pularBoss(posicoesBoss[indexPosicao]));
+    }
+
+    public void encostarPlataforma() {
+        BossNeve.instance.animator.SetBool("onAir", false);
+        jogarObjetosTela();
     }
 
     public void jogarObjetosTela() {
@@ -51,24 +56,29 @@ public class SalaBoss : MonoBehaviour {
     IEnumerator jogarCenoura() {
         yield return new WaitForSeconds(1.01f);
 
-        Transform cenouraRandom = posicoesCenoura[Random.Range(0, posicoesCenoura.Length)];
+        bool direitaBoss = BossNeve.instance.isBossOlhandoDireita();
 
-        if (cenouraRandom.localPosition.x > 0 && cenouraPrefab.transform.localScale.x > 0) {
-            flipCenoura();
-        } else if (cenouraRandom.localPosition.x < 0 && cenouraPrefab.transform.localScale.x < 0) {
-            flipCenoura();
+        Transform cenouraRandom = posicoesCenoura[direitaBoss ? 0 : 1];
+
+        Quaternion rotation = direitaBoss ? Quaternion.AngleAxis(0, new Vector3(0, 0, 0)) : Quaternion.AngleAxis(180, new Vector3(0, 180, 0));
+
+        int i = 3;
+
+        while (i-- > 0) {
+            Vector3 positionRandom = new Vector3(cenouraRandom.position.x, 0, cenouraRandom.position.z);
+            if (cenouraPraCima) {
+                positionRandom.y = (i + 1.5f);
+            } else {
+                positionRandom.y = (i + 0.5f) * -1;
+            }
+            Debug.Log(positionRandom);
+            Rigidbody2D temp = Instantiate(cenouraPrefab, positionRandom, rotation).GetComponent<Rigidbody2D>();
+            temp.velocity = new Vector2(direitaBoss ? velocidadeCenoura : velocidadeCenoura * -1, 0);
         }
 
-        //cenouraRandom.localScale = new Vector3(5, 5, 1);
-
-        Rigidbody2D temp = Instantiate(cenouraPrefab, cenouraRandom.position, transform.localRotation).GetComponent<Rigidbody2D>();
-
-        isLookLeftCenoura = cenouraRandom.localPosition.x > 0;
-
-        temp.velocity = new Vector2(cenouraRandom.localPosition.x > 0 ? velocidadeCenoura * -1 : velocidadeCenoura, 0);
+        cenouraPraCima = !cenouraPraCima;
 
         Invoke("mudarPosicaoBossRandom", 1f);
-        //Invoke("jogarCenoura", Random.Range(1f, 1.5f));
     }
 
     void flipCenoura() {
