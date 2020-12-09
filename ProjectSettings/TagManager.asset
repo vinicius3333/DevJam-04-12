@@ -12,6 +12,8 @@ TagManager:
   - EnemyBall
   - PlataformaBoss
   - BossNeve
+  - BolaNeve
+  - Geiser
   layers:
   - Default
   - TransparentFX

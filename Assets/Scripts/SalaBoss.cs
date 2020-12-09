@@ -20,6 +20,7 @@ public class SalaBoss : MonoBehaviour {
     public float velocidadeBola = 5f;
     private float[] cenouraPosicoes = new float[] { 1.5f, 1.0f, 0.5f };
     private int indexCenoura = 0;
+    private bool bolaJogada = false;
 
     void Start() {
         instance = this;
@@ -31,7 +32,8 @@ public class SalaBoss : MonoBehaviour {
             indexPosicao = Random.Range(0, posicoesBoss.Length);
         }
         ultimaPosicao = indexPosicao;
-        StartCoroutine(BossNeve.instance.pularBoss(posicoesBoss[indexPosicao]));
+        BossNeve.instance.proximaPosicao = posicoesBoss[indexPosicao];
+        BossNeve.instance.animator.SetTrigger("jump");
     }
 
     public void encostarPlataforma() {
@@ -41,8 +43,7 @@ public class SalaBoss : MonoBehaviour {
 
     public void jogarObjetosTela() {
         if (indexPosicao == 0 || indexPosicao == 2) {
-            //            jogarCenouraAnimacao();
-            jogarBolaAnimacao();
+            jogarCenouraAnimacao();
         } else {
             jogarBolaAnimacao();
         }
@@ -50,7 +51,6 @@ public class SalaBoss : MonoBehaviour {
 
     void jogarCenouraAnimacao() {
         BossNeve.instance.animator.SetTrigger("jogandoCenoura");
-        //StartCoroutine(jogarCenoura());
     }
 
     public void jogarCenoura() {
@@ -72,6 +72,7 @@ public class SalaBoss : MonoBehaviour {
 
         if (indexCenoura == 2) indexCenoura = 0;
         else indexCenoura++;
+        StartCoroutine(bossAguarde());
     }
 
     void flipCenoura() {
@@ -84,12 +85,38 @@ public class SalaBoss : MonoBehaviour {
     }
 
     public void jogarBola() {
-        Transform cenouraRandom = posicoesBola[Random.Range(0, posicoesBola.Length)];
+        if (bolaJogada) {
+            var bolaNeve = GameObject.FindWithTag("BolaNeve");
+            if (bolaNeve != null) {
+                Destroy(bolaNeve);
+            }
+        }
 
-        Vector3 positionRandom = cenouraRandom.position;
-        //positionRandom.y = (i + cenouraPosicoes[indexCenoura]);
-        Rigidbody2D temp = Instantiate(bolaPrefab, positionRandom, bolaPrefab.transform.rotation).GetComponent<Rigidbody2D>();
-        //temp.velocity = new Vector2(direitaBoss ? velocidadeCenoura : velocidadeCenoura * -1, 0);
+        int indexAleatorio = Random.Range(0, posicoesBola.Length);
+        Vector3 posicaoPlayer = PlayerController.instance.transform.position;
+        Vector3 posicaoLonge = posicoesBola[indexAleatorio].position;
+
+        if (Mathf.Ceil(posicaoPlayer.x) - Mathf.Ceil(posicaoLonge.x) < 5 || Mathf.Ceil(posicaoPlayer.x) - Mathf.Ceil(posicaoLonge.x) < -5) {
+            if (indexAleatorio == posicoesBola.Length - 1) {
+                indexAleatorio = 0;
+            } else {
+                indexAleatorio++;
+            }
+        }
+
+        Rigidbody2D temp = Instantiate(bolaPrefab, posicaoLonge, bolaPrefab.transform.rotation).GetComponent<Rigidbody2D>();
+        bolaJogada = true;
+        StartCoroutine(bossAguarde());
+    }
+
+    public IEnumerator bossAguarde() {
+        yield return new WaitForSeconds(Random.Range(2.5f, 3.5f));
+        mudarPosicaoBossRandom();
+    }
+
+    public void destruirBolaNeve(GameObject gameObject) {
+        Destroy(gameObject);
+        bolaJogada = false;
     }
 
 }

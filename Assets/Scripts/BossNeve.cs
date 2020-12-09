@@ -14,6 +14,8 @@ public class BossNeve : MonoBehaviour {
 
     public float jumpForce = 10f;
 
+    public Transform proximaPosicao;
+
 
     private void Start() {
         transform = GetComponent<Transform>();
@@ -44,12 +46,10 @@ public class BossNeve : MonoBehaviour {
         SalaBoss.instance.jogarBola();
     }
 
-    public IEnumerator pularBoss(Transform posicao) {
-        animator.SetTrigger("jump");
-        yield return new WaitForSeconds(0.30f);
+    public void pularBoss() {
         rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);
         animator.SetBool("onAir", true);
-        StartCoroutine(mudarPosicao(posicao, 2f));
+        StartCoroutine(mudarPosicao(proximaPosicao, 1.5f));
     }
 
     IEnumerator mudarPosicao(Transform _transform, float delayTime) {
