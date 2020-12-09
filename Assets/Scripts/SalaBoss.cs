@@ -40,22 +40,20 @@ public class SalaBoss : MonoBehaviour {
     }
 
     public void jogarObjetosTela() {
-        //Debug.Log("jogando cenoura");
         if (indexPosicao == 0 || indexPosicao == 2) {
-            jogarCenouraAnimacao();
+            //            jogarCenouraAnimacao();
+            jogarBolaAnimacao();
         } else {
-            // Mudar para função de jogar gelo
-            jogarCenouraAnimacao();
+            jogarBolaAnimacao();
         }
     }
 
     void jogarCenouraAnimacao() {
         BossNeve.instance.animator.SetTrigger("jogandoCenoura");
-        StartCoroutine(jogarCenoura());
+        //StartCoroutine(jogarCenoura());
     }
 
-    IEnumerator jogarCenoura() {
-        yield return new WaitForSeconds(1.01f);
+    public void jogarCenoura() {
 
         bool direitaBoss = BossNeve.instance.isBossOlhandoDireita();
 
@@ -74,8 +72,6 @@ public class SalaBoss : MonoBehaviour {
 
         if (indexCenoura == 2) indexCenoura = 0;
         else indexCenoura++;
-
-        Invoke("mudarPosicaoBossRandom", 1f);
     }
 
     void flipCenoura() {
@@ -83,10 +79,17 @@ public class SalaBoss : MonoBehaviour {
         cenouraPrefab.transform.localScale = new Vector3(scale.x * -1, scale.y, scale.z);
     }
 
-    void jogarBola() {
-        Vector3 posicaoRandom = posicoesCenoura[Random.Range(0, posicoesBola.Length)].localPosition;
-        Rigidbody2D temp = Instantiate(bolaPrefab, posicaoRandom, transform.localRotation).GetComponent<Rigidbody2D>();
-        temp.velocity = new Vector2(0, velocidadeBola);
+    void jogarBolaAnimacao() {
+        BossNeve.instance.animator.SetTrigger("jogandoBola");
+    }
+
+    public void jogarBola() {
+        Transform cenouraRandom = posicoesBola[Random.Range(0, posicoesBola.Length)];
+
+        Vector3 positionRandom = cenouraRandom.position;
+        //positionRandom.y = (i + cenouraPosicoes[indexCenoura]);
+        Rigidbody2D temp = Instantiate(bolaPrefab, positionRandom, bolaPrefab.transform.rotation).GetComponent<Rigidbody2D>();
+        //temp.velocity = new Vector2(direitaBoss ? velocidadeCenoura : velocidadeCenoura * -1, 0);
     }
 
 }

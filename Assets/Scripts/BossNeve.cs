@@ -36,6 +36,14 @@ public class BossNeve : MonoBehaviour {
         return dir.x > 0;
     }
 
+    public void jogarCenoura() {
+        SalaBoss.instance.jogarCenoura();
+    }
+
+    public void jogarBola() {
+        SalaBoss.instance.jogarBola();
+    }
+
     public IEnumerator pularBoss(Transform posicao) {
         animator.SetTrigger("jump");
         yield return new WaitForSeconds(0.30f);
