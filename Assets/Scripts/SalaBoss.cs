@@ -71,11 +71,8 @@ public class SalaBoss : MonoBehaviour {
 
         int i = 3;
 
-        Debug.Log("index cenoura: " + indexCenoura);
-
         while (i-- > 0) {
             Vector3 positionRandom = new Vector3(cenouraRandom.position.x, 0, cenouraRandom.position.z);
-            Debug.Log(cenouraPosicoes[indexCenoura]);
             positionRandom.y = (i + cenouraPosicoes[indexCenoura]);
             Rigidbody2D temp = Instantiate(cenouraPrefab, positionRandom, rotation).GetComponent<Rigidbody2D>();
             temp.velocity = new Vector2(direitaBoss ? velocidadeCenoura : velocidadeCenoura * -1, 0);

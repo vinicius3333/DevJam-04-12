@@ -78,7 +78,7 @@ public class BossNeve : MonoBehaviour {
     }
 
     private void OnParticleCollision(GameObject other) {
-        if (!tomouHit) {
+        if (!tomouHit && other.tag == "Geiser") {
             tomouHit = true;
             TakeHit();
         }

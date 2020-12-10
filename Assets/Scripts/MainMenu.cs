@@ -9,7 +9,6 @@ public class MainMenu : MonoBehaviour {
     }
 
     public void QuitGame() {
-        Debug.Log("Saindo!");
         Application.Quit();
     }
 }
