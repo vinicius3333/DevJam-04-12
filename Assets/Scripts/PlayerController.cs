@@ -54,6 +54,8 @@ public class PlayerController : MonoBehaviour {
     private int jumps = 0; //controla os pulos
     private bool isShield;
 
+    public bool moverSozinho = false;
+
     // Start is called before the first frame update
     void Start() {
         instance = this;
@@ -90,6 +92,10 @@ public class PlayerController : MonoBehaviour {
         }
 
         InputController();
+
+        if (moverSozinho) {
+            playerRb.velocity = new Vector2(speed, playerRb.velocity.y);
+        }
     }
     private void FixedUpdate() {
         isGrounded = Physics2D.OverlapArea(groundCheck[0].position, groundCheck[1].position, whatIsGround);
@@ -99,6 +105,8 @@ public class PlayerController : MonoBehaviour {
         vertical = Input.GetAxisRaw("Vertical");
         horizontal = Input.GetAxisRaw("Horizontal");
         playerRb.velocity = new Vector2(horizontal * speed, playerRb.velocity.y);
+
+        //playerRb.velocity = new Vector2(20f, playerRb.velocity.y);
 
         #region JUMP
         if (Input.GetButtonDown("Jump") && isGrounded == true) //pulo normal
