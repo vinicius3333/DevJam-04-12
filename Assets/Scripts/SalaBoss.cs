@@ -5,6 +5,7 @@ using UnityEngine;
 public class SalaBoss : MonoBehaviour {
     public static SalaBoss instance;
 
+    public GameObject Boss;
     public Transform[] posicoesBoss;
 
     public GameObject cenouraPrefab;
@@ -26,7 +27,11 @@ public class SalaBoss : MonoBehaviour {
         instance = this;
     }
 
-    void mudarPosicaoBossRandom() {
+    public void iniciarBoss() {
+        Boss.SetActive(true);
+    }
+
+    public void mudarPosicaoBossRandom() {
         indexPosicao = Random.Range(0, posicoesBoss.Length);
         while (ultimaPosicao == indexPosicao && posicoesBoss.Length > 0) {
             indexPosicao = Random.Range(0, posicoesBoss.Length);
@@ -38,6 +43,7 @@ public class SalaBoss : MonoBehaviour {
 
     public void encostarPlataforma() {
         BossNeve.instance.animator.SetBool("onAir", false);
+        if (BossNeve.instance.tomouHit) return;
         jogarObjetosTela();
     }
 
@@ -96,7 +102,7 @@ public class SalaBoss : MonoBehaviour {
         Vector3 posicaoPlayer = PlayerController.instance.transform.position;
         Vector3 posicaoLonge = posicoesBola[indexAleatorio].position;
 
-        if (Mathf.Ceil(posicaoPlayer.x) - Mathf.Ceil(posicaoLonge.x) < 5 || Mathf.Ceil(posicaoPlayer.x) - Mathf.Ceil(posicaoLonge.x) < -5) {
+        if (Mathf.Ceil(posicaoPlayer.x) - Mathf.Ceil(posicaoLonge.x) < 10 || Mathf.Ceil(posicaoPlayer.x) - Mathf.Ceil(posicaoLonge.x) < -10) {
             if (indexAleatorio == posicoesBola.Length - 1) {
                 indexAleatorio = 0;
             } else {

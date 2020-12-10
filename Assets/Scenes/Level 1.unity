@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -9900,9 +9900,54 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3416075269617887233, guid: 1d6ee4112b9b2df40b103791e9c826b9,
+        type: 3}
+      propertyPath: CollisionModule.type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3416075269617887233, guid: 1d6ee4112b9b2df40b103791e9c826b9,
+        type: 3}
+      propertyPath: TriggerModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3416075269617887233, guid: 1d6ee4112b9b2df40b103791e9c826b9,
+        type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3416075269617887233, guid: 1d6ee4112b9b2df40b103791e9c826b9,
+        type: 3}
+      propertyPath: CollisionModule.collisionMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3416075269617887233, guid: 1d6ee4112b9b2df40b103791e9c826b9,
+        type: 3}
+      propertyPath: CollisionModule.collisionMessages
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3416075269617887233, guid: 1d6ee4112b9b2df40b103791e9c826b9,
+        type: 3}
+      propertyPath: CollisionModule.collidesWith.m_Bits
+      value: 16384
+      objectReference: {fileID: 0}
+    - target: {fileID: 3416075269617887233, guid: 1d6ee4112b9b2df40b103791e9c826b9,
+        type: 3}
+      propertyPath: CollisionModule.m_EnergyLossOnCollision.scalar
+      value: 0.9
+      objectReference: {fileID: 0}
     - target: {fileID: 3416075269617887260, guid: 1d6ee4112b9b2df40b103791e9c826b9,
         type: 3}
       propertyPath: m_Name
+      value: Geiser
+      objectReference: {fileID: 0}
+    - target: {fileID: 3416075269617887260, guid: 1d6ee4112b9b2df40b103791e9c826b9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3416075269617887260, guid: 1d6ee4112b9b2df40b103791e9c826b9,
+        type: 3}
+      propertyPath: m_TagString
       value: Geiser
       objectReference: {fileID: 0}
     - target: {fileID: 3416075269617887263, guid: 1d6ee4112b9b2df40b103791e9c826b9,
@@ -10170,6 +10215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fa1484de5fde8641aded18e7ff5be50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Boss: {fileID: 2101421816}
   posicoesBoss:
   - {fileID: 1496939189}
   - {fileID: 266273280}
@@ -10265,12 +10311,12 @@ PrefabInstance:
     - target: {fileID: 3192997397140487342, guid: d2d608dd6fc54814ca015659b92bc2d4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -22.4
+      value: -24.909527
       objectReference: {fileID: 0}
     - target: {fileID: 3192997397140487342, guid: d2d608dd6fc54814ca015659b92bc2d4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.2
+      value: 6.516444
       objectReference: {fileID: 0}
     - target: {fileID: 3192997397140487342, guid: d2d608dd6fc54814ca015659b92bc2d4,
         type: 3}
@@ -10418,8 +10464,8 @@ PolygonCollider2D:
     - - {x: 0.7342739, y: 14.345002}
       - {x: -25.41269, y: 14.248795}
       - {x: -25.357264, y: -5.0615125}
-      - {x: 23.65552, y: -5.218673}
-      - {x: 23.55932, y: 14.287652}
+      - {x: 21.659231, y: -4.4697165}
+      - {x: 21.230314, y: 13.954782}
 --- !u!4 &811788776
 Transform:
   m_ObjectHideFlags: 0
@@ -10584,7 +10630,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1031615311}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 57.183342, y: 7.716803, z: -10}
+  m_LocalPosition: {x: 57.147896, y: 8.748477, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -10616,7 +10662,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1062478715}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.93, y: -0.87, z: 0}
+  m_LocalPosition: {x: -0.07, y: -0.87, z: 10000}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 651793734}
@@ -10635,6 +10681,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCamera: {fileID: 765922545}
+  bossCamera: 0
 --- !u!61 &1062478718
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10933,12 +10980,12 @@ PrefabInstance:
     - target: {fileID: 3192997397140487342, guid: d2d608dd6fc54814ca015659b92bc2d4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -20.519644
+      value: -22.149643
       objectReference: {fileID: 0}
     - target: {fileID: 3192997397140487342, guid: d2d608dd6fc54814ca015659b92bc2d4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.360693
+      value: 6.5806932
       objectReference: {fileID: 0}
     - target: {fileID: 3192997397140487342, guid: d2d608dd6fc54814ca015659b92bc2d4,
         type: 3}
@@ -11086,7 +11133,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1653657846}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.52, y: 0.08, z: 2.2216797}
+  m_LocalPosition: {x: 1.64, y: 0.08, z: 10000}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 651793734}
@@ -11105,6 +11152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCamera: {fileID: 144812162}
+  bossCamera: 1
 --- !u!61 &1653657849
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11333,7 +11381,7 @@ GameObject:
   - component: {fileID: 2101421819}
   - component: {fileID: 2101421821}
   - component: {fileID: 2101421822}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: BossNeve
   m_TagString: BossNeve
   m_Icon: {fileID: 0}
@@ -11399,7 +11447,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2101421816}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.487251, y: 17.6, z: 6.9726562}
+  m_LocalPosition: {x: 0.8, y: 17.6, z: 6.9726562}
   m_LocalScale: {x: 25, y: 25, z: 2}
   m_Children: []
   m_Father: {fileID: 641709235}
@@ -11457,6 +11505,16 @@ MonoBehaviour:
   animator: {fileID: 0}
   jumpForce: 25
   proximaPosicao: {fileID: 0}
+  healthPoints: 3
+  changeColorTimes: 6
+  timeBetweenChangeColor: 0.15
+  colorPadrao: {r: 1, g: 1, b: 1, a: 1}
+  colorHit: {r: 1, g: 0.3443396, b: 0.3443396, a: 1}
+  tomouHit: 0
+  estagiosBoss:
+  - morrendo
+  - terceiroEstagio
+  - segundoEstagio
 --- !u!95 &2101421822
 Animator:
   serializedVersion: 3
@@ -11642,12 +11700,12 @@ PrefabInstance:
     - target: {fileID: 6546942363640981363, guid: d28e7263c386cc640adc4df8eb8279ca,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 73.58
+      value: 28.6
       objectReference: {fileID: 0}
     - target: {fileID: 6546942363640981363, guid: d28e7263c386cc640adc4df8eb8279ca,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.09
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6546942363640981363, guid: d28e7263c386cc640adc4df8eb8279ca,
         type: 3}

@@ -12,7 +12,7 @@ public class CameraController : MonoBehaviour {
         instance = this;
     }
 
-    public void EnableCamera(GameObject camera) {
+    public void EnableCamera(GameObject camera, bool bossCamera) {
         if (camera.activeInHierarchy) return;
 
         for (int i = 0; i < cameras.Length; i++) {
@@ -22,6 +22,10 @@ public class CameraController : MonoBehaviour {
         camera.SetActive(true);
 
         StartCoroutine(FreezingTime());
+
+        if (bossCamera) {
+            StartCoroutine(moverSozinho());
+        }
     }
 
     IEnumerator FreezingTime() {
@@ -30,5 +34,13 @@ public class CameraController : MonoBehaviour {
         yield return new WaitForSecondsRealtime(freezeTime);
 
         Time.timeScale = 1;
+    }
+
+    IEnumerator moverSozinho() {
+        PlayerController.instance.moverSozinho = true;
+
+        yield return new WaitForSecondsRealtime(1.5f);
+
+        PlayerController.instance.moverSozinho = false;
     }
 }
