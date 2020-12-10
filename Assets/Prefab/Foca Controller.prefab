@@ -164,7 +164,7 @@ MonoBehaviour:
   shotPosition: {fileID: 5388886994846422602}
   timeInPoint: 1
   enemySpeed: 3
-  enemyHP: 3
+  enemyHP: 1
   shotSpeed: 20
   forceY: 70
   timeToShot: 1.5
@@ -353,6 +353,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5377218114347163727, guid: 83ba2527cc571b84794af061f2671a64,
+        type: 3}
+      propertyPath: _EnemyController
+      value: 
+      objectReference: {fileID: 5388886995422213854}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83ba2527cc571b84794af061f2671a64, type: 3}
 --- !u!1 &5774618443666889614 stripped

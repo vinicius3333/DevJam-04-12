@@ -2,19 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyHead : MonoBehaviour
-{
-    private EnemyController _EnemyController;
-    void Start()
-    {
-        _EnemyController = FindObjectOfType(typeof(EnemyController)) as EnemyController;
-    }
+public class EnemyHead : MonoBehaviour {
+    public Foca _EnemyController;
 
-    private void OnTriggerEnter2D(Collider2D col) 
-    {
-        if(col.gameObject.tag == "Player")
-        {
+    private void OnTriggerEnter2D(Collider2D col) {
+        if (col.gameObject.tag == "Player") {
             _EnemyController.TakeHit();
-        }    
+        }
     }
 }
