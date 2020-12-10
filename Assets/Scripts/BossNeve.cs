@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BossNeve : MonoBehaviour {
 
+    public HealthBar healthBar;
     private new Transform transform;
 
     private new Rigidbody2D rigidbody;
@@ -37,6 +38,7 @@ public class BossNeve : MonoBehaviour {
         rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        healthBar.SetMaxHealth((int)healthPoints);
         instance = this;
     }
 
@@ -96,6 +98,7 @@ public class BossNeve : MonoBehaviour {
             return;
         }
         healthPoints--;
+        healthBar.SetHealth((int)healthPoints);
 
         StartCoroutine("Invencivel");
 

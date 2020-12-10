@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 5528069460329415102}
   - component: {fileID: 1526039565}
   - component: {fileID: 6724792421161478475}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: CenouraBoss
-  m_TagString: Untagged
+  m_TagString: EnemyDamage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
