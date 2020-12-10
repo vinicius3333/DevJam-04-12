@@ -122,9 +122,6 @@ public class SalaBoss : MonoBehaviour {
     }
 
     public IEnumerator bossAguarde() {
-        if (BossNeve.instance.tomouHit) {
-            BossNeve.instance.proximoEstagio();
-        }
         yield return new WaitForSeconds(Random.Range(3.5f, 4.5f));
         mudarPosicaoBossRandom();
     }

@@ -90,8 +90,7 @@ public class BossNeve : MonoBehaviour {
         if (bolaNeve != null) {
             SalaBoss.instance.destruirBolaNeve(bolaNeve);
         }
-        criarParticulas();
-        Destroy(boss);
+        GameObject.Find("CanvasBoss").SetActive(false);
     }
 
     void TakeHit() {
@@ -111,7 +110,7 @@ public class BossNeve : MonoBehaviour {
             yield return new WaitForSeconds(timeBetweenChangeColor);
             spriteRenderer.color = colorPadrao;
         }
-        //SalaBoss.instance.mudarPosicaoBossRandom();
+        proximoEstagio();
     }
 
     public void proximoEstagio() {
