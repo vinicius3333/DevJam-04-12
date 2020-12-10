@@ -24,6 +24,10 @@ public class SalaBoss : MonoBehaviour {
     private int indexCenoura = 0;
     private bool bolaJogada = false;
 
+    private int[] ordemPosicoes = { 0, 2, 1 };
+
+    private int posicaoAtual = 0;
+
     void Start() {
         instance = this;
     }
@@ -34,11 +38,12 @@ public class SalaBoss : MonoBehaviour {
     }
 
     public void mudarPosicaoBossRandom() {
-        indexPosicao = Random.Range(0, posicoesBoss.Length);
-        while (ultimaPosicao == indexPosicao && posicoesBoss.Length > 0) {
-            indexPosicao = Random.Range(0, posicoesBoss.Length);
+        if (posicaoAtual == ordemPosicoes.Length - 1) {
+            posicaoAtual = 0;
+        } else {
+            posicaoAtual++;
         }
-        ultimaPosicao = indexPosicao;
+        indexPosicao = ordemPosicoes[posicaoAtual];
         BossNeve.instance.proximaPosicao = posicoesBoss[indexPosicao];
         BossNeve.instance.animator.SetTrigger("jump");
     }
@@ -88,7 +93,6 @@ public class SalaBoss : MonoBehaviour {
     }
 
     void jogarBolaAnimacao() {
-        Debug.Log("Testando");
         BossNeve.instance.animator.SetTrigger("jogandoBola");
     }
 
