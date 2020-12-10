@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LaserColliderRena : MonoBehaviour
 {
+    public GameObject explosionPrefab;
     public Animator animator;
     private BossRena _BossRena;
     // Start is called before the first frame update

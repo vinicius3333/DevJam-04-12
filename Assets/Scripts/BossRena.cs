@@ -22,6 +22,7 @@ public class BossRena : MonoBehaviour
     public GameObject bunda;
     public float timeInState; //tempo em cada ponto
     public float speed;
+    public float timeToStop;
     public float shotingTime;
     public Transform arma;
     public GameObject laserPrefab;
@@ -31,9 +32,22 @@ public class BossRena : MonoBehaviour
     public bool isStartShot;
     private bool isParado;
 
+    [Header("Dano Config")]
+    public float changeColorTimes = 3;
+
+    public float timeBetweenChangeColor = 1.3f;
+
+    private SpriteRenderer spriteRenderer;
+
+    public Color colorPadrao;
+    public Color colorHit;
+
+    public bool tomouHit = false;
+
     // Start is called before the first frame update
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         _PlayerController = FindObjectOfType(typeof(PlayerController)) as PlayerController;
         
         if(isLookLeft == true)
@@ -83,7 +97,14 @@ public class BossRena : MonoBehaviour
 
         if(_PlayerController.gameObject.transform.position.y > bunda.transform.position.y && bunda.activeSelf == false)
         {
-            bunda.SetActive(true);
+            if(tomouHit == false)
+            {
+                bunda.SetActive(true);
+            }
+            else
+            {
+                bunda.SetActive(false);
+            }
         }
         else if(_PlayerController.gameObject.transform.position.y < bunda.transform.position.y && bunda.activeSelf == true)
         {
@@ -130,23 +151,31 @@ public class BossRena : MonoBehaviour
     }
 
     public void TakeHit() {
+        tomouHit = true;
         enemyHP--;
 
         if (enemyHP < 0) {
             //MORTE
         }
-    } //controle da vida
+
+        StartCoroutine("Invencivel");
+    }
 
     public void Parar()
     {
-        rb.velocity = Vector2.zero;
         bossCurrentState = EnemyState.PARADO;
 
         if(isParado == false && bossCurrentState == EnemyState.PARADO)
         {
-            //StopCoroutine("RandState");
             StartCoroutine("RandState");
         }
+    }
+
+    public IEnumerator TimeToZeroSpeed() //chamado pelo chifre
+    {
+        rb.velocity = new Vector2(speed, rb.velocity.y);
+        yield return new WaitForSeconds(timeToStop);
+        rb.velocity = Vector2.zero;
     }
 
     void Run()
@@ -164,23 +193,56 @@ public class BossRena : MonoBehaviour
         Parar();
     }
 
+    IEnumerator Invencivel()
+    {
+        for (int i = 0; i < changeColorTimes; i++) {
+            yield return new WaitForSeconds(timeBetweenChangeColor);
+            spriteRenderer.color = colorHit;
+            yield return new WaitForSeconds(timeBetweenChangeColor);
+            spriteRenderer.color = colorPadrao;
+        }
+        tomouHit = false;
+    }
+
     IEnumerator RandState()
     {
+        int vezesTiro = 0;
+        int vezesCorrendo = 0;
         isParado = true;
         yield return new WaitForSeconds(timeInState);
         int rand = Random.Range(0, 100);
         
         if(rand > 50)
         {
-            bossCurrentState = EnemyState.ATIRANDO;
-        }
-        else if(rand >= 30)
-        {
-            bossCurrentState = EnemyState.CORRENDO;
+            if(vezesTiro >= 2)
+            {
+                bossCurrentState = EnemyState.CORRENDO;
+                vezesCorrendo ++;
+                vezesTiro = 0;
+            }
+            else
+            {
+                bossCurrentState = EnemyState.ATIRANDO;
+                vezesCorrendo = 0;
+                vezesTiro ++;
+            }
         }
         else
         {
-            bossCurrentState = EnemyState.PARADO;
+            if(vezesCorrendo >= 2)
+            {
+                bossCurrentState = EnemyState.ATIRANDO;
+                vezesCorrendo = 0;
+                vezesTiro ++;
+            }
+            else
+            {
+                bossCurrentState = EnemyState.CORRENDO;
+                vezesCorrendo ++;
+                vezesTiro = 0;
+            }
+            bossCurrentState = EnemyState.CORRENDO;
+            vezesCorrendo ++;
         }
 
         isParado = false;

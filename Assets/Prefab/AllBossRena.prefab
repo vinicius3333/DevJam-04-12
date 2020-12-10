@@ -411,15 +411,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossCurrentState: 0
-  enemyHP: 20
+  enemyHP: 35
+  bunda: {fileID: 2059881959878132420}
   timeInState: 3
-  speed: 4
-  shotingTime: 1.5
+  speed: 5
+  timeToStop: 0.8
+  shotingTime: 1.2
   arma: {fileID: 2059881959799768704}
   laserPrefab: {fileID: 9186405014252407900, guid: b2fe3d5fc3e57324b9443b0322ab0c50,
     type: 3}
   isLookLeft: 1
   isShotLaser: 0
+  isStartShot: 0
+  changeColorTimes: 3
+  timeBetweenChangeColor: 0.3
+  colorPadrao: {r: 1, g: 1, b: 1, a: 1}
+  colorHit: {r: 1, g: 0.18396229, b: 0.18396229, a: 1}
+  tomouHit: 0
 --- !u!95 &2059881960948673652
 Animator:
   serializedVersion: 3

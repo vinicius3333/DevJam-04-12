@@ -461,12 +461,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d28e7263c386cc640adc4df8eb8279ca, type: 3}
---- !u!1 &1013744636 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2059881959878132420, guid: c1327b3034744e54090ae52b5a096660,
-    type: 3}
-  m_PrefabInstance: {fileID: 2059881960346026296}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1389941532
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,6 +849,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2059881959878132420, guid: c1327b3034744e54090ae52b5a096660,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2059881960407564695, guid: c1327b3034744e54090ae52b5a096660,
         type: 3}
       propertyPath: m_TagString
@@ -922,13 +921,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2059881960948673651, guid: c1327b3034744e54090ae52b5a096660,
         type: 3}
-      propertyPath: bunda
-      value: 
-      objectReference: {fileID: 1013744636}
+      propertyPath: timeToStop
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 2059881961367139693, guid: c1327b3034744e54090ae52b5a096660,
         type: 3}
       propertyPath: qtdObjectsSpawn
-      value: 17
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2059881961367139693, guid: c1327b3034744e54090ae52b5a096660,
         type: 3}
