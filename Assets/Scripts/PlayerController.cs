@@ -236,7 +236,6 @@ public class PlayerController : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D col) {
         switch (col.gameObject.tag) {
             case "EnemyDamage":
-
                 TakeHit();
                 break;
         }
@@ -244,7 +243,6 @@ public class PlayerController : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D col) {
         switch (col.gameObject.tag) {
             case "Enemy":
-
                 TakeHit();
                 break;
         }

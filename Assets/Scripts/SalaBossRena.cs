@@ -24,12 +24,12 @@ public class SalaBossRena : MonoBehaviour {
             Vector3 pos = new Vector3(rand, alturaSpawn.position.y, alturaSpawn.position.z);
             GameObject temp = Instantiate(icePreafb, pos, transform.rotation);
 
-        //     yield return new WaitForSeconds(timeToNextSpawn);
+               yield return new WaitForSeconds(timeToNextSpawn);
 
-        //     if(i > qtdObjectsSpawn)
-        //     {
-        //         isInstanciado = false;
-        //     }
-        // }
+               if(i > qtdObjectsSpawn)
+               {
+                   isInstanciado = false;
+               }
+        }
     }
 }
