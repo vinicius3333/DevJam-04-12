@@ -75,6 +75,11 @@ public class PlayerController : MonoBehaviour {
         // Verifica se o jogo tá pausado e previni animações do player
         if (PauseMenu.GameIsPaused) return;
 
+        if (moverSozinho) {
+            playerRb.velocity = new Vector2(speed / 2, playerRb.velocity.y);
+            return;
+        }
+
         //Controle de Flip, para deixar o personagem olhando para o lado certo
         if (horizontal != 0) {
             if (horizontal > 0 && isLookLeft == true) {
@@ -92,10 +97,6 @@ public class PlayerController : MonoBehaviour {
         }
 
         InputController();
-
-        if (moverSozinho) {
-            playerRb.velocity = new Vector2(speed, playerRb.velocity.y);
-        }
     }
     private void FixedUpdate() {
         isGrounded = Physics2D.OverlapArea(groundCheck[0].position, groundCheck[1].position, whatIsGround);

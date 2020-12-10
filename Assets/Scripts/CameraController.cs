@@ -39,7 +39,7 @@ public class CameraController : MonoBehaviour {
     IEnumerator moverSozinho() {
         PlayerController.instance.moverSozinho = true;
 
-        yield return new WaitForSecondsRealtime(1.5f);
+        yield return new WaitForSecondsRealtime(2.3f);
 
         PlayerController.instance.moverSozinho = false;
     }
