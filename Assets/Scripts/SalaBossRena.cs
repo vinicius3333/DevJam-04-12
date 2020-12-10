@@ -24,9 +24,9 @@ public class SalaBossRena : MonoBehaviour
         isInstanciado = true;
         for(int i = 0; i <= qtdObjectsSpawn; i++)
         {
-            float rand = Random.Range(limiteSpawn[0].position.x, limiteSpawn[1].position.x);
-            Transform = new Vector3(rand, alturaSpawn.position.y, alturaSpawn.position.z).transform;
-            GameObject temp = Instantiate(icePreafb, );
+            float rand = Random.Range(limiteSpawnX[0].position.x, limiteSpawnX[1].position.x);
+            Vector3 pos = new Vector3(rand, alturaSpawn.position.y, alturaSpawn.position.z);
+            GameObject temp = Instantiate(icePreafb, pos, transform.rotation);
 
             yield return new WaitForSeconds(timeToNextSpawn);
 

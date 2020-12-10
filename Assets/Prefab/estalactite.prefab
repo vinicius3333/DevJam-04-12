@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 80789848869121321}
   - component: {fileID: 80789848869121322}
   - component: {fileID: 80789848869121323}
+  - component: {fileID: 2153386808090598254}
   m_Layer: 11
   m_Name: estalactite
   m_TagString: EnemyDamage
@@ -98,7 +99,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 2
+  m_GravityScale: 1.55
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -132,3 +133,15 @@ PolygonCollider2D:
     - - {x: 0, y: -0.52053785}
       - {x: -0.44005093, y: 0.24267381}
       - {x: 0.41189808, y: 0.24267344}
+--- !u!114 &2153386808090598254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 80789848869121316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4164b69e9b5cc3541a72c82fd73524e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

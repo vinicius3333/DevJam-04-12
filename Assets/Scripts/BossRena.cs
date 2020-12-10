@@ -29,6 +29,11 @@ public class BossRena : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+    }
+
+    void Run()
+    {
         rb.velocity = new Vector2(speed, rb.velocity.y);
         _SalaBossRena.Spawn();
     }
@@ -36,7 +41,22 @@ public class BossRena : MonoBehaviour
     public void Flip()
     {
         speed *= -1;
-        transform.localScale *= -1;
+        Vector3 scale = gameObject.transform.localScale;
+        transform.localScale = new Vector3(scale.x * -1, scale.y, scale.z);
+
+    }
+
+    public void RandState()
+    {
+        int rand = Random.Range(0, 100);
+        if(rand < 60)
+        {
+            bossCurrentState = EnemyState.ATIRANDO;
+        }
+        else
+        {
+            bossCurrentState = EnemyState.CORRENDO;
+        }
     }
 
 }
