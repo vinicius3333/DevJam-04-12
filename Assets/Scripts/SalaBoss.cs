@@ -20,7 +20,7 @@ public class SalaBoss : MonoBehaviour {
 
     public float velocidadeCenoura = 5f;
     public float velocidadeBola = 5f;
-    private float[] cenouraPosicoes = new float[] { 2.5f, 0f, -2.5f };
+    private float[] cenouraPosicoes = new float[] { 2f, 0f, -2.5f };
     private int indexCenoura = 0;
     private bool bolaJogada = false;
 
@@ -45,7 +45,6 @@ public class SalaBoss : MonoBehaviour {
 
     public void encostarPlataforma() {
         BossNeve.instance.animator.SetBool("onAir", false);
-        if (BossNeve.instance.tomouHit) return;
         jogarObjetosTela();
     }
 
@@ -89,6 +88,7 @@ public class SalaBoss : MonoBehaviour {
     }
 
     void jogarBolaAnimacao() {
+        Debug.Log("Testando");
         BossNeve.instance.animator.SetTrigger("jogandoBola");
     }
 
@@ -118,6 +118,9 @@ public class SalaBoss : MonoBehaviour {
     }
 
     public IEnumerator bossAguarde() {
+        if (BossNeve.instance.tomouHit) {
+            BossNeve.instance.proximoEstagio();
+        }
         yield return new WaitForSeconds(Random.Range(3.5f, 4.5f));
         mudarPosicaoBossRandom();
     }

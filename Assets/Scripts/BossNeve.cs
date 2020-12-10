@@ -32,6 +32,8 @@ public class BossNeve : MonoBehaviour {
 
     public string[] estagiosBoss = { "morrendo", "terceiroEstagio", "segundoEstagio" };
 
+    public GameObject explosao;
+
 
     private void Start() {
         transform = GetComponent<Transform>();
@@ -57,12 +59,10 @@ public class BossNeve : MonoBehaviour {
     }
 
     public void jogarCenoura() {
-        if (tomouHit) return;
         SalaBoss.instance.jogarCenoura();
     }
 
     public void jogarBola() {
-        if (tomouHit) return;
         SalaBoss.instance.jogarBola();
     }
 
@@ -86,11 +86,12 @@ public class BossNeve : MonoBehaviour {
 
     public void destruirBoss() {
         GameObject bolaNeve = GameObject.FindWithTag("BolaNeve");
-        GameObject boss = GameObject.FindWithTag("Boss");
+        GameObject boss = GameObject.FindWithTag("BossNeve");
         if (bolaNeve != null) {
             SalaBoss.instance.destruirBolaNeve(bolaNeve);
         }
-        Destroy(boss, 1f);
+        criarParticulas();
+        Destroy(boss);
     }
 
     void TakeHit() {
@@ -101,24 +102,24 @@ public class BossNeve : MonoBehaviour {
         healthBar.SetHealth((int)healthPoints);
 
         StartCoroutine("Invencivel");
-
-        if (healthPoints <= 0) {
-            Debug.Log("Game over");
-            //GAMEOVER
-        }
-    } //controle da vida
+    }
 
     IEnumerator Invencivel() {
         for (int i = 0; i < changeColorTimes; i++) {
-            if (i == changeColorTimes - 1) {
-                animator.SetTrigger(estagiosBoss[healthPoints]);
-            }
             yield return new WaitForSeconds(timeBetweenChangeColor);
             spriteRenderer.color = colorHit;
             yield return new WaitForSeconds(timeBetweenChangeColor);
             spriteRenderer.color = colorPadrao;
         }
+        //SalaBoss.instance.mudarPosicaoBossRandom();
+    }
+
+    public void proximoEstagio() {
+        animator.SetTrigger(estagiosBoss[healthPoints]);
         tomouHit = false;
-        SalaBoss.instance.mudarPosicaoBossRandom();
+    }
+
+    public void criarParticulas() {
+        GameObject.Instantiate(explosao, gameObject.transform.position, gameObject.transform.rotation);
     }
 }

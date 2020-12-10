@@ -3995,7 +3995,7 @@ ParticleSystem:
     m_EnergyLossOnCollision:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -11692,7 +11692,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1031615311}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 27.319859, y: 8.508816, z: -10}
+  m_LocalPosition: {x: 27.32552, y: 8.508783, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -13089,9 +13089,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.003360939, y: -0.008321056}
+  m_Offset: {x: 0.003360939, y: -0.003254299}
   serializedVersion: 2
-  m_Radius: 0.13293627
+  m_Radius: 0.12786952
 --- !u!50 &2101421820
 Rigidbody2D:
   serializedVersion: 4
@@ -13139,6 +13139,8 @@ MonoBehaviour:
   - morrendo
   - terceiroEstagio
   - segundoEstagio
+  explosao: {fileID: 1382640170578300928, guid: 882f01fcf154bca41924910c0e45f347,
+    type: 3}
 --- !u!95 &2101421822
 Animator:
   serializedVersion: 3
