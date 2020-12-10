@@ -15,6 +15,7 @@ public class DanoRenaController : MonoBehaviour
     {
         if(col.gameObject.tag == "Player")
         {
+            col.gameObject.GetComponent<PlayerController>().Bounce();
             _BossRena.TakeHit();
         }    
     }

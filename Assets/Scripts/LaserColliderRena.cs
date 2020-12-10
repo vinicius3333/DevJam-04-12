@@ -26,14 +26,18 @@ public class LaserColliderRena : MonoBehaviour
     public void RealDestroy() //destroi o objecto na animacao
     {
         Destroy(this.gameObject);
-        _BossRena.isShotLaser = false;
+        if(_BossRena.bossCurrentState == BossRena.EnemyState.ATIRANDO)
+        {
+            _BossRena.isShotLaser = false;
+            _BossRena.Parar();
+        }
     }
 
     public void CheckFlip()
     {
         Vector3 scale = gameObject.transform.localScale;
 
-        if(_BossRena.isLookLeft == true && scale.x > 0 || _BossRena.isLookLeft == false && scale.x < 0)
+        if(_BossRena.isLookLeft == true && scale.x > 0)
         {
             transform.localScale = new Vector3(scale.x * -1, scale.y, scale.z);
         }

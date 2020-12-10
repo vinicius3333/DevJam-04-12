@@ -11,6 +11,7 @@ public class BossRena : MonoBehaviour
         CORRENDO,
         ATIRANDO
     }
+    private PlayerController _PlayerController; 
     private SalaBossRena _SalaBossRena; 
     private Animator animator;
     private Rigidbody2D rb;
@@ -18,6 +19,7 @@ public class BossRena : MonoBehaviour
     [Header("Enemy Config")]
     public EnemyState bossCurrentState; //estado atual do inimigo
     public float enemyHP;
+    public GameObject bunda;
     public float timeInState; //tempo em cada ponto
     public float speed;
     public float shotingTime;
@@ -32,6 +34,8 @@ public class BossRena : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _PlayerController = FindObjectOfType(typeof(PlayerController)) as PlayerController;
+        
         if(isLookLeft == true)
         {
             speed *= -1;
@@ -40,6 +44,21 @@ public class BossRena : MonoBehaviour
         _SalaBossRena = FindObjectOfType(typeof(SalaBossRena)) as SalaBossRena;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+
+         switch(bossCurrentState)
+        {
+            case EnemyState.PARADO:
+                Parar();
+                break;
+
+            case EnemyState.CORRENDO:
+                Run();
+            break;
+
+            case EnemyState.ATIRANDO:
+                PreShot();
+                break;
+        }
     }
 
     // Update is called once per frame
@@ -54,16 +73,21 @@ public class BossRena : MonoBehaviour
             case EnemyState.ATIRANDO:
                 PreShot();
                 break;
+        }
 
-            case EnemyState.PARADO:
-                Parar();
-                break;
+        if(_PlayerController.gameObject.transform.position.y > bunda.transform.position.y && bunda.activeSelf == false)
+        {
+            bunda.SetActive(true);
+        }
+        else if(_PlayerController.gameObject.transform.position.y < bunda.transform.position.y && bunda.activeSelf == true)
+        {
+            bunda.SetActive(false);
         }
     }
 
     void PreShot()
     {
-        if(isShotLaser == false)
+        if(isShotLaser == false && bossCurrentState == EnemyState.ATIRANDO)
         {
             animator.SetTrigger("Shot");
         }
@@ -72,7 +96,6 @@ public class BossRena : MonoBehaviour
     public void Shot() //chamado na animacao
     {
         StartCoroutine("ShotTime");
-        
     }
 
     IEnumerator ShotTime()
@@ -110,8 +133,11 @@ public class BossRena : MonoBehaviour
     public void Parar()
     {
         rb.velocity = Vector2.zero;
-        if(isParado == false)
+        bossCurrentState = EnemyState.PARADO;
+
+        if(isParado == false && bossCurrentState == EnemyState.PARADO)
         {
+            StopCoroutine("RandState");
             StartCoroutine("RandState");
         }
     }
@@ -125,25 +151,29 @@ public class BossRena : MonoBehaviour
     public void Flip()
     {
         isLookLeft = !isLookLeft;
-        speed *= -1;
         Vector3 scale = gameObject.transform.localScale;
         transform.localScale = new Vector3(scale.x * -1, scale.y, scale.z);
+        speed *= -1;
+        Parar();
     }
 
     IEnumerator RandState()
     {
         isParado = true;
-
-        int rand = Random.Range(0, 100);
         yield return new WaitForSeconds(timeInState);
+        int rand = Random.Range(0, 100);
         
-        if(rand < 60)
+        if(rand > 70)
         {
             bossCurrentState = EnemyState.ATIRANDO;
         }
-        else
+        else if(rand >= 20)
         {
             bossCurrentState = EnemyState.CORRENDO;
+        }
+        else
+        {
+            bossCurrentState = EnemyState.PARADO;
         }
 
         isParado = false;
