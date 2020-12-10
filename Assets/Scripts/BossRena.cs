@@ -28,7 +28,7 @@ public class BossRena : MonoBehaviour
     public bool isLookLeft;
     public bool isShotLaser;
     private GameObject temp = null;
-
+    public bool isStartShot;
     private bool isParado;
 
     // Start is called before the first frame update
@@ -66,12 +66,18 @@ public class BossRena : MonoBehaviour
     {
         switch(bossCurrentState)
         {
+            case EnemyState.PARADO:
+                Parar();
+                break;
+
             case EnemyState.CORRENDO:
                 Run();
             break;
 
             case EnemyState.ATIRANDO:
+
                 PreShot();
+                
                 break;
         }
 
@@ -87,8 +93,9 @@ public class BossRena : MonoBehaviour
 
     void PreShot()
     {
-        if(isShotLaser == false && bossCurrentState == EnemyState.ATIRANDO)
+        if(isStartShot == false && bossCurrentState == EnemyState.ATIRANDO)
         {
+            isStartShot = true;
             animator.SetTrigger("Shot");
         }
     }
@@ -137,7 +144,7 @@ public class BossRena : MonoBehaviour
 
         if(isParado == false && bossCurrentState == EnemyState.PARADO)
         {
-            StopCoroutine("RandState");
+            //StopCoroutine("RandState");
             StartCoroutine("RandState");
         }
     }
@@ -163,11 +170,11 @@ public class BossRena : MonoBehaviour
         yield return new WaitForSeconds(timeInState);
         int rand = Random.Range(0, 100);
         
-        if(rand > 70)
+        if(rand > 50)
         {
             bossCurrentState = EnemyState.ATIRANDO;
         }
-        else if(rand >= 20)
+        else if(rand >= 30)
         {
             bossCurrentState = EnemyState.CORRENDO;
         }

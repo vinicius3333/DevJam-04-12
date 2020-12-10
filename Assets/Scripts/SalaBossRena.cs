@@ -26,7 +26,7 @@ public class SalaBossRena : MonoBehaviour {
 
                yield return new WaitForSeconds(timeToNextSpawn);
 
-               if(i > qtdObjectsSpawn)
+               if(i >= qtdObjectsSpawn)
                {
                    isInstanciado = false;
                }

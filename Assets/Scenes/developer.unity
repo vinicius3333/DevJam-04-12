@@ -357,18 +357,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &484058892 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1903440377, guid: ac738c28c697b7849b59fa333c5111a1,
-    type: 3}
-  m_PrefabInstance: {fileID: 1840125685}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 187e823b72a02e14a8ae50bbf214bd72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &722463072
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -450,7 +438,7 @@ PrefabInstance:
         type: 3}
       propertyPath: healthBar
       value: 
-      objectReference: {fileID: 484058892}
+      objectReference: {fileID: 0}
     - target: {fileID: 6546942363640981365, guid: d28e7263c386cc640adc4df8eb8279ca,
         type: 3}
       propertyPath: tempoPiscar
@@ -867,6 +855,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2059881960407564695, guid: c1327b3034744e54090ae52b5a096660,
+        type: 3}
+      propertyPath: m_TagString
+      value: EnemyDamage
+      objectReference: {fileID: 0}
     - target: {fileID: 2059881960498200584, guid: c1327b3034744e54090ae52b5a096660,
         type: 3}
       propertyPath: m_Name
