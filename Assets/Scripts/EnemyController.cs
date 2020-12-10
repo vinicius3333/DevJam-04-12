@@ -11,6 +11,7 @@ public enum EnemyState
 
 public class EnemyController : MonoBehaviour
 {
+    private Animator animator;
     private PlayerController _PlayerController;
     private Rigidbody2D enemyRb;
 
@@ -32,8 +33,7 @@ public class EnemyController : MonoBehaviour
     public LayerMask rayLayerGround; //usado para checar o chao, e tambem para testar se ele pode pular
     public LayerMask whatIsPlayer; //saber se o player entrou na area de proteção do inimigo
 
-    public float returnDistance; //quando ele volta para a origem tem q saber a distancia dele para o ponto, para mudar o estado
-    public GameObject head; //cabeça do inimigo e responsavel pelo dano do pulo
+    public float returnDistance; //quando ele volta para a origem tem q saber a distancia dele para o ponto, para mudar o estad
 
     [Header("Controladores")]
     private bool isGrounded;
@@ -43,9 +43,11 @@ public class EnemyController : MonoBehaviour
     private bool isCenter = false; //controla se está centralizado no ponto objetivo
     private Transform target; //objetivo
     private Vector3 direction; //direcao do movimento setado da posAtual para o objetivp
+    private bool isWalk;
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
         _PlayerController = FindObjectOfType(typeof(PlayerController)) as PlayerController;
         enemyRb = GetComponentInChildren<Rigidbody2D>();
         target = wayPoints[idTarget];
@@ -69,16 +71,6 @@ public class EnemyController : MonoBehaviour
                 Voltando();
                 break;
         }
-
-        //checa se o player está acima da cabeça
-        if(_PlayerController.gameObject.transform.position.y > head.transform.position.y && head.activeSelf == false)
-        {
-            head.SetActive(true);
-        }
-        else if(_PlayerController.gameObject.transform.position.y < head.transform.position.y && head.activeSelf == true)
-        {
-            head.SetActive(false);
-        }
     }
 
     private void FixedUpdate() {
@@ -90,6 +82,8 @@ public class EnemyController : MonoBehaviour
         isPlayerDetected = Physics2D.OverlapArea(wayPoints[0].position, wayPoints[1].position, whatIsPlayer);
         //deteccao do chao
         isGrounded = Physics2D.OverlapArea(groundCheck[0].position, groundCheck[1].position, rayLayerGround);
+
+        animator.SetBool("isWalk", isWalk);
     }
 
     public void Patrulha()
@@ -131,6 +125,12 @@ public class EnemyController : MonoBehaviour
             isJump = false;
         }
         
+        
+        if(isJump == false)
+        {
+            isWalk = true;
+        }
+
         //movimento
         enemyRb.velocity = new Vector2((enemySpeed * direction.x)*-1, enemyRb.velocity.y);
     }
@@ -145,6 +145,11 @@ public class EnemyController : MonoBehaviour
         else if(_PlayerController.transform.position.x >  wayPoints[1].transform.position.x)
         {
             idTarget = 1;
+        }
+
+        if(isJump == false)
+        {
+            isWalk = true;
         }
 
         target = wayPoints[idTarget];
@@ -175,6 +180,7 @@ public class EnemyController : MonoBehaviour
 
     void Jump() //jump kk
     {
+        isWalk = false;
         isJump = true;
         enemyRb.AddForce(new Vector2(direction.x *-1, jumpForce));
     }
@@ -184,6 +190,7 @@ public class EnemyController : MonoBehaviour
         //quando estiver centralizando
         if(isCenter == false)
         {
+            isWalk = true;
             if(idTarget == 0 && transform.position.x <= wayPoints[0].transform.position.x)
             {
                 idTarget = 1;
@@ -201,6 +208,14 @@ public class EnemyController : MonoBehaviour
         else
         {
             enemyRb.velocity = Vector2.zero;
+            isWalk = false;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D col) {
+        if(col.gameObject.tag == "PlayerHit")
+        {
+            TakeHit();
         }
     }
 
