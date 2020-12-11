@@ -16,6 +16,8 @@ TagManager:
   - Geiser
   - GeloGround
   - Parede
+  - Colecionavel
+  - ColecionavelVida
   layers:
   - Default
   - TransparentFX

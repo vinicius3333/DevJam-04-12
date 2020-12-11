@@ -250,6 +250,10 @@ public class PlayerController : MonoBehaviour {
             case "Enemy":
                 TakeHit();
                 break;
+            case "ColecionavelVida":
+                Destroy(col.gameObject);
+                healthClass.health++;
+                break;
         }
     }
 
