@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8573499189496704932}
   - component: {fileID: 8573499189496704933}
   - component: {fileID: 2012566753}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: BolaNeve
   m_TagString: BolaNeve
   m_Icon: {fileID: 0}

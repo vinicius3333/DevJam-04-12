@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Foca : MonoBehaviour
-{  
-    public enum EnemyState
-    {
+public class Foca : MonoBehaviour {
+    public enum EnemyState {
         PATRULHANDO,
         ATIRANDO
     }
@@ -15,7 +13,7 @@ public class Foca : MonoBehaviour
     public EnemyState enemyCurrentState; //estado atual do inimigo
     public GameObject shotPrefab;
     public Transform shotPosition;
-    
+
     public float timeInPoint; //tempo em cada ponto
     public float enemySpeed;
     public float enemyHP;
@@ -41,68 +39,82 @@ public class Foca : MonoBehaviour
 
     private bool isLockLeft;
 
+    private Animator animator;
+
+    public float changeColorTimes = 6f;
+
+    public float timeBetweenChangeColor = 0.15f;
+
+    private SpriteRenderer spriteRenderer;
+
+    public Color colorPadrao;
+    public Color colorHit;
+    private Rigidbody2D tempBall;
+
+    public float forceBall;
+    private bool start = false;
+
+    public Transform posicaoFinal;
+
+
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         _PlayerController = FindObjectOfType(typeof(PlayerController)) as PlayerController;
 
         enemyRb = GetComponentInChildren<Rigidbody2D>();
         target = wayPoints[idTarget];
 
         direction = Vector3.Normalize(transform.position - target.position);
+
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update() {
         //checa se o player está acima da cabeça
-        if(_PlayerController.gameObject.transform.position.y > head.transform.position.y && head.activeSelf == false)
-        {
+        if (_PlayerController.gameObject.transform.position.y > head.transform.position.y && head.activeSelf == false) {
             head.SetActive(true);
-        }
-        else if(_PlayerController.gameObject.transform.position.y < head.transform.position.y && head.activeSelf == true)
-        {
+        } else if (_PlayerController.gameObject.transform.position.y < head.transform.position.y && head.activeSelf == true) {
             head.SetActive(false);
         }
 
-        if(enemyCurrentState == EnemyState.ATIRANDO)
-        {
-            if(isOlhandoDireita()) {
+        if (enemyCurrentState == EnemyState.ATIRANDO) {
+            if (isOlhandoDireita()) {
                 transform.rotation = Quaternion.AngleAxis(0, new Vector3(0, 0, 0));
             } else {
                 transform.rotation = Quaternion.AngleAxis(180, new Vector3(0, 180, 0));
             }
-        } 
+        }
     }
 
     private void FixedUpdate() {
 
         float distance = Vector3.Distance(transform.position, _PlayerController.transform.position);
 
-        if(distance > maxDistance)
-        {
+        if (distance > maxDistance) {
             enemyCurrentState = EnemyState.PATRULHANDO;
-        }
-        else if(distance <= maxDistance && isLockPlayer == false && enemyCurrentState == EnemyState.PATRULHANDO)
-        {
+        } else if (distance <= maxDistance && isLockPlayer == false && enemyCurrentState == EnemyState.PATRULHANDO) {
             enemyCurrentState = EnemyState.ATIRANDO;
         }
 
+        // Vector2 posicaoAtual = transform.position;
+        // Vector2 PosicaoFinalTemp = posicaoFinal.position;
+        // direction = PosicaoFinalTemp - posicaoAtual;
 
-        switch(enemyCurrentState)
-        {
+        switch (enemyCurrentState) {
             case EnemyState.PATRULHANDO:
                 Patrulha();
                 StopCoroutine("ShotDelay");
                 isLockPlayer = false;
                 isShot = false;
 
-            break;
+                break;
 
             case EnemyState.ATIRANDO:
                 isLockPlayer = true;
                 enemyRb.velocity = Vector2.zero;
-                if(isShot == false)
-                {
+                if (isShot == false) {
                     Atirar();
                 }
                 break;
@@ -113,48 +125,42 @@ public class Foca : MonoBehaviour
         shotPosition.right = _PlayerController.transform.position - transform.position;
     }
 
-     public void Patrulha()
-    {
+    public void Patrulha() {
         //quando estiver centralizando
-        if(isCenter == false)
-        {
-            if(idTarget == 0 && transform.position.x <= wayPoints[0].transform.position.x)
-            {
+        if (isCenter == false) {
+            if (idTarget == 0 && transform.position.x <= wayPoints[0].transform.position.x) {
                 idTarget = 1;
                 StartCoroutine("UpdateTarget");
             }
 
-            if(idTarget == 1 && transform.position.x >= wayPoints[1].transform.position.x)
-            {   
+            if (idTarget == 1 && transform.position.x >= wayPoints[1].transform.position.x) {
                 idTarget = 0;
                 StartCoroutine("UpdateTarget");
             }
 
-            enemyRb.velocity = new Vector2((enemySpeed * direction.x)*-1, enemyRb.velocity.y);
-        }
-        else
-        {
+            enemyRb.velocity = new Vector2((enemySpeed * direction.x) * -1, enemyRb.velocity.y);
+        } else {
             enemyRb.velocity = Vector2.zero;
         }
 
     }
-    void Atirar()
-    {   
+    void Atirar() {
         shotPosition.right = _PlayerController.transform.position - transform.position;
-        if(isShot == false)
-        {
-            StartCoroutine("ShotDelay");
+        if (isShot == false) {
+            animator.SetTrigger("patada");
         }
     }
 
-    void Shot(){
+    void Shot() {
         isShot = true;
-        Rigidbody2D temp = Instantiate(shotPrefab, shotPosition.position, shotPosition.localRotation).GetComponent<Rigidbody2D>();
+        tempBall = Instantiate(shotPrefab, shotPosition.position, shotPosition.localRotation).GetComponent<Rigidbody2D>();
 
-        temp.transform.localRotation = shotPosition.localRotation;
-        temp.AddForce(new Vector2(0, forceY));
-        temp.velocity = shotPosition.right * shotSpeed;
-        
+        tempBall.GetComponent<Rigidbody2D>().velocity = direction * forceBall;
+
+        // temp.transform.localRotation = shotPosition.localRotation;
+        // temp.AddForce(new Vector2(0, forceY));
+        // temp.velocity = shotPosition.right * shotSpeed;
+
 
     } //instancia o tiro
 
@@ -162,14 +168,32 @@ public class Foca : MonoBehaviour
         enemyHP--;
 
         if (enemyHP <= 0) {
-            Destroy(gameObject.transform.parent.gameObject);
+            animator.SetTrigger("desmaia");
         }
+
+        StartCoroutine("Invencivel");
     } //controle da vida
 
-     IEnumerator UpdateTarget() //muda para um novo ponto
-    {   
-        switch(enemyCurrentState)
-        {
+    private void OnBecameInvisible() {
+        matarFoca();
+    }
+
+    void matarFoca() {
+        Destroy(gameObject.transform.parent.gameObject);
+    }
+
+    IEnumerator Invencivel() {
+        for (int i = 0; i < changeColorTimes; i++) {
+            yield return new WaitForSeconds(timeBetweenChangeColor);
+            spriteRenderer.color = colorHit;
+            yield return new WaitForSeconds(timeBetweenChangeColor);
+            spriteRenderer.color = colorPadrao;
+        }
+    }
+
+    IEnumerator UpdateTarget() //muda para um novo ponto
+   {
+        switch (enemyCurrentState) {
             case EnemyState.PATRULHANDO:
                 isCenter = true;
                 target = wayPoints[idTarget];
@@ -177,19 +201,16 @@ public class Foca : MonoBehaviour
                 yield return new WaitForSeconds(timeInPoint);
                 direction = Vector3.Normalize(transform.position - target.position);
                 isCenter = false;
-            break;
+                break;
         }
     }
 
-    IEnumerator ShotDelay()
-    {
+    void ShotDelay() {
         Shot();
-        yield return new WaitForSeconds(timeToShot);
-        //StartCoroutine("ShotDelay");
         isLockPlayer = false;
         isShot = false;
     }
-    
+
     public bool isOlhandoDireita() {
         Vector3 dir = PlayerController.instance.transform.position - transform.position;
 
