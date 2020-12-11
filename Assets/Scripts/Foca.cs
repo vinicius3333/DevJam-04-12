@@ -57,6 +57,10 @@ public class Foca : MonoBehaviour {
 
     private Vector2 directionUpdate;
 
+    public GameObject argolaPrefab;
+
+    public bool isFocaArgola;
+
 
 
     // Start is called before the first frame update
@@ -155,15 +159,16 @@ public class Foca : MonoBehaviour {
 
     void Shot() {
         isShot = true;
-        tempBall = Instantiate(shotPrefab, shotPosition.position, shotPosition.localRotation).GetComponent<Rigidbody2D>();
 
-        tempBall.GetComponent<Rigidbody2D>().velocity = directionUpdate * forceBall;
-
-        // temp.transform.localRotation = shotPosition.localRotation;
-        // temp.AddForce(new Vector2(0, forceY));
-        // temp.velocity = shotPosition.right * shotSpeed;
-
-
+        if (isFocaArgola) {
+            Rigidbody2D temp = GameObject.Instantiate(argolaPrefab, shotPosition.position, shotPosition.localRotation).GetComponent<Rigidbody2D>();
+            temp.transform.localRotation = shotPosition.localRotation;
+            temp.AddForce(new Vector2(0, forceY));
+            temp.velocity = shotPosition.right * shotSpeed;
+        } else {
+            tempBall = Instantiate(shotPrefab, shotPosition.position, shotPosition.localRotation).GetComponent<Rigidbody2D>();
+            tempBall.GetComponent<Rigidbody2D>().velocity = directionUpdate * forceBall;
+        }
     } //instancia o tiro
 
     public void TakeHit() {
@@ -171,6 +176,7 @@ public class Foca : MonoBehaviour {
 
         if (enemyHP <= 0) {
             animator.SetTrigger("desmaia");
+            return;
         }
 
         StartCoroutine("Invencivel");

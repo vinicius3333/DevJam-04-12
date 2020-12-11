@@ -212,6 +212,9 @@ MonoBehaviour:
   colorHit: {r: 1, g: 0.34509805, b: 0.34509805, a: 1}
   forceBall: 2
   posicaoFinal: {fileID: 685096412}
+  argolaPrefab: {fileID: 2952159839577256215, guid: fd5167ccb95841f43a4083d6ddbef642,
+    type: 3}
+  isFocaArgola: 1
 --- !u!50 &5388886995422213855
 Rigidbody2D:
   serializedVersion: 4
