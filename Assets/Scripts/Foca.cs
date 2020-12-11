@@ -52,7 +52,6 @@ public class Foca : MonoBehaviour {
     private Rigidbody2D tempBall;
 
     public float forceBall;
-    private bool start = false;
 
     public Transform posicaoFinal;
 
