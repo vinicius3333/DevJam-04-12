@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyCurrentState: 0
-  enemyHP: 3
+  enemyHP: 7
   timeInPoint: 1.3
   enemySpeed: 2.8
   jumpForce: 200
@@ -234,7 +234,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   returnDistance: 0.83
-  head: {fileID: 0}
+  changeColorTimes: 3
+  timeBetweenChangeColor: 0.3
+  colorPadrao: {r: 1, g: 1, b: 1, a: 1}
+  colorHit: {r: 1, g: 0.3726415, b: 0.3726415, a: 1}
+  isLookLeft: 1
 --- !u!61 &7982937857557901972
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -35,6 +35,13 @@ public class EnemyController : MonoBehaviour
 
     public float returnDistance; //quando ele volta para a origem tem q saber a distancia dele para o ponto, para mudar o estad
 
+    [Header("Dano Config")]
+    public float changeColorTimes = 3;
+    public float timeBetweenChangeColor = 0.3f;
+    private SpriteRenderer spriteRenderer;
+    public Color colorPadrao;
+    public Color colorHit;
+    
     [Header("Controladores")]
     private bool isGrounded;
     private bool isJump;
@@ -44,9 +51,12 @@ public class EnemyController : MonoBehaviour
     private Transform target; //objetivo
     private Vector3 direction; //direcao do movimento setado da posAtual para o objetivp
     private bool isWalk;
+    private bool isDie;
+    public bool isLookLeft;
 
     private void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         _PlayerController = FindObjectOfType(typeof(PlayerController)) as PlayerController;
         enemyRb = GetComponentInChildren<Rigidbody2D>();
@@ -57,6 +67,15 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
+        if(isDie == true) 
+        {
+            enemyRb.velocity = Vector2.zero;
+            enemyRb.gravityScale = 0;
+            gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            StopAllCoroutines();
+            return;
+        }
+
         switch(enemyCurrentState)
         {
             case EnemyState.PATRULHANDO:
@@ -71,10 +90,16 @@ public class EnemyController : MonoBehaviour
                 Voltando();
                 break;
         }
+        CheckFlip();
     }
 
     private void FixedUpdate() {
         
+        if(isDie == true) 
+        {
+            return;
+        }
+
         //debugar o raycast
         //Debug.DrawRay(transform.position, direction *-1 * 1.5f, Color.red);
 
@@ -213,7 +238,7 @@ public class EnemyController : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D col) {
-        if(col.gameObject.tag == "PlayerHit")
+        if(col.gameObject.tag == "PlayerHit" && isDie == false)
         {
             TakeHit();
         }
@@ -221,9 +246,10 @@ public class EnemyController : MonoBehaviour
 
     public void TakeHit() {
         enemyHP--;
-
+        StartCoroutine("Invencivel");
         if (enemyHP <= 0) {
-            Destroy(gameObject.transform.parent.gameObject);
+            animator.SetTrigger("die");
+            isDie = true;
         }
     } //controle da vida
     
@@ -247,5 +273,34 @@ public class EnemyController : MonoBehaviour
             break;
         }
 
+    }
+    IEnumerator Invencivel()
+    {
+        for (int i = 0; i < changeColorTimes; i++) {
+            yield return new WaitForSeconds(timeBetweenChangeColor);
+            spriteRenderer.color = colorHit;
+            yield return new WaitForSeconds(timeBetweenChangeColor);
+            spriteRenderer.color = colorPadrao;
+        }
+    }
+    void CheckFlip()
+    {
+        Vector3 dir = Vector3.Normalize(transform.position - target.position);
+
+        if(dir.x > 0 && isLookLeft == false)
+        {
+            Flip();
+        }
+        else if(dir.x < 0 && isLookLeft == true)
+        {
+            Flip();
+        }
+    }
+
+    void Flip()
+    {
+        isLookLeft = !isLookLeft;
+        Vector3 scale = transform.localScale;
+        transform.localScale = new Vector3(scale.x *-1, scale.y, scale.z);
     }
 }

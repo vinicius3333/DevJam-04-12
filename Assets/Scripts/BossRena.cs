@@ -34,7 +34,7 @@ public class BossRena : MonoBehaviour
 
     [Header("Dano Config")]
     public float changeColorTimes = 3;
-    public float timeBetweenChangeColor = 1.3f;
+    public float timeBetweenChangeColor = 0.3f;
     private SpriteRenderer spriteRenderer;
     public Color colorPadrao;
     public Color colorHit;
