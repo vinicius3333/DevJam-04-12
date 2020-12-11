@@ -9,6 +9,10 @@ public class CameraTrigger : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Player")) {
             if (bossCamera) {
+                GameObject bgFase = GameObject.Find("BackgroundFase");
+                if (bgFase != null) {
+                    bgFase.SetActive(false);
+                }
                 SalaBoss.instance.iniciarBoss();
             }
             CameraController.instance.EnableCamera(myCamera, bossCamera);

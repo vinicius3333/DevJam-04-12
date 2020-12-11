@@ -91,6 +91,7 @@ public class BossNeve : MonoBehaviour {
             SalaBoss.instance.destruirBolaNeve(bolaNeve);
         }
         GameObject.Find("CanvasBoss").SetActive(false);
+        Destroy(gameObject);
     }
 
     void TakeHit() {

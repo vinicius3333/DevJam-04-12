@@ -16,7 +16,6 @@ public class SalaBoss : MonoBehaviour {
     public Transform[] posicoesBola;
 
     private int indexPosicao = 0;
-    private int ultimaPosicao = 0;
 
     public float velocidadeCenoura = 5f;
     public float velocidadeBola = 5f;
