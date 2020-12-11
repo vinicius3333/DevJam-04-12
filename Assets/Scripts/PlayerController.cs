@@ -56,12 +56,16 @@ public class PlayerController : MonoBehaviour {
 
     public bool moverSozinho = false;
 
+    private Health healthClass;
+
     // Start is called before the first frame update
     void Start() {
         instance = this;
+        healthClass = GetComponent<Health>();
         bounceCollider = GetComponent<BoxCollider2D>();
         playerRb = GetComponent<Rigidbody2D>();
         playerSr = GetComponent<SpriteRenderer>();
+
 
         if (isLookLeft == true) {
             bulletSpeed *= -1;
@@ -235,7 +239,6 @@ public class PlayerController : MonoBehaviour {
     } //controla a posicao do shield
 
     private void OnTriggerEnter2D(Collider2D col) {
-        Debug.Log(col);
         switch (col.gameObject.tag) {
             case "EnemyDamage":
                 TakeHit();
@@ -256,12 +259,14 @@ public class PlayerController : MonoBehaviour {
     } //controle da vida
 
     void TakeHit() {
+        Debug.Log("teste");
         healthPoints--;
+        healthClass.health--;
 
         StartCoroutine("Invencivel");
 
         if (healthPoints < 0) {
-            //GAMEOVER
+            GetComponent<GameController>().resetarCena();
         }
     } //controle da vida
 
