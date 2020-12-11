@@ -427,7 +427,10 @@ MonoBehaviour:
   timeBetweenChangeColor: 0.3
   colorPadrao: {r: 1, g: 1, b: 1, a: 1}
   colorHit: {r: 1, g: 0.18396229, b: 0.18396229, a: 1}
+  chifre: {fileID: 2059881960407564695}
   tomouHit: 0
+  isWalk: 0
+  isDie: 0
 --- !u!95 &2059881960948673652
 Animator:
   serializedVersion: 3
