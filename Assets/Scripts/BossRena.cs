@@ -34,15 +34,15 @@ public class BossRena : MonoBehaviour
 
     [Header("Dano Config")]
     public float changeColorTimes = 3;
-
-    public float timeBetweenChangeColor = 1.3f;
-
+    public float timeBetweenChangeColor = 0.3f;
     private SpriteRenderer spriteRenderer;
-
     public Color colorPadrao;
     public Color colorHit;
-
+    public GameObject chifre;
     public bool tomouHit = false;
+
+    public bool isWalk;
+    public bool isDie;
 
     // Start is called before the first frame update
     void Start()
@@ -78,6 +78,17 @@ public class BossRena : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(isDie == true) 
+        {
+            rb.velocity = Vector2.zero;
+            rb.gravityScale = 0;
+            gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            StopAllCoroutines();
+            chifre.SetActive(false);
+            bunda.SetActive(false);
+            return;
+        }
+
         switch(bossCurrentState)
         {
             case EnemyState.PARADO:
@@ -110,10 +121,13 @@ public class BossRena : MonoBehaviour
         {
             bunda.SetActive(false);
         }
+
+        animator.SetBool("isWalk", isWalk);
     }
 
     void PreShot()
     {
+        isWalk = false;
         if(isStartShot == false && bossCurrentState == EnemyState.ATIRANDO)
         {
             isStartShot = true;
@@ -144,7 +158,7 @@ public class BossRena : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D col) {
-        if(col.gameObject.tag == "PlayerHit")
+        if(col.gameObject.tag == "PlayerHit" && isDie == false)
         {
             TakeHit();
         }
@@ -155,7 +169,8 @@ public class BossRena : MonoBehaviour
         enemyHP--;
 
         if (enemyHP < 0) {
-            //MORTE
+            animator.SetTrigger("Die");
+            isDie = true;
         }
 
         StartCoroutine("Invencivel");
@@ -163,6 +178,7 @@ public class BossRena : MonoBehaviour
 
     public void Parar()
     {
+        isWalk = false;
         bossCurrentState = EnemyState.PARADO;
 
         if(isParado == false && bossCurrentState == EnemyState.PARADO)
@@ -180,6 +196,7 @@ public class BossRena : MonoBehaviour
 
     void Run()
     {
+        isWalk = true;
         rb.velocity = new Vector2(speed, rb.velocity.y);
         _SalaBossRena.Spawn();
     }
@@ -206,43 +223,17 @@ public class BossRena : MonoBehaviour
 
     IEnumerator RandState()
     {
-        int vezesTiro = 0;
-        int vezesCorrendo = 0;
         isParado = true;
         yield return new WaitForSeconds(timeInState);
         int rand = Random.Range(0, 100);
         
-        if(rand > 50)
+        if(rand > 65)
         {
-            if(vezesTiro >= 2)
-            {
-                bossCurrentState = EnemyState.CORRENDO;
-                vezesCorrendo ++;
-                vezesTiro = 0;
-            }
-            else
-            {
-                bossCurrentState = EnemyState.ATIRANDO;
-                vezesCorrendo = 0;
-                vezesTiro ++;
-            }
+            bossCurrentState = EnemyState.ATIRANDO;
         }
         else
         {
-            if(vezesCorrendo >= 2)
-            {
-                bossCurrentState = EnemyState.ATIRANDO;
-                vezesCorrendo = 0;
-                vezesTiro ++;
-            }
-            else
-            {
-                bossCurrentState = EnemyState.CORRENDO;
-                vezesCorrendo ++;
-                vezesTiro = 0;
-            }
             bossCurrentState = EnemyState.CORRENDO;
-            vezesCorrendo ++;
         }
 
         isParado = false;
