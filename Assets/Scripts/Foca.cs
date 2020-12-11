@@ -61,6 +61,8 @@ public class Foca : MonoBehaviour {
 
     public bool isFocaArgola;
 
+    private bool isDead = false;
+
 
 
     // Start is called before the first frame update
@@ -77,6 +79,7 @@ public class Foca : MonoBehaviour {
     }
 
     private void Update() {
+        if (isDead) return;
         //checa se o player está acima da cabeça
         if (_PlayerController.gameObject.transform.position.y > head.transform.position.y && head.activeSelf == false) {
             head.SetActive(true);
@@ -95,6 +98,7 @@ public class Foca : MonoBehaviour {
     }
 
     private void FixedUpdate() {
+        if (isDead) return;
 
         float distance = Vector3.Distance(transform.position, _PlayerController.transform.position);
 
@@ -176,6 +180,7 @@ public class Foca : MonoBehaviour {
 
         if (enemyHP <= 0) {
             animator.SetTrigger("desmaia");
+            isDead = true;
             return;
         }
 

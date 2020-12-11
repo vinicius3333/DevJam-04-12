@@ -235,6 +235,7 @@ public class PlayerController : MonoBehaviour {
     } //controla a posicao do shield
 
     private void OnTriggerEnter2D(Collider2D col) {
+        Debug.Log(col);
         switch (col.gameObject.tag) {
             case "EnemyDamage":
                 TakeHit();
