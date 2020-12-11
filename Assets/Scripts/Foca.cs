@@ -56,6 +56,8 @@ public class Foca : MonoBehaviour {
 
     public Transform posicaoFinal;
 
+    private Vector2 directionUpdate;
+
 
 
     // Start is called before the first frame update
@@ -80,6 +82,7 @@ public class Foca : MonoBehaviour {
         }
 
         if (enemyCurrentState == EnemyState.ATIRANDO) {
+            if (enemyHP == 0) return;
             if (isOlhandoDireita()) {
                 transform.rotation = Quaternion.AngleAxis(0, new Vector3(0, 0, 0));
             } else {
@@ -98,9 +101,9 @@ public class Foca : MonoBehaviour {
             enemyCurrentState = EnemyState.ATIRANDO;
         }
 
-        // Vector2 posicaoAtual = transform.position;
-        // Vector2 PosicaoFinalTemp = posicaoFinal.position;
-        // direction = PosicaoFinalTemp - posicaoAtual;
+        Vector2 posicaoAtual = transform.position;
+        Vector2 PosicaoFinalTemp = posicaoFinal.position;
+        directionUpdate = PosicaoFinalTemp - posicaoAtual;
 
         switch (enemyCurrentState) {
             case EnemyState.PATRULHANDO:
@@ -155,7 +158,7 @@ public class Foca : MonoBehaviour {
         isShot = true;
         tempBall = Instantiate(shotPrefab, shotPosition.position, shotPosition.localRotation).GetComponent<Rigidbody2D>();
 
-        tempBall.GetComponent<Rigidbody2D>().velocity = direction * forceBall;
+        tempBall.GetComponent<Rigidbody2D>().velocity = directionUpdate * forceBall;
 
         // temp.transform.localRotation = shotPosition.localRotation;
         // temp.AddForce(new Vector2(0, forceY));
