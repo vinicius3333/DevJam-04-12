@@ -235,7 +235,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 6
 --- !u!60 &4950047129886133687
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -326,7 +326,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5388886996254363229}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Foca Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}

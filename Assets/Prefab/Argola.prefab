@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6126777365475750407}
   - component: {fileID: 6891475918720410717}
   - component: {fileID: -4567122100732631841}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Argola
   m_TagString: Enemy
   m_Icon: {fileID: 0}
