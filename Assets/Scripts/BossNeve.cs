@@ -36,6 +36,8 @@ public class BossNeve : MonoBehaviour {
 
     public GameObject plataformaSaida;
 
+    private bool isDead = false;
+
 
     private void Start() {
         transform = GetComponent<Transform>();
@@ -47,7 +49,7 @@ public class BossNeve : MonoBehaviour {
     }
 
     private void Update() {
-        if (healthPoints == 0) return;
+        if (isDead) return;
         if (isBossOlhandoDireita()) {
             transform.rotation = Quaternion.AngleAxis(0, new Vector3(0, 0, 0));
         } else {
@@ -93,6 +95,7 @@ public class BossNeve : MonoBehaviour {
         if (bolaNeve != null) {
             SalaBoss.instance.destruirBolaNeve(bolaNeve);
         }
+        isDead = true;
         GameObject.Find("CanvasBoss").SetActive(false);
         plataformaSaida.SetActive(true);
     }
