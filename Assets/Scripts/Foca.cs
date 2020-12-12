@@ -187,12 +187,6 @@ public class Foca : MonoBehaviour {
         StartCoroutine("Invencivel");
     } //controle da vida
 
-    private void OnBecameInvisible() {
-        if (isDead) {
-            matarFoca();
-        }
-    }
-
     void matarFoca() {
         Destroy(gameObject.transform.parent.gameObject);
     }

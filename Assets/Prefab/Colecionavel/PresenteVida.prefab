@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 73294670}
   - component: {fileID: 73294669}
   m_Layer: 0
-  m_Name: SacoVida
+  m_Name: PresenteVida
   m_TagString: ColecionavelVida
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
