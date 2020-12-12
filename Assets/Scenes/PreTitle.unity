@@ -121,6 +121,101 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &21698594
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 21698595}
+  - component: {fileID: 21698597}
+  - component: {fileID: 21698596}
+  - component: {fileID: 21698598}
+  m_Layer: 5
+  m_Name: btnSpace
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &21698595
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21698594}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 688591662}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 751, y: 166}
+  m_SizeDelta: {x: 128.125, y: 62.5}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &21698596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21698594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 8698078273999563640, guid: 9245a7fab17f20f48b8622a25835d596,
+    type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &21698597
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21698594}
+  m_CullTransparentMesh: 0
+--- !u!95 &21698598
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21698594}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: de2418b2e14289d4c99b82da75b09897, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &41404631
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,6 +228,7 @@ GameObject:
   - component: {fileID: 41404635}
   - component: {fileID: 41404634}
   - component: {fileID: 41404633}
+  - component: {fileID: 41404636}
   m_Layer: 5
   m_Name: fade
   m_TagString: Untagged
@@ -215,6 +311,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 41404631}
   m_CullTransparentMesh: 0
+--- !u!114 &41404636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41404631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36a97e22d532b874b9d2d9c2d5b2cb71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFadeComplete: 0
+  isFadeInComplete: 0
 --- !u!1 &197907782
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,6 +354,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1852361204}
+  - {fileID: 887204699}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -259,10 +370,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfb8057db350acb42b338562217c99d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bgColorCam: {r: 0.03137255, g: 0.08627451, b: 0.015686275, a: 1}
+  timeToFadeOut: 1.1
+  timeStep: 0.1
+  timeStepFury: 0.002
+  spriteRenderer: {fileID: 1852361203}
+  transition: {fileID: 1571667544}
+  canvasText: {fileID: 1145058005}
+  btnSpace: {fileID: 21698594}
+  cena: {fileID: 1852361202}
+  title: {fileID: 887204698}
+  cenas:
+  - {fileID: 21300000, guid: 7c34b62e2446bc841817294f8aba17b6, type: 3}
+  - {fileID: 21300000, guid: c82635c9db77f2c4880bcc65e86785c1, type: 3}
+  - {fileID: 21300000, guid: 6ab6478533a55bf4393fd0a06d05bd7b, type: 3}
+  - {fileID: 21300000, guid: 3af12196e4369ef41858463ab31e9e2e, type: 3}
   dialogo:
-    falas: []
+  - falas:
+    - "Nossa hist\xF3ria se passa alguns dias antes do Natal. "
+    - "O Papai Noel e seus duendes est\xE3o nos \xFAltimos preparativos para cria\xE7\xE3o
+      e divis\xE3o dos brinquedos para a entrega na noite da v\xE9spera. "
+    - "Por\xE9m, um terr\xEDvel imprevisto aconteceu."
+    - "Ozob, um dos l\xEDderes dos duendes, cansou-se do fato dos duendes estarem
+      sempre trabalhando para presentear as crian\xE7as, mas eles n\xE3o ganharem
+      nada. "
+    - "Sendo assim, ele iniciou uma rebeli\xE3o e todos os duendes abra\xE7aram a
+      causa."
+  - falas:
+    - "Para estragar ent\xE3o o Natal, ele roubou o saco do Papai Noel e todos os
+      presentes j\xE1 feitos os escondendo em diferentes lugares."
+  - falas:
+    - "Diante dessa situa\xE7\xE3o totalmente inesperada e ca\xF3tica, ele recorreu
+      ao \xFAnico duende que n\xE3o estava presente nessa rebeli\xE3o por estar de
+      f\xE9rias, o Duende Jack, um dos mais confi\xE1veis e trabalhadores do time. "
+    - "A sua esperan\xE7a \xE9 de que ele possa ajudar uma vez que os duendes o prenderam
+      em sua pr\xF3pria casa e n\xE3o est\xE1 deixando ele sair para nada. "
+    - Por um momento, ele conseguiu fugir para ligar.
+    - "Ser\xE1 que Jack tamb\xE9m se revoltar\xE1 com o Noel ou entender\xE1 a boa
+      e nobre causa pela qual os duendes trabalham?"
+  - falas:
+    - "Depois de explicar a situa\xE7\xE3o, Jack diz que entende o lado do Noel e
+      apesar de eles n\xE3o receberem presentes materiais"
+    - "o sorriso das crian\xE7as e a uni\xE3o e o amor que o natal proporciona sendo
+      a entrega de presentes um desses momentos, j\xE1 compensa todo o esfor\xE7o
+      e trabalho que fazem. "
+    - Agora, cabe Jack resgatar o saco com os presentes e acabar com essa revolta
+      de uma vez tentando salvar o Natal a tempo.
   falas: []
   txt: {fileID: 769756860}
+  isFinishWord: 0
 --- !u!1 &688591661
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,13 +449,14 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 769756859}
+  - {fileID: 21698595}
   m_Father: {fileID: 1145058009}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 40}
-  m_SizeDelta: {x: 1822.1382, y: 214.12524}
+  m_SizeDelta: {x: 1682.6165, y: 214.12524}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &688591663
 MonoBehaviour:
@@ -396,18 +553,19 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
-    m_FontSize: 77
+    m_FontSize: 71
     m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 9
-    m_MaxSize: 169
+    m_BestFit: 1
+    m_MinSize: 25
+    m_MaxSize: 75
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: "Olaf, um dos l\xEDderes dos duendes, cansou-se do fato dos duendes estarem
+    sempre trabalhando para presentear as crian\xE7as, mas eles n\xE3o ganharem nada."
 --- !u!222 &769756861
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -416,6 +574,87 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 769756858}
   m_CullTransparentMesh: 0
+--- !u!1 &887204698
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 887204699}
+  - component: {fileID: 887204700}
+  m_Layer: 0
+  m_Name: title
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &887204699
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 887204698}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 197907783}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &887204700
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 887204698}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: e73a5ec32099cc347847a996940c734d, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 12, y: 12}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &1028091711
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,7 +802,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1571667545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -804,7 +1043,7 @@ GameObject:
   - component: {fileID: 1852361204}
   - component: {fileID: 1852361203}
   m_Layer: 0
-  m_Name: 00
+  m_Name: Cena
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
