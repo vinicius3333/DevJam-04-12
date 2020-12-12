@@ -248,16 +248,16 @@ public class PlayerController : MonoBehaviour {
             case "Buraco":
                 GameOver();
                 break;
+            case "ColecionavelVida":
+                Destroy(col.gameObject);
+                healthClass.health++;
+                break;
         }
     }
     private void OnCollisionEnter2D(Collision2D col) {
         switch (col.gameObject.tag) {
             case "Enemy":
                 TakeHit();
-                break;
-            case "ColecionavelVida":
-                Destroy(col.gameObject);
-                healthClass.health++;
                 break;
         }
     }
