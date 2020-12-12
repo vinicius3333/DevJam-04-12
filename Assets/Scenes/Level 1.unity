@@ -12013,6 +12013,18 @@ Transform:
   m_Father: {fileID: 841651122}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &785324482 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8342901287306804865, guid: 7bcfac997ba060f41a42ca32d7935766,
+    type: 3}
+  m_PrefabInstance: {fileID: 1208979072480256280}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &808795044
 GameObject:
   m_ObjectHideFlags: 0
@@ -12905,7 +12917,7 @@ PrefabInstance:
     - target: {fileID: 5388886995422213854, guid: b0cc7963832795e47b9d4e221e01adf7,
         type: 3}
       propertyPath: forceBall
-      value: 1.8
+      value: 1.3
       objectReference: {fileID: 0}
     - target: {fileID: 5388886995422213854, guid: b0cc7963832795e47b9d4e221e01adf7,
         type: 3}
@@ -14918,6 +14930,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.326908, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1921119666 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8342901286781796496, guid: 7bcfac997ba060f41a42ca32d7935766,
+    type: 3}
+  m_PrefabInstance: {fileID: 1208979072480256280}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1939821811
 GameObject:
   m_ObjectHideFlags: 0
@@ -15983,6 +16007,16 @@ PrefabInstance:
       propertyPath: hearts.Array.data[2]
       value: 
       objectReference: {fileID: 665575784}
+    - target: {fileID: 6546942362688375568, guid: d28e7263c386cc640adc4df8eb8279ca,
+        type: 3}
+      propertyPath: hearts.Array.data[3]
+      value: 
+      objectReference: {fileID: 1921119666}
+    - target: {fileID: 6546942362688375568, guid: d28e7263c386cc640adc4df8eb8279ca,
+        type: 3}
+      propertyPath: hearts.Array.data[4]
+      value: 
+      objectReference: {fileID: 785324482}
     - target: {fileID: 6546942363640981363, guid: d28e7263c386cc640adc4df8eb8279ca,
         type: 3}
       propertyPath: m_RootOrder
