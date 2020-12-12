@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,6 +29,7 @@ public class TitleController : MonoBehaviour
     private int idDialogo = 0;
     private bool isStartStep;
     private bool isLastScene;
+    private bool isFirstNext;
 
     private void Start() {
         transition.SetActive(true);
@@ -45,7 +46,7 @@ public class TitleController : MonoBehaviour
 
     private void Update() {
 
-        if(_FadeController.isFadeComplete == true)
+        if(_FadeController.isFadeComplete == true && isLastScene == false)
         {
             if(isStartStep == false)
             {
@@ -78,6 +79,7 @@ public class TitleController : MonoBehaviour
 
     void UpdateFalasList()
     {
+        if(isLastScene == true) {return;}
         falas.Clear();
 
         foreach(string fala in dialogo[idDialogo].falas)
@@ -88,27 +90,37 @@ public class TitleController : MonoBehaviour
 
     void NextFala()
     {
-        idFala ++;
-        print(idFala);
-        txt.text = "";
+        if(isFirstNext == true)
+        {     
+            isFirstNext = false;
+            idFala = 0;
+        }
+        else
+        {
+            idFala++;
+        }
 
+        txt.text = "";
+        print(falas.Count);
         if(idFala >= falas.Count)
         {
+            UpdateFalasList();
             NextDialogo();
-            idFala = 0;
         }
         else
         {
             falaAtual = falas[idFala];
             StartCoroutine("FalaStep");
         }
+       
     }
 
     void NextDialogo()
     {
+        isFirstNext = true;
+        idFala = 0;
         idDialogo ++;
-        print(idDialogo);
-        if(idDialogo >= dialogo.Length)
+        if(idDialogo >= dialogo.Length) //ultima cena
         {
             isLastScene = true;
             canvasText.SetActive(false);
@@ -119,10 +131,8 @@ public class TitleController : MonoBehaviour
         {
             _FadeController.FadeIn();
             StartCoroutine("WaitFadeOut");
-           
+           UpdateFalasList();
         }
-
-        UpdateFalasList();
     }
 
     IEnumerator WaitFadeOut()
@@ -134,20 +144,25 @@ public class TitleController : MonoBehaviour
             mainCam.backgroundColor = bgColorCam;
             cena.SetActive(false);
             title.SetActive(true);
+            StartCoroutine("WaitFadeIn");
         }
         else
         {
             mainCam.backgroundColor = Color.black;
+            spriteRenderer.sprite = cenas[idDialogo];
+           
         }
-
-        _FadeController.FadeOut();
-        spriteRenderer.sprite = cenas[idDialogo];
+         _FadeController.FadeOut();
     }
 
     IEnumerator WaitFadeIn()
     {
-        yield return new WaitForSeconds(timeToFadeOut);
-        SceneManager.LoadScene(1);
+        yield return new WaitForSeconds(timeToFadeOut * 2);
+       //_FadeController.FadeIn();
+        if(_FadeController.isFadeComplete = true)
+        {
+            SceneManager.LoadScene(1);
+        }
     }
 
     IEnumerator FalaStep()

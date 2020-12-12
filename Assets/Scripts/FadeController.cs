@@ -10,6 +10,7 @@ public class FadeController : MonoBehaviour
     private void Start() 
     {
         animator = GetComponent<Animator>();
+        FadeOut();
     }
 
     public void OnFadeComplete() //chamado na animacao
