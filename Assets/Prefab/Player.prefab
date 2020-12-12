@@ -308,6 +308,7 @@ GameObject:
   - component: {fileID: 3818040526761308122}
   - component: {fileID: 6546942363640981390}
   - component: {fileID: 6546942362688375568}
+  - component: {fileID: 539437839}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -446,15 +447,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   isLookLeft: 1
-  healthPoints: 3
+  healthPoints: 4
   changeColorTimes: 6
-  timeBetweenChangeColor: 0.15
+  timeBetweenChangeColor: 0.2
   colorPadrao: {r: 1, g: 0, b: 0, a: 1}
   colorHit: {r: 1, g: 0.101745084, b: 0, a: 0.4392157}
   speed: 8
-  jumpForce: 520
-  doubleJumpForce: 440
-  bounceForce: 300
+  jumpForce: 450
+  doubleJumpForce: 420
+  bounceForce: 240
   bounceForceX: 2
   timeBetweenShots: 0.26
   groundCheck:
@@ -473,6 +474,8 @@ MonoBehaviour:
   isShootActive: 1
   isShieldActive: 1
   moverSozinho: 0
+  _gameController: {fileID: 0}
+  tempoSaidaGelo: 0.5
 --- !u!114 &3818040526761308122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -521,8 +524,37 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  fullHeart: {fileID: 21300000, guid: e4b1078555eb52e4d9784697687a1f3e, type: 3}
-  emptyHeart: {fileID: 21300000, guid: 7a3ca1eddc9b3b441bb9d38f2c07ceb6, type: 3}
+  fullHeart: {fileID: 21300000, guid: d8994233d820a7b47bbf4a1b4a506ad9, type: 3}
+  emptyHeart: {fileID: 21300000, guid: 2db58f0813a394a4c9c5a6a430368fa2, type: 3}
+--- !u!60 &539437839
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6546942363640981364}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.5, y: -0.5}
+      - {x: -0.5, y: 0.5}
+      - {x: 0.5, y: 0.5}
+      - {x: 0.5, y: -0.5}
 --- !u!1 &6546942363674606203
 GameObject:
   m_ObjectHideFlags: 0

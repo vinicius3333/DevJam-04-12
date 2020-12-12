@@ -60,6 +60,10 @@ public class PlayerController : MonoBehaviour {
 
     public GameController _gameController;
 
+    private bool isAndandoGelo = false;
+
+    public float tempoSaidaGelo;
+
     // Start is called before the first frame update
     void Start() {
         instance = this;
@@ -111,7 +115,12 @@ public class PlayerController : MonoBehaviour {
     void InputController() {
         vertical = Input.GetAxisRaw("Vertical");
         horizontal = Input.GetAxisRaw("Horizontal");
-        playerRb.velocity = new Vector2(horizontal * speed, playerRb.velocity.y);
+
+        if (isAndandoGelo) {
+            playerRb.AddForce(new Vector2(horizontal * speed * 0.99f, playerRb.velocity.y));
+        } else {
+            playerRb.velocity = new Vector2(horizontal * speed, playerRb.velocity.y);
+        }
 
         //playerRb.velocity = new Vector2(20f, playerRb.velocity.y);
 
@@ -259,7 +268,23 @@ public class PlayerController : MonoBehaviour {
             case "Enemy":
                 TakeHit();
                 break;
+            case "Gelo":
+                isAndandoGelo = true;
+                break;
         }
+    }
+
+    private void OnCollisionExit2D(Collision2D col) {
+        switch (col.gameObject.tag) {
+            case "Gelo":
+                StartCoroutine(delaySaidaGelo());
+                break;
+        }
+    }
+
+    IEnumerator delaySaidaGelo() {
+        yield return new WaitForSeconds(tempoSaidaGelo);
+        isAndandoGelo = false;
     }
 
     public void Bounce() {

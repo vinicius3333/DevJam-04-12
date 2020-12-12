@@ -19,6 +19,7 @@ TagManager:
   - Colecionavel
   - ColecionavelVida
   - Buraco
+  - Gelo
   layers:
   - Default
   - TransparentFX
