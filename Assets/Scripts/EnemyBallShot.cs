@@ -12,8 +12,7 @@ public class EnemyBallShot : MonoBehaviour {
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
         collider = GetComponent<CircleCollider2D>();
-        collider.enabled = false;
-        StartCoroutine("TimeToCollider");
+        collider.enabled = true;
     }
     private void OnCollisionEnter2D(Collision2D col) {
         Destroy(this.gameObject, timeToDestroy);

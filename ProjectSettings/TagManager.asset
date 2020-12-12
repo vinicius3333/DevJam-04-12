@@ -18,6 +18,7 @@ TagManager:
   - Parede
   - Colecionavel
   - ColecionavelVida
+  - Buraco
   layers:
   - Default
   - TransparentFX

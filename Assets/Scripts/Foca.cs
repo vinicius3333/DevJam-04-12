@@ -188,7 +188,9 @@ public class Foca : MonoBehaviour {
     } //controle da vida
 
     private void OnBecameInvisible() {
-        matarFoca();
+        if (isDead) {
+            matarFoca();
+        }
     }
 
     void matarFoca() {

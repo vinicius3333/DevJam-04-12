@@ -58,6 +58,8 @@ public class PlayerController : MonoBehaviour {
 
     private Health healthClass;
 
+    public GameController _gameController;
+
     // Start is called before the first frame update
     void Start() {
         instance = this;
@@ -243,6 +245,9 @@ public class PlayerController : MonoBehaviour {
             case "EnemyDamage":
                 TakeHit();
                 break;
+            case "Buraco":
+                GameOver();
+                break;
         }
     }
     private void OnCollisionEnter2D(Collision2D col) {
@@ -263,16 +268,19 @@ public class PlayerController : MonoBehaviour {
     } //controle da vida
 
     void TakeHit() {
-        Debug.Log("teste");
         healthPoints--;
         healthClass.health--;
 
         StartCoroutine("Invencivel");
 
         if (healthPoints < 0) {
-            GetComponent<GameController>().resetarCena();
+            GameOver();
         }
     } //controle da vida
+
+    void GameOver() {
+        _gameController.resetarCena();
+    }
 
     IEnumerator Invencivel() {
         gameObject.layer = 9; //invencivel layer
