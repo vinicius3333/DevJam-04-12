@@ -1,52 +1,41 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
-public class TitleController : MonoBehaviour
+public class FinalCurtscene : MonoBehaviour
 {
-    private Camera mainCam;
     private FadeController _FadeController;
-    public Color bgColorCam;
     public float timeToFadeOut;
     public float timeStep;
     public float timeStepFury;
     private float timeStepPadrao;
-    public SpriteRenderer spriteRenderer;
     public GameObject transition;
-    public GameObject canvasText;
     public GameObject btnSpace;
-    public GameObject cena;
-    public GameObject title;
-    public Sprite[] cenas;
-    public Dialogo[] dialogo;
+    public Dialogo dialogo;
     public List<string> falas;
     public Text txt;
     public bool isFinishWord;
     private string falaAtual;
     private int idFala = 0;
-    private int idDialogo = 0;
     private bool isStartStep;
-    private bool isLastScene;
-    private bool isFirstNext;
 
-    private void Start() {
+
+    // Start is called before the first frame update
+       private void Start() {
         transition.SetActive(true);
-        mainCam = Camera.main;
         _FadeController = FindObjectOfType(typeof(FadeController)) as FadeController;
-        cena.SetActive(true);
-        title.SetActive(false);
         timeStepPadrao = timeStep;
         txt.text = "";
         UpdateFalasList();
         falaAtual = falas[idFala];
-        spriteRenderer.sprite = cenas[idDialogo];
     }
 
-    private void Update() {
-
-        if(_FadeController.isFadeComplete == true && isLastScene == false)
+    // Update is called once per frame
+    void Update()
+    {
+        
+        if(_FadeController.isFadeComplete == true)
         {
             if(isStartStep == false)
             {
@@ -76,13 +65,11 @@ public class TitleController : MonoBehaviour
             }
         }
     }
-
     void UpdateFalasList()
     {
-        if(isLastScene == true) {return;}
         falas.Clear();
 
-        foreach(string fala in dialogo[idDialogo].falas)
+        foreach(string fala in dialogo.falas)
         {
             falas.Add(fala);
         }
@@ -90,79 +77,28 @@ public class TitleController : MonoBehaviour
 
     void NextFala()
     {
-        if(isFirstNext == true)
-        {     
-            isFirstNext = false;
-            idFala = 0;
-        }
-        else
-        {
-            idFala++;
-        }
+        idFala++;
 
         txt.text = "";
-        print(falas.Count);
         if(idFala >= falas.Count)
         {
-            UpdateFalasList();
-            NextDialogo();
+            StartCoroutine("WaitFadeIn");
         }
         else
         {
             falaAtual = falas[idFala];
             StartCoroutine("FalaStep");
         }
-       
     }
 
-    void NextDialogo()
-    {
-        isFirstNext = true;
-        idFala = 0;
-        idDialogo ++;
-        if(idDialogo >= dialogo.Length) //ultima cena
-        {
-            isLastScene = true;
-            canvasText.SetActive(false);
-            _FadeController.FadeIn();
-            StartCoroutine("WaitFadeOut");
-        }
-        else
-        {
-            _FadeController.FadeIn();
-            StartCoroutine("WaitFadeOut");
-           UpdateFalasList();
-        }
-    }
-
-    IEnumerator WaitFadeOut()
-    {
-        yield return new WaitForSeconds(timeToFadeOut);
-        
-        if(isLastScene == true)
-        {
-            mainCam.backgroundColor = bgColorCam;
-            cena.SetActive(false);
-            title.SetActive(true);
-            StartCoroutine("WaitFadeIn");
-        }
-        else
-        {
-            mainCam.backgroundColor = Color.black;
-            spriteRenderer.sprite = cenas[idDialogo];
-           
-        }
-         _FadeController.FadeOut();
-    }
-
-    IEnumerator WaitFadeIn()
+      IEnumerator WaitFadeIn()
     {
         _FadeController.FadeIn();
         yield return new WaitForSeconds(timeToFadeOut * 2);
-     
+ 
         if(_FadeController.isFadeComplete == true)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene(0);
         }
     }
 
