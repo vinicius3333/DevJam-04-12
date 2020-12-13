@@ -89,7 +89,7 @@ public class Bat : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag == "PlayerHit")
         {
-            _AudioController.PlayFX(_AudioController.batDie);
+            _AudioController.PlayFX(_AudioController.batDie, 1f);
             Destroy(this.gameObject);
         }    
     }
