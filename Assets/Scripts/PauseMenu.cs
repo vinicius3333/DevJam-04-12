@@ -4,8 +4,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour {
+<<<<<<< Updated upstream
     private AudioController _AudioController;
     private FadeController _FadeController;
+=======
+    public AudioController _AudioController;
+    private FadeController _FadeController; 
+>>>>>>> Stashed changes
     public static bool GameIsPaused;
     public GameObject pauseMenuUI;
     public GameObject gameOverMenu;
@@ -50,6 +55,11 @@ public class PauseMenu : MonoBehaviour {
         _AudioController.PlayFX(_AudioController.uiClick, 1f);
         Time.timeScale = 1f;
         GameIsPaused = false;
-        SceneManager.LoadScene(0);
+        _AudioController.ChangeMusic(_AudioController.title);
+        _FadeController.FadeIn();
+        if(_FadeController.isFadeComplete == true)
+        {
+            SceneManager.LoadScene(1);
+        }
     }
 }

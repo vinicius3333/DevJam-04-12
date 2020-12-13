@@ -77,9 +77,11 @@ public class PlayerController : MonoBehaviour {
     public int maxHealth = 5;
 
     private Mana mana;
+    private AudioController _AudioController;
 
     // Start is called before the first frame update
     void Start() {
+        _AudioController = FindObjectOfType(typeof(AudioController)) as AudioController;
         _PauseMenu = FindObjectOfType(typeof(PauseMenu)) as PauseMenu;
         gm = GameObject.FindWithTag("GM").GetComponent<GameMaster>();
         if (gm.posicaoPlayer != Vector2.zero) {
@@ -352,6 +354,7 @@ public class PlayerController : MonoBehaviour {
 
     void GameOver() {
         Time.timeScale = 0;
+        _AudioController.ChangeMusic(_AudioController.gameOver);
         _PauseMenu.gameOverMenu.SetActive(true);
     }
 

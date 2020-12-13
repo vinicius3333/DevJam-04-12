@@ -767,6 +767,11 @@ MonoBehaviour:
   intro: {fileID: 8300000, guid: b7fc250c755dc4d4bb5e50090c33f9ce, type: 3}
   title: {fileID: 8300000, guid: 7c3e46c6dbd3e43479860fe90581aed9, type: 3}
   level1: {fileID: 8300000, guid: ef24e7c22e156c54fb3651e7d7d2622b, type: 3}
+  boss1: {fileID: 8300000, guid: f0ee647f9ac132f408720c1a403ae31c, type: 3}
+  level2: {fileID: 8300000, guid: 94acb92ece4a29e408fa36f5dd31f18e, type: 3}
+  boss2: {fileID: 8300000, guid: 84b694299efcccd46be788f325640fed, type: 3}
+  perseguicao: {fileID: 8300000, guid: 490fa0fde69243544b987a0e8d9f24dc, type: 3}
+  gameOver: {fileID: 8300000, guid: b24271ea517f6a14f88098fa023fca70, type: 3}
   icebrokenBg: {fileID: 8300000, guid: 852666b2c72c6fd428fad577b2df3889, type: 3}
   fx: {fileID: 838421779}
   ballBounce: {fileID: 8300000, guid: 4f18ed1536b739d46be07572178c8ef9, type: 3}

@@ -42,9 +42,10 @@ public class BossRena : MonoBehaviour {
 
     public bool isWalk;
     public bool isDie;
-
+     private AudioController _AudioController;
     // Start is called before the first frame update
     void Start() {
+        _AudioController = FindObjectOfType(typeof(AudioController)) as AudioController;
         spriteRenderer = GetComponent<SpriteRenderer>();
         _PlayerController = FindObjectOfType(typeof(PlayerController)) as PlayerController;
 
@@ -150,6 +151,7 @@ public class BossRena : MonoBehaviour {
         enemyHP--;
 
         if (enemyHP < 0) {
+            _AudioController.ChangeMusic(_AudioController.level2);
             animator.SetTrigger("Die");
             isDie = true;
         }

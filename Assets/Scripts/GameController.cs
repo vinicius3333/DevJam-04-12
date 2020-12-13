@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
+    private AudioController _AudioController;
     public GameObject transition;
     private FadeController _FadeController;
     private bool isWait;
@@ -13,6 +14,7 @@ public class GameController : MonoBehaviour {
 
 
     private void Start() {
+        _AudioController = FindObjectOfType(typeof(AudioController)) as AudioController;
         transition.SetActive(true);
         _FadeController = FindObjectOfType(typeof(FadeController)) as FadeController;
         gameMaster = GameObject.FindWithTag("GM").GetComponent<GameMaster>();
@@ -25,6 +27,7 @@ public class GameController : MonoBehaviour {
 
     IEnumerator WaitToReset() {
         isWait = true;
+        _AudioController.ChangeMusic(_AudioController.level1);
         _FadeController.FadeIn();
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -37,6 +40,7 @@ public class GameController : MonoBehaviour {
 
     IEnumerator WaitToNext() {
         isWait = true;
+        _AudioController.ChangeMusic(_AudioController.level2);
         _FadeController.FadeIn();
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
