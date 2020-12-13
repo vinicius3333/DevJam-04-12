@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BossNeve : MonoBehaviour {
 
+    private AudioController _AudioController;
     public HealthBar healthBar;
     private new Transform transform;
 
@@ -40,6 +41,7 @@ public class BossNeve : MonoBehaviour {
 
 
     private void Start() {
+        _AudioController = FindObjectOfType(typeof(AudioController)) as AudioController;
         transform = GetComponent<Transform>();
         rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -102,6 +104,7 @@ public class BossNeve : MonoBehaviour {
 
     void TakeHit() {
         if (healthPoints == 0) {
+            _AudioController.ChangeMusic(_AudioController.level1);
             return;
         }
         healthPoints--;

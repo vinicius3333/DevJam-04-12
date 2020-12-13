@@ -104,7 +104,6 @@ public class TitleController : MonoBehaviour
         }
 
         txt.text = "";
-        print(falas.Count);
         if(idFala >= falas.Count)
         {
             UpdateFalasList();
@@ -161,8 +160,9 @@ public class TitleController : MonoBehaviour
     IEnumerator WaitFadeIn()
     {
         //_FadeController.FadeIn();
-        yield return new WaitForSeconds(timeToFadeOut * 5);
-     
+        _AudioController.ChangeMusic(_AudioController.title);
+        yield return new WaitForSeconds(timeToFadeOut * 4);
+
         if(_FadeController.isFadeComplete == true)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

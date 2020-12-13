@@ -34,6 +34,7 @@ public class MainMenu : MonoBehaviour {
 
     IEnumerator WaitToPlayGame() {
         isWait = true;
+        _AudioController.ChangeMusic(_AudioController.level1);
         _FadeController.FadeIn();
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
