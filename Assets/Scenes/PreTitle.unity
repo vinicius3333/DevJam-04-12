@@ -726,6 +726,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 968333312}
+  - component: {fileID: 968333313}
   m_Layer: 0
   m_Name: AudioController
   m_TagString: Untagged
@@ -749,6 +750,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &968333313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968333311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3121f5d4f01867d4d897c7e8f6c37953, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  music: {fileID: 736886474}
+  icebrokenBg: {fileID: 8300000, guid: 852666b2c72c6fd428fad577b2df3889, type: 3}
+  fx: {fileID: 838421779}
+  ballBounce: {fileID: 8300000, guid: 4f18ed1536b739d46be07572178c8ef9, type: 3}
+  batAtentention: {fileID: 8300000, guid: 2c1efb73f5c48e94e97caf925f8516f6, type: 3}
+  batFly: {fileID: 8300000, guid: 3f9c5d05c59eece498e49eac20ee1590, type: 3}
+  batDie: {fileID: 8300000, guid: 08f61bd74cfc9b8478c71369d3629e8d, type: 3}
+  focaDie: {fileID: 8300000, guid: 6b7fd983883ecb144994af20a09beb74, type: 3}
+  iceHardBroken: {fileID: 8300000, guid: 348d50e57f7c6284e8b40ce440415391, type: 3}
+  smokeExplosion: {fileID: 8300000, guid: 43e00321e7aeed649a3bb2b926711570, type: 3}
+  smokeNormal: {fileID: 8300000, guid: 02b9f8abef4a7094d97467a887a82858, type: 3}
+  uiClick: {fileID: 8300000, guid: b96054a17213e1f43bcf6fb5119322e6, type: 3}
 --- !u!1 &1028091711
 GameObject:
   m_ObjectHideFlags: 0

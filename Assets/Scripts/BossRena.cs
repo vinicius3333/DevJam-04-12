@@ -168,6 +168,7 @@ public class BossRena : MonoBehaviour {
 
     public IEnumerator TimeToZeroSpeed() //chamado pelo chifre
     {
+        print("Zerou");
         rb.velocity = new Vector2(speed, rb.velocity.y);
         yield return new WaitForSeconds(timeToStop);
         rb.velocity = Vector2.zero;

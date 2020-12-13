@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bat : MonoBehaviour
 {
+    private AudioController _AudioController;
     private PlayerController _PlayerController; 
     public Transform[] wayPoints;
     public float speed;
@@ -14,9 +15,10 @@ public class Bat : MonoBehaviour
     public bool isLockPlayer;
     public bool isLookLeft;
     public bool isCenter;
-
+    private bool isPlayFX;
     void Start()
     {
+        //_AudioController = FindObjectOfType(typeof(AudioController)) as AudioController;
         _PlayerController = FindObjectOfType(typeof(PlayerController)) as PlayerController;
         target = wayPoints[0];
     }
@@ -27,6 +29,11 @@ public class Bat : MonoBehaviour
         if(isLockPlayer == true)
         {
             target = _PlayerController.transform;
+            if(isPlayFX == false)
+            {
+                isPlayFX = true;
+                //_AudioController.PlayFX(_AudioController.batAtentention, 1f);
+            }
         }
 
         if(isCenter == true && isLockPlayer == false)
@@ -77,5 +84,13 @@ public class Bat : MonoBehaviour
         isLookLeft = !isLookLeft;
         Vector3 scale = transform.localScale;
         transform.localScale = new Vector3(scale.x *-1, scale.y, scale.z);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if(other.gameObject.tag == "PlayerHit")
+        {
+            //_AudioController.PlayFX(_AudioController.batDie);
+            Destroy(this.gameObject);
+        }    
     }
 }

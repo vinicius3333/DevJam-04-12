@@ -10,7 +10,7 @@ public class ChifreBossRena : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D col) {
-        if (col.gameObject.layer == 8) {
+        if (col.gameObject.tag == "Parede") {
             _BossRena.Flip();
             _BossRena.StartCoroutine("TimeToZeroSpeed");
         }

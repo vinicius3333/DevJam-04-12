@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyBallShot : MonoBehaviour {
+    private AudioController _AudioController;
     public float timeToDestroy; //tempo para destruir dps que bater em algo
     public Rigidbody2D rb;
     private CircleCollider2D collider;
@@ -10,11 +11,13 @@ public class EnemyBallShot : MonoBehaviour {
 
 
     private void Start() {
+        //_AudioController = FindObjectOfType(typeof(AudioController)) as AudioController;
         rb = GetComponent<Rigidbody2D>();
         collider = GetComponent<CircleCollider2D>();
         collider.enabled = true;
     }
     private void OnCollisionEnter2D(Collision2D col) {
+        //_AudioController.PlayFX(_AudioController.ballBounce, 1f);
         Destroy(this.gameObject, timeToDestroy);
     }
     private void OnBecameInvisible() {
