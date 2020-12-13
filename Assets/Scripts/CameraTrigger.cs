@@ -33,9 +33,14 @@ public class CameraTrigger : MonoBehaviour {
                 }
             }
             if (bossRena) {
-                AllRenaPrefab.SetActive(true);
+                StartCoroutine(ativarRena());
             }
             CameraController.instance.EnableCamera(myCamera, bossCamera, bossRena, conclusao);
         }
+    }
+
+    IEnumerator ativarRena() {
+        yield return new WaitForSecondsRealtime(1.5f);
+        AllRenaPrefab.SetActive(true);
     }
 }

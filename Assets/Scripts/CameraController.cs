@@ -40,10 +40,6 @@ public class CameraController : MonoBehaviour {
             StartCoroutine(moverSozinho(2.3f));
         }
 
-        if (bossRena) {
-            StartCoroutine(moverSozinho(2.3f));
-        }
-
         if (conclusao) {
             StartCoroutine(moverSozinho(6f));
         }
