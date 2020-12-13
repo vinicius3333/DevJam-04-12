@@ -271,6 +271,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a332debff24f1345a20c084908c95d9, type: 3}
+--- !u!1 &66984670 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6546942363640981364, guid: d28e7263c386cc640adc4df8eb8279ca,
+    type: 3}
+  m_PrefabInstance: {fileID: 6546942362688375566}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &66984671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66984670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6600b277348771e4cad594106be9001b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quantidadeTiro: 50
+  textoQuantidadeNeve: {fileID: 788736547}
+  ManaUI: {fileID: 1161918260}
+  mostrarManaUI: 1
 --- !u!1001 &71970430
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2358,6 +2380,12 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.061645508, y: 4.8258348}
   m_EdgeRadius: 0
+--- !u!1 &788736547 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6582602407139537189, guid: 7bcfac997ba060f41a42ca32d7935766,
+    type: 3}
+  m_PrefabInstance: {fileID: 1208979072480256280}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &830706119
 GameObject:
   m_ObjectHideFlags: 0
@@ -3126,6 +3154,12 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1161918260 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2695391953166240938, guid: 7bcfac997ba060f41a42ca32d7935766,
+    type: 3}
+  m_PrefabInstance: {fileID: 1208979072480256280}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1172665890
 GameObject:
   m_ObjectHideFlags: 0
@@ -7004,37 +7038,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI Player
       objectReference: {fileID: 0}
-    - target: {fileID: 1208979072904584892, guid: 7bcfac997ba060f41a42ca32d7935766,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 1208979072904584892, guid: 7bcfac997ba060f41a42ca32d7935766,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 1208979072904584892, guid: 7bcfac997ba060f41a42ca32d7935766,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1208979072904584892, guid: 7bcfac997ba060f41a42ca32d7935766,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1208979072904584892, guid: 7bcfac997ba060f41a42ca32d7935766,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1208979072904584893, guid: 7bcfac997ba060f41a42ca32d7935766,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: d8994233d820a7b47bbf4a1b4a506ad9,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bcfac997ba060f41a42ca32d7935766, type: 3}
 --- !u!156049354 &2569400266686094375
