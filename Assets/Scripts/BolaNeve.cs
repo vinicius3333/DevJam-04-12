@@ -14,4 +14,8 @@ public class BolaNeve : MonoBehaviour {
     public void criarParticulas() {
         GameObject.Instantiate(explosao, gameObject.transform.position, gameObject.transform.rotation);
     }
+
+    public void destruirBolaNeve() {
+        Destroy(gameObject);
+    }
 }

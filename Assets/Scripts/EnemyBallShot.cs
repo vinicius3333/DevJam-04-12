@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyBallShot : MonoBehaviour {
     public float timeToDestroy; //tempo para destruir dps que bater em algo
     public Rigidbody2D rb;
-    private CircleCollider2D collider;
+    private new CircleCollider2D collider;
     public float timeToActive;
 
 
@@ -15,7 +15,9 @@ public class EnemyBallShot : MonoBehaviour {
         collider.enabled = true;
     }
     private void OnCollisionEnter2D(Collision2D col) {
-        Destroy(this.gameObject, timeToDestroy);
+        if (col.gameObject.tag == "Player") {
+            Destroy(this.gameObject, timeToDestroy);
+        }
     }
     private void OnBecameInvisible() {
         Destroy(this.gameObject);
