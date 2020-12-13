@@ -66,7 +66,6 @@ public class TitleController : MonoBehaviour
             {
                 btnSpace.SetActive(false);
                 timeStep = timeStepFury;
-                _AudioController.PlayFX(_AudioController.uiClick, 1f);
             }
             else if(Input.GetButton("Jump") && isFinishWord == true && btnSpace.activeSelf == false)
             {

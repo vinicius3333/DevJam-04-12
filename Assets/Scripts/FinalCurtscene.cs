@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class FinalCurtscene : MonoBehaviour
 {
+    private AudioController _AudioController;
     private FadeController _FadeController;
     public float timeToFadeOut;
     public float timeStep;
@@ -23,6 +24,7 @@ public class FinalCurtscene : MonoBehaviour
 
     // Start is called before the first frame update
        private void Start() {
+        _AudioController = FindObjectOfType(typeof(AudioController)) as AudioController;
         transition.SetActive(true);
         _FadeController = FindObjectOfType(typeof(FadeController)) as FadeController;
         timeStepPadrao = timeStep;
@@ -46,6 +48,7 @@ public class FinalCurtscene : MonoBehaviour
             if(Input.GetButtonDown("Jump") && isFinishWord == true)
             {   
                 NextFala();
+                _AudioController.PlayFX(_AudioController.uiClick, 1f);
             }
 
             if(Input.GetButton("Jump") && isFinishWord == false)
