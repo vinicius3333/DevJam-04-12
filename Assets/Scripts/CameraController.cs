@@ -25,7 +25,7 @@ public class CameraController : MonoBehaviour {
         instance = this;
     }
 
-    public void EnableCamera(GameObject camera, bool bossCamera, bool bossRena) {
+    public void EnableCamera(GameObject camera, bool bossCamera, bool bossRena, bool conclusao) {
         if (camera.activeInHierarchy) return;
 
         for (int i = 0; i < cameras.Length; i++) {
@@ -42,6 +42,10 @@ public class CameraController : MonoBehaviour {
 
         if (bossRena) {
             StartCoroutine(moverSozinho(2.3f));
+        }
+
+        if (conclusao) {
+            StartCoroutine(moverSozinho(6f));
         }
     }
 
@@ -81,6 +85,7 @@ public class CameraController : MonoBehaviour {
     }
 
     public void zoomItem(Transform transform, float zoom) {
+        getVcam();
         vcam.Follow = transform;
         targetZoom = vcam.m_Lens.OrthographicSize;
         zoomFactor = zoom;

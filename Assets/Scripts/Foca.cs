@@ -164,6 +164,7 @@ public class Foca : MonoBehaviour {
     }
 
     void Shot() {
+        if (isDead) return;
         isShot = true;
 
         if (isFocaArgola) {
@@ -173,18 +174,22 @@ public class Foca : MonoBehaviour {
             temp.velocity = shotPosition.right * shotSpeed;
         } else {
             tempBall = Instantiate(shotPrefab, shotPosition.position, shotPosition.localRotation).GetComponent<Rigidbody2D>();
-            tempBall.GetComponent<Rigidbody2D>().velocity = directionUpdate * forceBall;
+            tempBall.velocity = directionUpdate * forceBall;
         }
     } //instancia o tiro
 
     public void TakeHit() {
         enemyHP--;
+        enemyRb.isKinematic = true;
 
         if (enemyHP <= 0) {
             //_AudioController.PlayFX(_AudioController.focaDie, 1f);
             animator.SetTrigger("desmaia");
             isDead = true;
-            enemyRb.velocity = Vector2.zero;
+            Destroy(GetComponent<Rigidbody2D>());
+            Destroy(GetComponent<PolygonCollider2D>());
+            Destroy(head);
+            rb.velocity = Vector2.zero;
             return;
         }
 
@@ -202,6 +207,7 @@ public class Foca : MonoBehaviour {
             yield return new WaitForSeconds(timeBetweenChangeColor);
             spriteRenderer.color = colorPadrao;
         }
+        enemyRb.isKinematic = false;
     }
 
     IEnumerator UpdateTarget() //muda para um novo ponto
@@ -228,5 +234,17 @@ public class Foca : MonoBehaviour {
         Vector3 dir = PlayerController.instance.transform.position - transform.position;
 
         return dir.x < 0;
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        if (other.gameObject.tag == "Player") {
+            enemyRb.isKinematic = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D other) {
+        if (other.gameObject.tag == "Player") {
+            enemyRb.isKinematic = false;
+        }
     }
 }

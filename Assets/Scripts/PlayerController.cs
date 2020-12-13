@@ -72,6 +72,10 @@ public class PlayerController : MonoBehaviour {
 
     private GameMaster gm;
 
+    public int maxHealth = 5;
+
+    private Mana mana;
+
     // Start is called before the first frame update
     void Start() {
         gm = GameObject.FindWithTag("GM").GetComponent<GameMaster>();
@@ -82,6 +86,7 @@ public class PlayerController : MonoBehaviour {
         }
         instance = this;
         healthClass = GetComponent<Health>();
+        mana = GetComponent<Mana>();
         bounceCollider = GetComponent<BoxCollider2D>();
         playerRb = GetComponent<Rigidbody2D>();
         playerSr = GetComponent<SpriteRenderer>();
@@ -254,6 +259,9 @@ public class PlayerController : MonoBehaviour {
     } //controla a posicao do tiro antes de instanciar
 
     void Shot(Transform newTransform, bool eixoX) {
+        if (mana.quantidadeTiro <= 0) return;
+        mana.quantidadeTiro--;
+        mana.atualizarQuantidade(mana.quantidadeTiro);
         isShot = true;
         Rigidbody2D temp = Instantiate(presentePrefab, newTransform.position, transform.localRotation).GetComponent<Rigidbody2D>();
 
@@ -272,8 +280,10 @@ public class PlayerController : MonoBehaviour {
     } //controla a posicao do shield
 
     private void OnTriggerEnter2D(Collider2D col) {
+        if (gameObject.layer == 9) return;
         switch (col.gameObject.tag) {
             case "EnemyDamage":
+                Debug.Log(col.gameObject.tag);
                 TakeHit();
                 break;
             case "Buraco":
@@ -281,8 +291,10 @@ public class PlayerController : MonoBehaviour {
                 break;
             case "ColecionavelVida":
                 Destroy(col.gameObject);
-                healthPoints++;
-                healthClass.health++;
+                if (healthPoints < maxHealth) {
+                    healthPoints++;
+                    healthClass.health++;
+                }
                 break;
         }
     }
@@ -311,12 +323,13 @@ public class PlayerController : MonoBehaviour {
     } //controle da vida
 
     void TakeHit() {
+        //StopAllCoroutines();
         healthPoints--;
         healthClass.health--;
 
         StartCoroutine("Invencivel");
 
-        if (healthPoints < 0) {
+        if (healthPoints <= 0) {
             GameOver();
         }
     } //controle da vida

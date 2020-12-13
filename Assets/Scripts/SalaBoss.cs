@@ -72,14 +72,10 @@ public class SalaBoss : MonoBehaviour {
 
         Quaternion rotation = direitaBoss ? Quaternion.AngleAxis(0, new Vector3(0, 0, 0)) : Quaternion.AngleAxis(180, new Vector3(0, 180, 0));
 
-        int i = 3;
-
-        while (i-- > 0) {
-            Vector3 positionRandom = new Vector3(cenouraRandom.position.x, 0, cenouraRandom.position.z);
-            positionRandom.y = (i + cenouraPosicoes[indexCenoura]);
-            Rigidbody2D temp = Instantiate(cenouraPrefab, positionRandom, rotation).GetComponent<Rigidbody2D>();
-            temp.velocity = new Vector2(direitaBoss ? velocidadeCenoura : velocidadeCenoura * -1, 0);
-        }
+        Vector3 positionRandom = new Vector3(cenouraRandom.position.x, 0, cenouraRandom.position.z);
+        positionRandom.y = cenouraPosicoes[indexCenoura];
+        Rigidbody2D temp = Instantiate(cenouraPrefab, positionRandom, rotation).GetComponent<Rigidbody2D>();
+        temp.velocity = new Vector2(direitaBoss ? velocidadeCenoura : velocidadeCenoura * -1, 0);
 
         if (indexCenoura == 2) indexCenoura = 0;
         else indexCenoura++;
@@ -127,7 +123,7 @@ public class SalaBoss : MonoBehaviour {
 
     public void destruirBolaNeve(GameObject gameObject) {
         BolaNeve.instance.criarParticulas();
-        Destroy(gameObject);
+        BolaNeve.instance.destruirBolaNeve();
         bolaJogada = false;
     }
 
