@@ -70,14 +70,21 @@ public class PlayerController : MonoBehaviour {
 
     public float andarSozinhoForce = 0.5f;
 
+    private GameMaster gm;
+
     // Start is called before the first frame update
     void Start() {
+        gm = GameObject.FindWithTag("GM").GetComponent<GameMaster>();
+        if (gm.posicaoPlayer != Vector2.zero) {
+            Debug.Log(gm.posicaoPlayer);
+            Transform transform = GetComponent<Transform>();
+            transform.position = gm.posicaoPlayer;
+        }
         instance = this;
         healthClass = GetComponent<Health>();
         bounceCollider = GetComponent<BoxCollider2D>();
         playerRb = GetComponent<Rigidbody2D>();
         playerSr = GetComponent<SpriteRenderer>();
-
 
         if (isLookLeft == true) {
             bulletSpeed *= -1;
