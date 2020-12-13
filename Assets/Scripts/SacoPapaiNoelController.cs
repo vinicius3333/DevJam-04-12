@@ -33,8 +33,17 @@ public class SacoPapaiNoelController : MonoBehaviour {
                 Destroy(presentePrefab.gameObject);
                 Destroy(botaoEspacoPrefab.gameObject);
                 Destroy(gameObject);
+                StartCoroutine(moverSozinho(5f));
             }
         }
+    }
+
+    IEnumerator moverSozinho(float timeToWalk) {
+        PlayerController.instance.moverSozinho = true;
+
+        yield return new WaitForSecondsRealtime(timeToWalk);
+
+        PlayerController.instance.moverSozinho = false;
     }
 
     private void OnTriggerEnter2D(Collider2D other) {

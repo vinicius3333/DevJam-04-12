@@ -32,5 +32,13 @@ public class GameController : MonoBehaviour {
 
     public void proximaCena() {
         gameMaster.posicaoPlayer = Vector2.zero;
+        StartCoroutine(WaitToNext());
+    }
+
+    IEnumerator WaitToNext() {
+        isWait = true;
+        _FadeController.FadeIn();
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

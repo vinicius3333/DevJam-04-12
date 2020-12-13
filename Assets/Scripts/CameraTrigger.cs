@@ -8,22 +8,34 @@ public class CameraTrigger : MonoBehaviour {
 
     public bool bossRena;
 
+    public bool conclusao;
+
     public GameObject AllRenaPrefab;
+
+    private GameObject bgFase;
+
+    private void Start() {
+        GameObject bgFase = GameObject.Find("BackgroundFase");
+    }
 
     // Desculpa por esse código horrível, mas fazer o que, né
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Player")) {
             if (bossCamera) {
-                GameObject bgFase = GameObject.Find("BackgroundFase");
                 if (bgFase != null) {
                     bgFase.SetActive(false);
                 }
                 SalaBoss.instance.iniciarBoss();
             }
+            if (conclusao) {
+                if (bgFase != null) {
+                    bgFase.SetActive(true);
+                }
+            }
             if (bossRena) {
                 AllRenaPrefab.SetActive(true);
             }
-            CameraController.instance.EnableCamera(myCamera, bossCamera, bossRena);
+            CameraController.instance.EnableCamera(myCamera, bossCamera, bossRena, conclusao);
         }
     }
 }
