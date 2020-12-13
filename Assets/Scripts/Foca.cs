@@ -8,6 +8,7 @@ public class Foca : MonoBehaviour {
         ATIRANDO
     }
 
+    private AudioController _AudioController;
     private PlayerController _PlayerController;
     private Rigidbody2D enemyRb;
     public EnemyState enemyCurrentState; //estado atual do inimigo
@@ -67,6 +68,7 @@ public class Foca : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
+        //_AudioController = FindObjectOfType(typeof(AudioController)) as AudioController;
         _PlayerController = FindObjectOfType(typeof(PlayerController)) as PlayerController;
 
         enemyRb = GetComponentInChildren<Rigidbody2D>();
@@ -181,11 +183,13 @@ public class Foca : MonoBehaviour {
         enemyRb.isKinematic = true;
 
         if (enemyHP <= 0) {
+            //_AudioController.PlayFX(_AudioController.focaDie, 1f);
             animator.SetTrigger("desmaia");
             isDead = true;
             Destroy(GetComponent<Rigidbody2D>());
             Destroy(GetComponent<PolygonCollider2D>());
             Destroy(head);
+            rb.velocity = Vector2.zero;
             return;
         }
 

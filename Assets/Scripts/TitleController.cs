@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class TitleController : MonoBehaviour
 {
+    private AudioController _AudioController; 
     private Camera mainCam;
     private FadeController _FadeController;
     public Color bgColorCam;
@@ -32,6 +33,7 @@ public class TitleController : MonoBehaviour
     private bool isFirstNext;
 
     private void Start() {
+        _AudioController = FindObjectOfType(typeof(AudioController)) as AudioController;
         transition.SetActive(true);
         mainCam = Camera.main;
         _FadeController = FindObjectOfType(typeof(FadeController)) as FadeController;
@@ -57,12 +59,14 @@ public class TitleController : MonoBehaviour
             if(Input.GetButtonDown("Jump") && isFinishWord == true)
             {   
                 NextFala();
+                _AudioController.PlayFX(_AudioController.uiClick, 1f);
             }
 
             if(Input.GetButton("Jump") && isFinishWord == false)
             {
                 btnSpace.SetActive(false);
                 timeStep = timeStepFury;
+                _AudioController.PlayFX(_AudioController.uiClick, 1f);
             }
             else if(Input.GetButton("Jump") && isFinishWord == true && btnSpace.activeSelf == false)
             {
