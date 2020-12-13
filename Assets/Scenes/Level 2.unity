@@ -1075,7 +1075,7 @@ PrefabInstance:
     - target: {fileID: 2059881960498200584, guid: 5763b4df806f63048b0711e880c9d901,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2059881960498200585, guid: 5763b4df806f63048b0711e880c9d901,
         type: 3}
@@ -2878,7 +2878,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1031615311}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -27.91, y: 2.9, z: -10}
+  m_LocalPosition: {x: -391.83817, y: 5.7000003, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 845603719}
@@ -4982,12 +4982,12 @@ PrefabInstance:
     - target: {fileID: 3192997397140487342, guid: d2d608dd6fc54814ca015659b92bc2d4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -78.84964
+      value: -450.24963
       objectReference: {fileID: 0}
     - target: {fileID: 3192997397140487342, guid: d2d608dd6fc54814ca015659b92bc2d4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.9806936
+      value: 3.7806938
       objectReference: {fileID: 0}
     - target: {fileID: 3192997397140487342, guid: d2d608dd6fc54814ca015659b92bc2d4,
         type: 3}
@@ -7225,12 +7225,12 @@ PrefabInstance:
     - target: {fileID: 6546942363640981363, guid: d28e7263c386cc640adc4df8eb8279ca,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -28.1
+      value: -399.5
       objectReference: {fileID: 0}
     - target: {fileID: 6546942363640981363, guid: d28e7263c386cc640adc4df8eb8279ca,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.6
+      value: 3.4
       objectReference: {fileID: 0}
     - target: {fileID: 6546942363640981363, guid: d28e7263c386cc640adc4df8eb8279ca,
         type: 3}
@@ -7297,6 +7297,11 @@ PrefabInstance:
       propertyPath: _gameController
       value: 
       objectReference: {fileID: 1323746443}
+    - target: {fileID: 6546942363640981365, guid: d28e7263c386cc640adc4df8eb8279ca,
+        type: 3}
+      propertyPath: timeBetweenShots
+      value: 0.55
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d28e7263c386cc640adc4df8eb8279ca, type: 3}
 --- !u!1001 &6666665846520198670

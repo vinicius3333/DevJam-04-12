@@ -20,7 +20,7 @@ public class EnemyBallShot : MonoBehaviour {
         if (col.gameObject.tag == "Player") {
             Destroy(this.gameObject, timeToDestroy);
         }
-        _AudioController.PlayFX(_AudioController.ballBounce);
+        //_AudioController.PlayFX(_AudioController.ballBounce);
     }
     private void OnBecameInvisible() {
         Destroy(this.gameObject);
