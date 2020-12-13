@@ -36,7 +36,6 @@ public class CameraTrigger : MonoBehaviour {
                 }
             }
             if (bossRena) {
-                _AudioController.ChangeMusic(_AudioController.boss2);
                 StartCoroutine(ativarRena());
             }
             CameraController.instance.EnableCamera(myCamera, bossCamera, bossRena, conclusao);

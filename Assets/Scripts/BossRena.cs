@@ -43,6 +43,7 @@ public class BossRena : MonoBehaviour {
     public bool isWalk;
     public bool isDie;
      private AudioController _AudioController;
+     public GameObject sacoPapaiNoel;
     // Start is called before the first frame update
     void Start() {
         _AudioController = FindObjectOfType(typeof(AudioController)) as AudioController;
@@ -154,6 +155,8 @@ public class BossRena : MonoBehaviour {
             _AudioController.ChangeMusic(_AudioController.level2);
             animator.SetTrigger("Die");
             isDie = true;
+            PlayerController.instance.moverSozinho = true;
+            sacoPapaiNoel.SetActive(true);
         }
 
         StartCoroutine("Invencivel");

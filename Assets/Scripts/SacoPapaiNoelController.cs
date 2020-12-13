@@ -19,6 +19,10 @@ public class SacoPapaiNoelController : MonoBehaviour {
 
     private bool podeApertarEspaco = false;
 
+    public bool isEnd = false;
+
+    private GameController gameController;
+
 
     void Start() {
         animator = GetComponent<Animator>();
@@ -33,6 +37,12 @@ public class SacoPapaiNoelController : MonoBehaviour {
                 Destroy(presentePrefab.gameObject);
                 Destroy(botaoEspacoPrefab.gameObject);
                 Destroy(gameObject);
+                if (isEnd) {
+                    gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
+                    PlayerController.instance.moverSozinho = false;
+                    gameController.proximaCena();
+                    return;
+                }
                 StartCoroutine(moverSozinho(5f));
             }
         }
