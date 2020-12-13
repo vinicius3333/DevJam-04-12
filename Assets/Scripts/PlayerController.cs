@@ -83,7 +83,6 @@ public class PlayerController : MonoBehaviour {
         _PauseMenu = FindObjectOfType(typeof(PauseMenu)) as PauseMenu;
         gm = GameObject.FindWithTag("GM").GetComponent<GameMaster>();
         if (gm.posicaoPlayer != Vector2.zero) {
-            Debug.Log(gm.posicaoPlayer);
             Transform transform = GetComponent<Transform>();
             transform.position = gm.posicaoPlayer;
         }
@@ -134,9 +133,7 @@ public class PlayerController : MonoBehaviour {
             } else if (horizontal < 0 && bulletSpeed > 0) {
                 bulletSpeed *= -1;
             }
-        }
-        else
-        {
+        } else {
             isWalk = false;
         }
 
@@ -298,7 +295,6 @@ public class PlayerController : MonoBehaviour {
         if (gameObject.layer == 9) return;
         switch (col.gameObject.tag) {
             case "EnemyDamage":
-                Debug.Log(col.gameObject.tag);
                 TakeHit();
                 break;
             case "Buraco":

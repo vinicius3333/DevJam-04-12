@@ -17,7 +17,7 @@ public class MainMenu : MonoBehaviour {
     }
 
     public void PlayGame() {
-        if(isWait == true) {return;}
+        if (isWait == true) { return; }
         StartCoroutine("WaitToPlayGame");
         _AudioController.PlayFX(_AudioController.uiClick, 1f);
     }
@@ -27,14 +27,12 @@ public class MainMenu : MonoBehaviour {
         Application.Quit();
     }
 
-    public void OpenPanel()
-    {
+    public void OpenPanel() {
         controlePanel.SetActive(!controlePanel.activeSelf);
         _AudioController.PlayFX(_AudioController.uiClick, 1f);
     }
 
-    IEnumerator WaitToPlayGame()
-    {
+    IEnumerator WaitToPlayGame() {
         isWait = true;
         _FadeController.FadeIn();
         yield return new WaitForSeconds(1f);

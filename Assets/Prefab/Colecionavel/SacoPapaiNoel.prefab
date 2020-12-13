@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 9129482704761425680}
   - component: {fileID: 9129482704761425681}
   - component: {fileID: 9129482704761425694}
+  - component: {fileID: 718899255}
+  - component: {fileID: 718899258}
   m_Layer: 0
   m_Name: SacoPapaiNoel
   m_TagString: Untagged
@@ -27,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 9129482704761425695}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -384.86, y: -0.56, z: 0}
-  m_LocalScale: {x: 6, y: 6, z: 1}
+  m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -102,3 +104,39 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!58 &718899255
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9129482704761425695}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.018122356, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.089670815
+--- !u!114 &718899258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9129482704761425695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c57d4d4b187b4143bb65dbdf019ab5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  presentePrefab: {fileID: 6383435826375695785, guid: dd70100cb43f97348be6dc1a17c18a53,
+    type: 3}
+  botaoEspacoPrefab: {fileID: 6607336275965022, guid: ab4678a7b6c3c1e46aa6ce23a60cd037,
+    type: 3}
+  numeroAnimacao: 20
+  aguardarAnimacao: 0.01
+  presenteForce: 0.05
+  zoomPresente: 1

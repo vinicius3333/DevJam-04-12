@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour {
     private AudioController _AudioController;
-    private FadeController _FadeController; 
+    private FadeController _FadeController;
     public static bool GameIsPaused;
     public GameObject pauseMenuUI;
     public GameObject gameOverMenu;
@@ -25,12 +25,10 @@ public class PauseMenu : MonoBehaviour {
         }
     }
 
-    public void TryAgain()
-    {
+    public void TryAgain() {
         _AudioController.PlayFX(_AudioController.uiClick, 1f);
         _FadeController.FadeIn();
-        if(_FadeController.isFadeComplete == true)
-        {
+        if (_FadeController.isFadeComplete == true) {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }

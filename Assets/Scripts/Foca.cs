@@ -82,12 +82,6 @@ public class Foca : MonoBehaviour {
 
     private void Update() {
         if (isDead) return;
-        //checa se o player está acima da cabeça
-        if (_PlayerController.gameObject.transform.position.y > head.transform.position.y && head.activeSelf == false) {
-            head.SetActive(true);
-        } else if (_PlayerController.gameObject.transform.position.y < head.transform.position.y && head.activeSelf == true) {
-            head.SetActive(false);
-        }
 
         if (enemyCurrentState == EnemyState.ATIRANDO) {
             if (enemyHP == 0) return;

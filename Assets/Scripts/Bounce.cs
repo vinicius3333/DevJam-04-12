@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bounce : MonoBehaviour
-{
+public class Bounce : MonoBehaviour {
     private PlayerController _PlayerController;
 
     private void Start() {
