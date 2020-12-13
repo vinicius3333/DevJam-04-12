@@ -43,6 +43,8 @@ public class BossRena : MonoBehaviour {
     public bool isWalk;
     public bool isDie;
 
+    public GameObject sacoPapaiNoel;
+
     // Start is called before the first frame update
     void Start() {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -152,6 +154,8 @@ public class BossRena : MonoBehaviour {
         if (enemyHP < 0) {
             animator.SetTrigger("Die");
             isDie = true;
+            PlayerController.instance.moverSozinho = true;
+            sacoPapaiNoel.SetActive(true);
         }
 
         StartCoroutine("Invencivel");

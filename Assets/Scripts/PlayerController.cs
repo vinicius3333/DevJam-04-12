@@ -113,6 +113,9 @@ public class PlayerController : MonoBehaviour {
         }
 
         if (moverSozinho) {
+            if (isLookLeft) {
+                Flip();
+            }
             playerRb.velocity = new Vector2(speed * andarSozinhoForce, playerRb.velocity.y);
             isWalk = true;
             return;
