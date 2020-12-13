@@ -189,7 +189,7 @@ public class Foca : MonoBehaviour {
             Destroy(GetComponent<Rigidbody2D>());
             Destroy(GetComponent<PolygonCollider2D>());
             Destroy(head);
-            rb.velocity = Vector2.zero;
+            enemyRb.velocity = Vector2.zero;
             return;
         }
 
