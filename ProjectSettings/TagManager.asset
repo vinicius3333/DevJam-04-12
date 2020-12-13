@@ -20,6 +20,8 @@ TagManager:
   - ColecionavelVida
   - Buraco
   - Gelo
+  - Checkpoint
+  - GM
   layers:
   - Default
   - TransparentFX
