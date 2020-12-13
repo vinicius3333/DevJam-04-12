@@ -20605,9 +20605,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6546942363640981365, guid: d28e7263c386cc640adc4df8eb8279ca,
         type: 3}
+      propertyPath: isShootActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6546942363640981365, guid: d28e7263c386cc640adc4df8eb8279ca,
+        type: 3}
       propertyPath: gameController
       value: 
       objectReference: {fileID: 1323746443}
+    - target: {fileID: 6546942363640981365, guid: d28e7263c386cc640adc4df8eb8279ca,
+        type: 3}
+      propertyPath: isShieldActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6546942363640981365, guid: d28e7263c386cc640adc4df8eb8279ca,
         type: 3}
       propertyPath: _gameController
