@@ -11,7 +11,7 @@ public class EnemyBallShot : MonoBehaviour {
 
 
     private void Start() {
-        //_AudioController = FindObjectOfType(typeof(AudioController)) as AudioController;
+        _AudioController = FindObjectOfType(typeof(AudioController)) as AudioController;
         rb = GetComponent<Rigidbody2D>();
         collider = GetComponent<CircleCollider2D>();
         collider.enabled = true;
@@ -20,7 +20,7 @@ public class EnemyBallShot : MonoBehaviour {
         if (col.gameObject.tag == "Player") {
             Destroy(this.gameObject, timeToDestroy);
         }
-        //_AudioController.PlayFX(_AudioController.ballBoune, 1f);
+        _AudioController.PlayFX(_AudioController.ballBoune, 1f);
     }
     private void OnBecameInvisible() {
         Destroy(this.gameObject);

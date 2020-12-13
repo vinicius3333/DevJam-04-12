@@ -18,7 +18,7 @@ public class Bat : MonoBehaviour
     private bool isPlayFX;
     void Start()
     {
-        //_AudioController = FindObjectOfType(typeof(AudioController)) as AudioController;
+        _AudioController = FindObjectOfType(typeof(AudioController)) as AudioController;
         _PlayerController = FindObjectOfType(typeof(PlayerController)) as PlayerController;
         target = wayPoints[0];
     }
@@ -32,7 +32,7 @@ public class Bat : MonoBehaviour
             if(isPlayFX == false)
             {
                 isPlayFX = true;
-                //_AudioController.PlayFX(_AudioController.batAtentention, 1f);
+                _AudioController.PlayFX(_AudioController.batAtentention, 1f);
             }
         }
 
@@ -89,7 +89,7 @@ public class Bat : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag == "PlayerHit")
         {
-            //_AudioController.PlayFX(_AudioController.batDie);
+            _AudioController.PlayFX(_AudioController.batDie);
             Destroy(this.gameObject);
         }    
     }
