@@ -344,9 +344,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: b7fc250c755dc4d4bb5e50090c33f9ce, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -762,7 +762,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3121f5d4f01867d4d897c7e8f6c37953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  incremento: 0.008
   music: {fileID: 736886474}
+  intro: {fileID: 8300000, guid: b7fc250c755dc4d4bb5e50090c33f9ce, type: 3}
+  title: {fileID: 8300000, guid: 7c3e46c6dbd3e43479860fe90581aed9, type: 3}
+  level1: {fileID: 8300000, guid: ef24e7c22e156c54fb3651e7d7d2622b, type: 3}
   icebrokenBg: {fileID: 8300000, guid: 852666b2c72c6fd428fad577b2df3889, type: 3}
   fx: {fileID: 838421779}
   ballBounce: {fileID: 8300000, guid: 4f18ed1536b739d46be07572178c8ef9, type: 3}

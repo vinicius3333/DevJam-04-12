@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraTrigger : MonoBehaviour {
+    private AudioController _AudioController;
     public GameObject myCamera;
     public bool bossCamera;
 
@@ -15,6 +16,7 @@ public class CameraTrigger : MonoBehaviour {
     private GameObject bgFase;
 
     private void Start() {
+        _AudioController = FindObjectOfType(typeof(AudioController)) as AudioController;
         GameObject bgFase = GameObject.Find("BackgroundFase");
     }
 
@@ -22,6 +24,7 @@ public class CameraTrigger : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Player")) {
             if (bossCamera) {
+                _AudioController.ChangeMusic(_AudioController.boss1);
                 if (bgFase != null) {
                     bgFase.SetActive(false);
                 }
@@ -33,6 +36,7 @@ public class CameraTrigger : MonoBehaviour {
                 }
             }
             if (bossRena) {
+                _AudioController.ChangeMusic(_AudioController.boss2);
                 StartCoroutine(ativarRena());
             }
             CameraController.instance.EnableCamera(myCamera, bossCamera, bossRena, conclusao);
