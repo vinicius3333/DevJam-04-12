@@ -172,7 +172,6 @@ public class Foca : MonoBehaviour {
             temp.velocity = shotPosition.right * shotSpeed;
         } else {
             tempBall = Instantiate(shotPrefab, shotPosition.position, shotPosition.localRotation).GetComponent<Rigidbody2D>();
-            tempBall.AddForce(new Vector2(0, forceY));
             tempBall.velocity = directionUpdate * forceBall;
         }
     } //instancia o tiro
