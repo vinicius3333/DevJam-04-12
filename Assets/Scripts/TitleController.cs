@@ -160,8 +160,8 @@ public class TitleController : MonoBehaviour
 
     IEnumerator WaitFadeIn()
     {
-        _FadeController.FadeIn();
-        yield return new WaitForSeconds(timeToFadeOut * 2);
+        //_FadeController.FadeIn();
+        yield return new WaitForSeconds(timeToFadeOut * 5);
      
         if(_FadeController.isFadeComplete == true)
         {

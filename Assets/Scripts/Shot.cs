@@ -7,15 +7,11 @@ public class Shot : MonoBehaviour
     private AudioController _AudioController;
     private SpriteRenderer sr;
     public Rigidbody2D rb;
-    public Color[] spritePresente;
 
     private void Start()
     {
         sr = GetComponent<SpriteRenderer>();
-        //_AudioController = FindObjectOfType(typeof(AudioController)) as AudioController;
-        int i = Random.Range(0, spritePresente.Length);
-
-        sr.color = spritePresente[i];
+        _AudioController = FindObjectOfType(typeof(AudioController)) as AudioController;
     }
 
     private void OnBecameInvisible()
@@ -27,7 +23,7 @@ public class Shot : MonoBehaviour
     { 
         if(col.gameObject.layer == 8) //layer do ground
         {
-            //_AudioController.PlayFX(_AudioController.iceHardBroken, 1f);
+            _AudioController.PlayFX(_AudioController.iceHardBroken, 1f);
             Destroy(this.gameObject, 0.002f);
 
         }

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-
+    private PauseMenu _PauseMenu;
+    private Animator animator;
     public static PlayerController instance;
     private Rigidbody2D playerRb;
     private SpriteRenderer playerSr;
@@ -53,6 +54,7 @@ public class PlayerController : MonoBehaviour {
     private bool isGrounded;
     private int jumps = 0; //controla os pulos
     private bool isShield;
+    private bool isWalk;
 
     public bool moverSozinho = false;
 
@@ -78,6 +80,7 @@ public class PlayerController : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
+        _PauseMenu = FindObjectOfType(typeof(PauseMenu)) as PauseMenu;
         gm = GameObject.FindWithTag("GM").GetComponent<GameMaster>();
         if (gm.posicaoPlayer != Vector2.zero) {
             Debug.Log(gm.posicaoPlayer);
@@ -90,6 +93,7 @@ public class PlayerController : MonoBehaviour {
         bounceCollider = GetComponent<BoxCollider2D>();
         playerRb = GetComponent<Rigidbody2D>();
         playerSr = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
 
         if (isLookLeft == true) {
             bulletSpeed *= -1;
@@ -105,16 +109,19 @@ public class PlayerController : MonoBehaviour {
 
         if (isPlayerParado) {
             playerRb.velocity = Vector2.zero;
+            isWalk = false;
             return;
         }
 
         if (moverSozinho) {
             playerRb.velocity = new Vector2(speed * andarSozinhoForce, playerRb.velocity.y);
+            isWalk = true;
             return;
         }
 
         //Controle de Flip, para deixar o personagem olhando para o lado certo
         if (horizontal != 0) {
+            isWalk = true;
             if (horizontal > 0 && isLookLeft == true) {
                 Flip();
             } else if (horizontal < 0 && isLookLeft == false) {
@@ -128,11 +135,18 @@ public class PlayerController : MonoBehaviour {
                 bulletSpeed *= -1;
             }
         }
+        else
+        {
+            isWalk = false;
+        }
 
         InputController();
     }
     private void FixedUpdate() {
         isGrounded = Physics2D.OverlapArea(groundCheck[0].position, groundCheck[1].position, whatIsGround);
+
+        animator.SetBool("isWalk", isWalk);
+        animator.SetBool("isGrounded", isGrounded);
     }
 
     void InputController() {
@@ -260,6 +274,7 @@ public class PlayerController : MonoBehaviour {
 
     void Shot(Transform newTransform, bool eixoX) {
         if (mana.quantidadeTiro <= 0) return;
+        animator.SetTrigger("Fire");
         mana.quantidadeTiro--;
         mana.atualizarQuantidade(mana.quantidadeTiro);
         isShot = true;
@@ -340,7 +355,8 @@ public class PlayerController : MonoBehaviour {
     } //controle da vida
 
     void GameOver() {
-        _gameController.resetarCena();
+        Time.timeScale = 0;
+        _PauseMenu.gameOverMenu.SetActive(true);
     }
 
     IEnumerator Invencivel() {
