@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1111040260623922037}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.48, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -145,8 +145,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   spritePresente:
-  - {r: 1, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0.051671505, b: 1, a: 1}
-  - {r: 1, g: 0.50048995, b: 0, a: 1}
-  - {r: 0, g: 1, b: 0.25998163, a: 1}
-  - {r: 0.9910605, g: 1, b: 0, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}

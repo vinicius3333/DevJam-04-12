@@ -13,15 +13,19 @@ public class Mana : MonoBehaviour {
 
     public bool mostrarManaUI;
 
+    private TextMeshProUGUI textMeshProUGUI;
+
     private void Awake() {
         if (!mostrarManaUI) {
             ManaUI.SetActive(false);
         }
+
+        textMeshProUGUI = textoQuantidadeNeve.GetComponent<TextMeshProUGUI>();
+        textMeshProUGUI.text = quantidadeTiro.ToString();
     }
 
     public void atualizarQuantidade(int qtd) {
         quantidadeTiro = qtd;
-        TextMeshProUGUI textMeshProUGUI = textoQuantidadeNeve.GetComponent<TextMeshProUGUI>();
         textMeshProUGUI.text = qtd.ToString();
     }
 }
