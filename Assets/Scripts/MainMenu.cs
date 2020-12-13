@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
     public GameObject transition;
+    public GameObject controlePanel;
     private FadeController _FadeController;
     private bool isWait;
 
@@ -20,6 +21,11 @@ public class MainMenu : MonoBehaviour {
 
     public void QuitGame() {
         Application.Quit();
+    }
+
+    public void OpenPanel()
+    {
+        controlePanel.SetActive(!controlePanel.activeSelf);
     }
 
     IEnumerator WaitToPlayGame()
