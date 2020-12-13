@@ -15,7 +15,7 @@ public class CameraTrigger : MonoBehaviour {
     private GameObject bgFase;
 
     private void Start() {
-        GameObject bgFase = GameObject.Find("BackgroundFase");
+        bgFase = GameObject.Find("BackgroundFase");
     }
 
     // Desculpa por esse código horrível, mas fazer o que, né
