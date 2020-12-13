@@ -296,6 +296,11 @@ public class PlayerController : MonoBehaviour {
                     healthClass.health++;
                 }
                 break;
+            case "ColecionavelMana":
+                Destroy(col.gameObject);
+                mana.quantidadeTiro += 50;
+                mana.atualizarQuantidade(mana.quantidadeTiro);
+                break;
         }
     }
     private void OnCollisionEnter2D(Collision2D col) {
