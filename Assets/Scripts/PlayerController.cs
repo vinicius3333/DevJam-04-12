@@ -89,7 +89,12 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         // Verifica se o jogo tá pausado ou se o jogador tá parado e previni animações do player
-        if (PauseMenu.GameIsPaused || isPlayerParado) return;
+        if (PauseMenu.GameIsPaused) return;
+
+        if (isPlayerParado) {
+            playerRb.velocity = Vector2.zero;
+            return;
+        }
 
         if (moverSozinho) {
             playerRb.velocity = new Vector2(speed * andarSozinhoForce, playerRb.velocity.y);
