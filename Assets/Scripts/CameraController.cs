@@ -12,7 +12,7 @@ public class CameraController : MonoBehaviour {
         instance = this;
     }
 
-    public void EnableCamera(GameObject camera, bool bossCamera) {
+    public void EnableCamera(GameObject camera, bool bossCamera, bool bossRena) {
         if (camera.activeInHierarchy) return;
 
         for (int i = 0; i < cameras.Length; i++) {
@@ -24,6 +24,10 @@ public class CameraController : MonoBehaviour {
         StartCoroutine(FreezingTime());
 
         if (bossCamera) {
+            StartCoroutine(moverSozinho());
+        }
+
+        if (bossRena) {
             StartCoroutine(moverSozinho());
         }
     }

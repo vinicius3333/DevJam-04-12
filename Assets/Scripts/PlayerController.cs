@@ -66,6 +66,10 @@ public class PlayerController : MonoBehaviour {
 
     public float geloForce;
 
+    public bool isPlayerParado = false;
+
+    public float andarSozinhoForce = 0.5f;
+
     // Start is called before the first frame update
     void Start() {
         instance = this;
@@ -84,11 +88,11 @@ public class PlayerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        // Verifica se o jogo tá pausado e previni animações do player
-        if (PauseMenu.GameIsPaused) return;
+        // Verifica se o jogo tá pausado ou se o jogador tá parado e previni animações do player
+        if (PauseMenu.GameIsPaused || isPlayerParado) return;
 
         if (moverSozinho) {
-            playerRb.velocity = new Vector2(speed / 2, playerRb.velocity.y);
+            playerRb.velocity = new Vector2(speed * andarSozinhoForce, playerRb.velocity.y);
             return;
         }
 
@@ -265,6 +269,7 @@ public class PlayerController : MonoBehaviour {
                 break;
             case "ColecionavelVida":
                 Destroy(col.gameObject);
+                healthPoints++;
                 healthClass.health++;
                 break;
         }
