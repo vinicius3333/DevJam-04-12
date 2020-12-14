@@ -20649,6 +20649,11 @@ PrefabInstance:
       propertyPath: m_Offset.x
       value: 191.88419
       objectReference: {fileID: 0}
+    - target: {fileID: 4022401121111718696, guid: cfa21f3c5751c154ea0d649a454639d1,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4022401121111718697, guid: cfa21f3c5751c154ea0d649a454639d1,
         type: 3}
       propertyPath: m_Name

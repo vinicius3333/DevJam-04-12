@@ -303,6 +303,7 @@ public class PlayerController : MonoBehaviour {
                 TakeHit();
                 break;
             case "Buraco":
+                healthPoints = 0;
                 GameOver();
                 break;
             case "ColecionavelVida":
