@@ -16,6 +16,7 @@ public class AudioController : MonoBehaviour
     public AudioClip boss2;
     public AudioClip perseguicao;
     public AudioClip gameOver;
+    public AudioClip lastCene;
     public AudioClip icebrokenBg;
 
     [Header("FX")]

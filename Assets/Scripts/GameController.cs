@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour {
     public GameObject transition;
     private FadeController _FadeController;
     private bool isWait;
+    public bool isLevel2;
 
     private GameMaster gameMaster;
 
@@ -40,7 +41,14 @@ public class GameController : MonoBehaviour {
 
     IEnumerator WaitToNext() {
         isWait = true;
-        _AudioController.ChangeMusic(_AudioController.level2);
+        if(isLevel2 == false)
+        {
+            _AudioController.ChangeMusic(_AudioController.level2);
+        }
+        else
+        {
+            _AudioController.ChangeMusic(_AudioController.lastCene);
+        } 
         _FadeController.FadeIn();
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
