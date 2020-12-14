@@ -28,9 +28,7 @@ public class PauseMenu : MonoBehaviour {
     public void TryAgain() {
         _AudioController.PlayFX(_AudioController.uiClick, 1f);
         _FadeController.FadeIn();
-        if (_FadeController.isFadeComplete == true) {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void Resume() {
@@ -52,8 +50,6 @@ public class PauseMenu : MonoBehaviour {
         GameIsPaused = false;
         _AudioController.ChangeMusic(_AudioController.title);
         _FadeController.FadeIn();
-        if (_FadeController.isFadeComplete == true) {
-            SceneManager.LoadScene(1);
-        }
+        SceneManager.LoadScene(1);
     }
 }
