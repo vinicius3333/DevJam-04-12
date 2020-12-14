@@ -372,6 +372,7 @@ public class PlayerController : MonoBehaviour {
             playerSr.color = colorPadrao;
         }
 
+        playerSr.color = colorPadrao;
         gameObject.layer = 10; //player layer
     }
 
