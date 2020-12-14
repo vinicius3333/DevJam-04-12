@@ -42,13 +42,16 @@ public class BossRena : MonoBehaviour {
 
     public bool isWalk;
     public bool isDie;
-     private AudioController _AudioController;
-     public GameObject sacoPapaiNoel;
-    // Start is called before the first frame update
+    private AudioController _AudioController;
+    public GameObject sacoPapaiNoel;
+
+    public HealthBar healthBar;
+
     void Start() {
         _AudioController = FindObjectOfType(typeof(AudioController)) as AudioController;
         spriteRenderer = GetComponent<SpriteRenderer>();
         _PlayerController = FindObjectOfType(typeof(PlayerController)) as PlayerController;
+        healthBar.SetMaxHealth((int)enemyHP);
 
         if (isLookLeft == true) {
             speed *= -1;
@@ -150,6 +153,7 @@ public class BossRena : MonoBehaviour {
     public void TakeHit() {
         tomouHit = true;
         enemyHP--;
+        healthBar.SetHealth((int)enemyHP);
 
         if (enemyHP < 0) {
             _AudioController.ChangeMusic(_AudioController.level2);
