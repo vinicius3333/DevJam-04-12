@@ -297,7 +297,7 @@ public class PlayerController : MonoBehaviour {
     } //controla a posicao do shield
 
     private void OnTriggerEnter2D(Collider2D col) {
-        if (gameObject.layer == 9) return;
+        if (gameObject.layer == 9 && col.gameObject.tag != "Buraco") return;
         switch (col.gameObject.tag) {
             case "EnemyDamage":
                 TakeHit();

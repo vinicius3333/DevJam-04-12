@@ -16564,6 +16564,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transition: {fileID: 2038932515}
+  isLevel2: 0
 --- !u!4 &1323746444
 Transform:
   m_ObjectHideFlags: 0
@@ -20982,6 +20983,21 @@ PrefabInstance:
         type: 3}
       propertyPath: healthPoints
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6546942363640981365, guid: d28e7263c386cc640adc4df8eb8279ca,
+        type: 3}
+      propertyPath: colorPadrao.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6546942363640981365, guid: d28e7263c386cc640adc4df8eb8279ca,
+        type: 3}
+      propertyPath: colorPadrao.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6546942363640981365, guid: d28e7263c386cc640adc4df8eb8279ca,
+        type: 3}
+      propertyPath: colorPadrao.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6546942363640981365, guid: d28e7263c386cc640adc4df8eb8279ca,
         type: 3}
