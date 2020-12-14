@@ -9,6 +9,7 @@ public class PauseMenu : MonoBehaviour {
     public static bool GameIsPaused;
     public GameObject pauseMenuUI;
     public GameObject gameOverMenu;
+    private bool isFadeComplete;
 
     private void Start() {
         _FadeController = FindObjectOfType(typeof(FadeController)) as FadeController;
@@ -16,7 +17,8 @@ public class PauseMenu : MonoBehaviour {
     }
 
     void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape) && gameOverMenu.activeSelf == false) {
+        isFadeComplete = _FadeController.isFadeComplete;
+        if (Input.GetKeyDown(KeyCode.Escape) && gameOverMenu.activeSelf == false && isFadeComplete == true) {
             if (GameIsPaused) {
                 Resume();
             } else {

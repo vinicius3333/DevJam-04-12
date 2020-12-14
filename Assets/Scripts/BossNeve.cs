@@ -120,6 +120,7 @@ public class BossNeve : MonoBehaviour {
             yield return new WaitForSeconds(timeBetweenChangeColor);
             spriteRenderer.color = colorPadrao;
         }
+        spriteRenderer.color = colorPadrao;
         proximoEstagio();
     }
 
