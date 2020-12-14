@@ -4,9 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class TitleController : MonoBehaviour
-{
-    private AudioController _AudioController; 
+public class TitleController : MonoBehaviour {
+    private AudioController _AudioController;
     private Camera mainCam;
     private FadeController _FadeController;
     public Color bgColorCam;
@@ -48,134 +47,114 @@ public class TitleController : MonoBehaviour
 
     private void Update() {
 
-        if(_FadeController.isFadeComplete == true && isLastScene == false)
-        {
-            if(isStartStep == false)
-            {
+        if (_FadeController.isFadeComplete == true && isLastScene == false) {
+            if (Input.GetKeyDown(KeyCode.Escape)) {
+                canvasText.SetActive(false);
+                mainCam.backgroundColor = bgColorCam;
+                cena.SetActive(false);
+                title.SetActive(true);
+                StartCoroutine("WaitFadeIn");
+            }
+            if (isStartStep == false) {
                 isStartStep = true;
                 StartCoroutine("FalaStep");
             }
 
-            if(Input.GetButtonDown("Jump") && isFinishWord == true)
-            {   
+            if (Input.GetButtonDown("Jump") && isFinishWord == true) {
                 NextFala();
                 _AudioController.PlayFX(_AudioController.uiClick, 1f);
             }
 
-            if(Input.GetButton("Jump") && isFinishWord == false)
-            {
+            if (Input.GetButton("Jump") && isFinishWord == false) {
                 btnSpace.SetActive(false);
                 timeStep = timeStepFury;
-            }
-            else if(Input.GetButton("Jump") && isFinishWord == true && btnSpace.activeSelf == false)
-            {
+            } else if (Input.GetButton("Jump") && isFinishWord == true && btnSpace.activeSelf == false) {
                 btnSpace.SetActive(true);
             }
 
-            if(Input.GetButtonUp("Jump") && isFinishWord == false)
-            {
+            if (Input.GetButtonUp("Jump") && isFinishWord == false) {
                 btnSpace.SetActive(true);
                 timeStep = timeStepPadrao;
             }
         }
     }
 
-    void UpdateFalasList()
-    {
-        if(isLastScene == true) {return;}
+    void UpdateFalasList() {
+        if (isLastScene == true) { return; }
         falas.Clear();
 
-        foreach(string fala in dialogo[idDialogo].falas)
-        {
+        foreach (string fala in dialogo[idDialogo].falas) {
             falas.Add(fala);
         }
     }
 
-    void NextFala()
-    {
-        if(isFirstNext == true)
-        {     
+    void NextFala() {
+        if (isFirstNext == true) {
             isFirstNext = false;
             idFala = 0;
-        }
-        else
-        {
+        } else {
             idFala++;
         }
 
         txt.text = "";
-        if(idFala >= falas.Count)
-        {
+        if (idFala >= falas.Count) {
             UpdateFalasList();
             NextDialogo();
-        }
-        else
-        {
+        } else {
             falaAtual = falas[idFala];
             StartCoroutine("FalaStep");
         }
-       
+
     }
 
-    void NextDialogo()
-    {
+    void NextDialogo() {
         isFirstNext = true;
         idFala = 0;
-        idDialogo ++;
-        if(idDialogo >= dialogo.Length) //ultima cena
+        idDialogo++;
+        if (idDialogo >= dialogo.Length) //ultima cena
         {
             isLastScene = true;
             canvasText.SetActive(false);
             _FadeController.FadeIn();
             StartCoroutine("WaitFadeOut");
-        }
-        else
-        {
+        } else {
             _FadeController.FadeIn();
             StartCoroutine("WaitFadeOut");
-           UpdateFalasList();
+            UpdateFalasList();
         }
     }
 
-    IEnumerator WaitFadeOut()
-    {
+    IEnumerator WaitFadeOut() {
         yield return new WaitForSeconds(timeToFadeOut);
-        
-        if(isLastScene == true)
-        {
+
+        if (isLastScene == true) {
             mainCam.backgroundColor = bgColorCam;
             cena.SetActive(false);
             title.SetActive(true);
             StartCoroutine("WaitFadeIn");
-        }
-        else
-        {
+        } else {
             mainCam.backgroundColor = Color.black;
             spriteRenderer.sprite = cenas[idDialogo];
-           
+
         }
-         _FadeController.FadeOut();
+        _FadeController.FadeOut();
     }
 
-    IEnumerator WaitFadeIn()
-    {
+    IEnumerator WaitFadeIn() {
         //_FadeController.FadeIn();
         _AudioController.ChangeMusic(_AudioController.title);
         yield return new WaitForSeconds(timeToFadeOut * 4);
 
-        if(_FadeController.isFadeComplete == true)
-        {
+        if (_FadeController.isFadeComplete == true) {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 
-    IEnumerator FalaStep()
-    {
+    IEnumerator FalaStep() {
         isFinishWord = false;
         char[] slip = falaAtual.ToCharArray();
 
-        for(int i = 0; i < slip.Length; i++)
-        {
+        for (int i = 0; i < slip.Length; i++) {
             txt.text += slip[i];
             yield return new WaitForSeconds(timeStep);
         }
