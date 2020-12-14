@@ -101,7 +101,7 @@ public class FinalCurtscene : MonoBehaviour
  
         if(_FadeController.isFadeComplete == true)
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 
